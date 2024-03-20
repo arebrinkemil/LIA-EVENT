@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import BackButton from "../components/BackButton";
-import Spinner from "../components/Spinner";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
@@ -21,7 +20,7 @@ const CreateCompany = () => {
     };
     setLoading(true);
     axios
-      .post("https://134.122.48.238:22/companies", data)
+      .post("http://localhost:5555/companies", data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Company added successfully", { variant: "success" });
@@ -36,15 +35,14 @@ const CreateCompany = () => {
 
   return (
     <div className="p-4">
-      <BackButton />
       <h1 className="text-3xl my-4">Create Book</h1>
-      {loading ? <Spinner /> : ""}
+
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Company Name</label>
           <input
             type="text"
-            value={title}
+            value={name}
             onChange={(e) => setName(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
           />
@@ -53,7 +51,7 @@ const CreateCompany = () => {
           <label className="text-xl mr-4 text-gray-500">About Us</label>
           <input
             type="text"
-            value={author}
+            value={about}
             onChange={(e) => setAbout(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2  w-full "
           />
