@@ -1,16 +1,50 @@
-import React, { useState } from "react";
-
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import axios from "axios";
 
 const CreateCompany = () => {
+  const [cookies, removeCookie] = useCookies(["token"]);
+  const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
   const [contact, setContact] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+
+  useEffect(() => {
+    const verifyCookie = async () => {
+      if (!cookies.token) {
+        navigate("/login");
+      }
+      const { data } = await axios.post(
+        "http://localhost:5555",
+        {},
+        { withCredentials: true }
+      );
+      const { status, user } = data;
+      setUsername(user);
+      return status
+        ? toast(`Hello ${user}`, {
+            position: "top-right",
+          })
+        : (removeCookie("token"), navigate("/login"));
+    };
+    verifyCookie();
+  }, [cookies, navigate, removeCookie]);
+  const handleLogout = async () => {
+    try {
+      await axios.get("http://localhost:5555/logout", {
+        withCredentials: true,
+      });
+      removeCookie("token");
+      navigate("/login");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   const handleSaveCompany = () => {
     const data = {
@@ -35,6 +69,13 @@ const CreateCompany = () => {
 
   return (
     <div className="p-4">
+      <div className="home_page">
+        <h4>
+          {" "}
+          Welcome <span>{username}</span>
+        </h4>
+        <button onClick={handleLogout}>LOGOUT</button>
+      </div>
       <h1 className="text-3xl my-4">Create Book</h1>
 
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
