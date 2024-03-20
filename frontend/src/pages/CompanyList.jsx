@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import CompaniesTable from "../components/CompaniesTable";
-import CompaniesCard from "../components/CompaniesCard";
+import { AiOutlineEdit } from "react-icons/ai";
+import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import CompaniesCard from "../components/CompaniesCard";
+import CompaniesTable from "../components/CompaniesTable";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -15,7 +17,7 @@ const CompanyList = () => {
     axios
       .get("http://localhost:5555/companies")
       .then((response) => {
-        setBooks(response.data.data);
+        setCompanies(response.data.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -46,10 +48,10 @@ const CompanyList = () => {
           <MdOutlineAddBox className="text-sky-800 text-4xl" />
         </Link>
       </div>
-      : showType === "table" ? (
+
       <CompaniesTable companies={companies} />
-      ) : (
-      <CompaniesCard companies={companies} />)
+
+      <CompaniesCard companies={companies} />
     </div>
   );
 };
