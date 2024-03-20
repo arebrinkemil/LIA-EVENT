@@ -7,6 +7,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRouth from "./routes/AuthRoute.js";
 import companiesRoute from "./routes/companiesRoute.js";
+
 const app = express();
 
 mongoose.connect(mongoDBURL, {
@@ -29,6 +30,13 @@ app.use(
 app.use(cookieParser());
 
 app.use(express.json());
+
+// app.use("/", authRouth);
+
+app.get("/", (request, response) => {
+  console.log(request);
+  return response.status(234).send("Welcome");
+});
 
 app.use("/", authRouth);
 
