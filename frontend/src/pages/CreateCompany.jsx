@@ -10,6 +10,7 @@ const CreateCompany = () => {
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
   const [contact, setContact] = useState("");
+  const [owner_id, setOwnerId] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -25,7 +26,9 @@ const CreateCompany = () => {
         { withCredentials: true }
       );
       const { status, user } = data;
+      console.log(data);
       setUsername(user);
+      setOwnerId(user._id);
       return status
         ? toast(`Hello ${user}`, {
             position: "top-right",
@@ -51,6 +54,7 @@ const CreateCompany = () => {
       name,
       about,
       contact,
+      owner_id,
     };
     setLoading(true);
     axios
