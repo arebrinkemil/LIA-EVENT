@@ -57,15 +57,11 @@ router.get("/:id", async (request, response) => {
 });
 
 // Route for Updateing a Company
-router.put('/:id', async (request, response) => {
+router.put("/:id", async (request, response) => {
   try {
-    if (
-      !request.body.name ||
-      !request.body.about ||
-      !request.body.contact
-    ) {
+    if (!request.body.name || !request.body.about || !request.body.contact) {
       return response.status(400).send({
-        message: 'Send all required fields: name, about, contact',
+        message: "Send all required fields: name, about, contact",
       });
     }
 
@@ -74,10 +70,12 @@ router.put('/:id', async (request, response) => {
     const result = await Company.findByIdAndUpdate(id, request.body);
 
     if (!result) {
-      return response.status(404).json({ message: 'Company not found' });
+      return response.status(404).json({ message: "Company not found" });
     }
 
-    return response.status(200).send({ message: 'Company updated successfully' });
+    return response
+      .status(200)
+      .send({ message: "Company updated successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
@@ -85,17 +83,19 @@ router.put('/:id', async (request, response) => {
 });
 
 // Route for Deleteing a Company
-router.delete('/:id', async (request, response) => {
+router.delete("/:id", async (request, response) => {
   try {
     const { id } = request.params;
 
     const result = await Company.findByIdAndDelete(id);
 
     if (!result) {
-      return response.status(404).json({ message: 'Company not found' });
+      return response.status(404).json({ message: "Company not found" });
     }
 
-    return response.status(200).send({ message: 'Company deleted successfully' });
+    return response
+      .status(200)
+      .send({ message: "Company deleted successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });

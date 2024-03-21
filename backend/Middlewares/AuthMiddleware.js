@@ -5,18 +5,21 @@ import jwt from "jsonwebtoken";
 export const userVerification = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token) {
-    return res.json({ status: false });
+    res.json({ status: false });
+    return next();
   }
   jwt.verify(token, process.env.TOKEN_KEY, async (err, data) => {
     if (err) {
-      return res.json({ status: false });
+      res.json({ status: false });
+      return next();
     } else {
       const user = await User.findById(data.id);
       if (user) {
-        req.user = user;
-        next();
+        res.json({ status: true, user: user.username });
+        return next();
       } else {
-        return res.json({ status: false });
+        res.json({ status: false });
+        return next();
       }
     }
   });
