@@ -12,6 +12,10 @@ const CompanyInfoSchema = mongoose.Schema({
   },
   about: String,
   contact: String,
+  owner_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "user",
+  },
 });
 
 // CompanyInfoSchema.plugin(uniqueValidator, { message: "is already taken." });

@@ -16,6 +16,7 @@ router.post("/", userVerification, async (request, response) => {
       name: request.body.name,
       about: request.body.about,
       contact: request.body.contact,
+      owner_id: request.body.owner_id,
     };
 
     const company = await CompanyInfoModel.create(newCompany);
