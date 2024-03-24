@@ -10,6 +10,7 @@ const Login = () => {
     password: "",
   });
   const { email, password } = inputValue;
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setInputValue({
@@ -31,9 +32,10 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5555/login",
+        "http://localhost:5555/auth",
         {
-          ...inputValue,
+          email,
+          password,
         },
         { withCredentials: true }
       );
@@ -49,9 +51,9 @@ const Login = () => {
       }
     } catch (error) {
       console.log(error);
+      handleError("Something went wrong. Please try again later.");
     }
     setInputValue({
-      ...inputValue,
       email: "",
       password: "",
     });
@@ -83,7 +85,7 @@ const Login = () => {
         </div>
         <button type="submit">Submit</button>
         <span>
-          Create Account <Link to={"/signup"}>Signup</Link>
+          Create Account <Link to="/signup">Signup</Link>
         </span>
       </form>
       <ToastContainer />
