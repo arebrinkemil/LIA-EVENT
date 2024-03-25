@@ -32,6 +32,7 @@ const Profile = () => {
     fetchCompanies();
     const verifyAuth = async () => {
       if (!cookies.jwt) {
+        console.log("No JWT found, redirecting to login");
         navigate("/login");
         return;
       }
