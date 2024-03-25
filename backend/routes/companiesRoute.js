@@ -1,11 +1,12 @@
 import express from "express";
 import { CompanyInfoModel } from "../models/Company_info.js";
-import { userVerification } from "../Middlewares/AuthMiddleware.js";
+import { protect } from "../Middlewares/AuthMiddleware.js";
+// import { userVerification } from "../Middlewares/AuthMiddleware.js";
 
 const router = express.Router();
 
 // Route for Save a new Company
-router.post("/", userVerification, async (request, response) => {
+router.post("/", protect, async (request, response) => {
   try {
     if (!request.body.name || !request.body.about || !request.body.contact) {
       return response.status(400).send({

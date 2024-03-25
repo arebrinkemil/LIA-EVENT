@@ -16,32 +16,44 @@ const CreateCompany = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const verifyCookie = async () => {
+    const verifyAuth = async () => {
       if (!cookies.token) {
         navigate("/login");
+        return;
       }
-      const { data } = await axios.post(
-        "http://localhost:5555",
-        {},
-        { withCredentials: true }
-      );
-      const { status, user } = data;
-      console.log(data);
-      setUsername(user);
-      setOwnerId(user._id);
-      return status
-        ? toast(`Hello ${user}`, {
-            position: "top-right",
-          })
-        : (removeCookie("token"), navigate("/login"));
+      try {
+        const response = await axios.get("http://localhost:5555/profile", {
+          headers: {
+            Authorization: `Bearer ${cookies.token}`,
+          },
+          withCredentials: true,
+        });
+        const { data } = response;
+        console.log("Response data:", data);
+        const { _id, name, email } = data;
+        if (!_id || !name || !email) {
+          throw new Error("Invalid user data received from the server");
+        }
+        setUsername(name);
+        setOwnerId(_id);
+      } catch (error) {
+        console.error("Error verifying authentication:", error);
+        removeCookie("token");
+        navigate("/login");
+      }
     };
-    verifyCookie();
+    verifyAuth();
   }, [cookies, navigate, removeCookie]);
+
   const handleLogout = async () => {
     try {
-      await axios.get("http://localhost:5555/logout", {
-        withCredentials: true,
-      });
+      await axios.post(
+        "http://localhost:5555/logout",
+        {},
+        {
+          withCredentials: true,
+        }
+      );
       removeCookie("token");
       navigate("/login");
     } catch (error) {
@@ -58,7 +70,12 @@ const CreateCompany = () => {
     };
     setLoading(true);
     axios
-      .post("http://localhost:5555/companies", data)
+      .post("http://localhost:5555/companies", data, {
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+        },
+        withCredentials: true,
+      })
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Company added successfully", { variant: "success" });

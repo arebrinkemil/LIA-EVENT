@@ -1,12 +1,21 @@
-import { Login, Signup, Logout } from "../Controllers/AuthController.js";
 import express from "express";
-import { userVerification } from "../Middlewares/AuthMiddleware.js";
+import {
+  authUser,
+  registerUser,
+  logoutUser,
+  getUserProfile,
+  updateUserProfile,
+} from "../Controllers/AuthController.js";
+import { protect } from "../Middlewares/AuthMiddleware.js";
 
 const router = express.Router();
 
-router.post("/", userVerification);
-router.post("/signup", Signup);
-router.post("/login", Login);
-router.get("/logout", Logout);
+router.post("/", registerUser);
+router.post("/auth", authUser);
+router.post("/logout", logoutUser);
+router
+  .route("/profile")
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
 export default router;

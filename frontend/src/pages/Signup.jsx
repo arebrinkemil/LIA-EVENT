@@ -11,6 +11,7 @@ const Signup = () => {
     username: "",
   });
   const { email, password, username } = inputValue;
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setInputValue({
@@ -32,26 +33,24 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5555/signup",
-        {
-          ...inputValue,
-        },
+        "http://localhost:5555/",
+        { email, password, name: username },
         { withCredentials: true }
       );
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 1000);
       } else {
         handleError(message);
       }
     } catch (error) {
       console.log(error);
+      handleError("Something went wrong. Please try again later.");
     }
     setInputValue({
-      ...inputValue,
       email: "",
       password: "",
       username: "",
@@ -73,7 +72,7 @@ const Signup = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Username</label>
+          <label htmlFor="username">Username</label>
           <input
             type="text"
             name="username"
@@ -94,7 +93,7 @@ const Signup = () => {
         </div>
         <button type="submit">Submit</button>
         <span>
-          Already have an account? <Link to={"/login"}>Login</Link>
+          Already have an account? <Link to="/login">Login</Link>
         </span>
       </form>
       <ToastContainer />

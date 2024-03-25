@@ -1,68 +1,109 @@
 import User from "../models/User.js";
+import asyncHandler from "express-async-handler";
+
+import generateToken from "../utils/generateToken.js";
 import { createSecretToken } from "../SecretToken.js";
 import bcrypt from "bcryptjs";
 
-export const Signup = async (req, res, next) => {
-  try {
-    const { email, password, username, createdAt } = req.body;
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.json({ message: "User already exists" });
-    }
-    const user = await User.create({ email, password, username, createdAt });
-    const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
+const authUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (user && (await user.matchPassword(password))) {
+    generateToken(res, user._id);
+
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
     });
-    res
-      .status(201)
-      .json({ message: "User signed in successfully", success: true, user });
-    next();
-  } catch (error) {
-    console.error(error);
+  } else {
+    res.status(401);
+    throw new Error("Invalid email or password");
   }
+});
+
+const registerUser = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body;
+
+  const userExists = await User.findOne({ email });
+
+  if (userExists) {
+    res.status(400);
+    throw new Error("User already exists");
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    password,
+  });
+
+  if (user) {
+    generateToken(res, user._id);
+
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid user data");
+  }
+});
+
+const logoutUser = (req, res) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(0),
+  });
+  res.status(200).json({ message: "Logged out successfully" });
 };
 
-export const Login = async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.json({ message: "All fields are required" });
-    }
-    const user = await User.findOne({ email });
-    if (!user) {
-      return res.json({ message: "Incorrect password or email" });
-    }
-    const auth = await bcrypt.compare(password, user.password);
-    if (!auth) {
-      return res.json({ message: "Incorrect password or email" });
-    }
-    const token = createSecretToken(user._id);
-    res.cookie("token", token, {
-      withCredentials: true,
-      httpOnly: false,
-    });
-    res
-      .status(201)
-      .json({ message: "User logged in successfully", success: true });
-    next();
-  } catch (error) {
-    console.error(error);
-  }
-};
+const getUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
 
-export const Logout = async (req, res, next) => {
-  try {
-    res.cookie("token", "", {
-      expires: new Date(0),
-      httpOnly: false,
+  if (user) {
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
     });
-
-    res
-      .status(200)
-      .json({ message: "User logged out successfully", success: true });
-  } catch (error) {
-    console.error(error);
+  } else {
+    res.status(404);
+    throw new Error("User not found");
   }
+});
+
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+
+    const updatedUser = await user.save();
+
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+export {
+  authUser,
+  registerUser,
+  logoutUser,
+  getUserProfile,
+  updateUserProfile,
 };
