@@ -1,4 +1,5 @@
 import User from "../models/User.js";
+import CompanyInfoModel from "../models/Company_info.js";
 import asyncHandler from "express-async-handler";
 
 import generateToken from "../utils/generateToken.js";
