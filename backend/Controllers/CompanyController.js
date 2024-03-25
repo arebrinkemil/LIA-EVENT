@@ -3,7 +3,7 @@ import CompanyInfoModel from "../models/Company_info.js";
 import asyncHandler from "express-async-handler";
 
 import generateToken from "../utils/generateToken.js";
-import { createSecretToken } from "../SecretToken.js";
+
 import bcrypt from "bcryptjs";
 
 const getCompanyInfo = asyncHandler(async (req, res) => {

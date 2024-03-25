@@ -5,7 +5,7 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 
 const CreateCompany = () => {
-  const [cookies, removeCookie] = useCookies(["token"]);
+  const [cookies, removeCookie] = useCookies(["jwt"]);
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
@@ -17,14 +17,14 @@ const CreateCompany = () => {
 
   useEffect(() => {
     const verifyAuth = async () => {
-      if (!cookies.token) {
+      if (!cookies.jwt) {
         navigate("/login");
         return;
       }
       try {
         const response = await axios.get("http://localhost:5555/profile", {
           headers: {
-            Authorization: `Bearer ${cookies.token}`,
+            Authorization: `Bearer ${cookies.jwt}`,
           },
           withCredentials: true,
         });
@@ -54,7 +54,7 @@ const CreateCompany = () => {
           withCredentials: true,
         }
       );
-      removeCookie("token");
+      removeCookie("jwt");
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);
