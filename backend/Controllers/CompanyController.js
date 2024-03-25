@@ -98,7 +98,7 @@ const deleteCompany = asyncHandler(async (request, response) => {
   try {
     const { id } = request.params;
 
-    const result = await Company.findByIdAndDelete(id);
+    const result = await CompanyInfoModel.findByIdAndDelete(id);
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -52,6 +52,9 @@ const Company = () => {
   }
   return (
     <div className="p-4">
+      <Link to="/profile" className="p-2 bg-sky-300 m-8">
+        Go to Profile
+      </Link>
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Company Name</label>
