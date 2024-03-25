@@ -1,6 +1,6 @@
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
@@ -86,6 +86,7 @@ const Profile = () => {
             <h3>{company.name}</h3>
             <p>About: {company.about}</p>
             <p>Contact: {company.contact}</p>
+            <Link to={`/companies/${company._id}`}>View</Link>
           </div>
         ))}
       </div>

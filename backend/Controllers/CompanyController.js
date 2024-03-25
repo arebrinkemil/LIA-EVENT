@@ -79,7 +79,7 @@ const updateCompany = asyncHandler(async (request, response) => {
 
     const { id } = request.params;
 
-    const result = await Company.findByIdAndUpdate(id, request.body);
+    const result = await CompanyInfoModel.findByIdAndUpdate(id, request.body);
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });
