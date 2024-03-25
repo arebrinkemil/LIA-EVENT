@@ -23,3 +23,5 @@ export const CompanyInfoModel = mongoose.model(
   "company_info",
   CompanyInfoSchema
 );
+
+export default CompanyInfoModel;
