@@ -22,9 +22,9 @@ const BurgerStar = () => {
   };
   return (
     <>
-      <div className="relative">
+      <div className={`relative ${isNavOpen ? "" : "overflow-hidden"}`}>
         <img
-          className={`-rotate-180 transition ease-in-out duration-300 ${
+          className={`-rotate-180 transition ease-in-out duration-1000 ${
             isRotated ? "rotate-180" : ""
           }`}
           src={burger}
@@ -32,26 +32,24 @@ const BurgerStar = () => {
           onClick={handleClick}
         />
         <div
-          className={`absolute top-8 right-1 bg-white flex flex-col align-middle justify-center text-center w-48 transition-all duration-300 ease-out transform ${
-            isNavOpen
-              ? "opacity-100 scale-100 z-10"
-              : "opacity-0 scale-90 -z-10"
+          className={`absolute w-screen z-10 top-15 -right-4 bg-white flex flex-col align-middle justify-center text-center transition-transform duration-500 ease-in-out transform ${
+            isNavOpen ? "" : "translate-x-full"
           }`}
         >
           <button
-            className="p-2 border-solid border-2 border-black w-full"
+            className="p-2 text-5xl border-solid border-2 border-black w-full"
             onClick={handleHome}
           >
             HEM
           </button>
           <button
-            className="p-2 border-solid border-x-2 border-black w-full"
+            className="p-2 text-5xl border-solid border-x-2 border-black w-full"
             onClick={handleLIA}
           >
             LIA
           </button>
           <button
-            className="p-2 border-solid border-2 border-black w-full"
+            className="p-2 text-5xl border-solid border-2 border-black w-full"
             onClick={handleProfile}
           >
             PROFIL
