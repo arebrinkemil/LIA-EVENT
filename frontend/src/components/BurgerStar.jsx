@@ -32,8 +32,10 @@ const BurgerStar = () => {
           onClick={handleClick}
         />
         <div
-          className={`absolute top-8 right-1 z-10 bg-slate-50 flex flex-col align-middle justify-center text-center w-48 transition-all duration-300 ease-out transform ${
-            isNavOpen ? "opacity-100 scale-100" : "opacity-0 scale-90"
+          className={`absolute top-8 right-1 bg-white flex flex-col align-middle justify-center text-center w-48 transition-all duration-300 ease-out transform ${
+            isNavOpen
+              ? "opacity-100 scale-100 z-10"
+              : "opacity-0 scale-90 -z-10"
           }`}
         >
           <button

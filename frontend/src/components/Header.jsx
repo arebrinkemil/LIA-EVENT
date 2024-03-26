@@ -4,7 +4,7 @@ import logo from "../assets/icons/yrgoLogo.svg";
 
 const Header = () => {
   return (
-    <header className="flex flex-row justify-between px-4 py-3">
+    <header className="flex flex-row justify-between px-4 py-3 bg-black">
       <img src={logo} alt="Yrgo logo" />
       <BurgerStar></BurgerStar>
     </header>
