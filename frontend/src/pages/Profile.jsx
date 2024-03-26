@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Company from "../components/ListItem";
 import axios from "axios";
+import Header from "../components/Header";
 
 const Profile = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
@@ -73,13 +74,26 @@ const Profile = () => {
   };
 
   return (
-    <div className="p-4">
-      <div className="home_page">
-        <h4>
-          {" "}
-          Welcome <span>{username}</span>
-        </h4>
-        <button onClick={handleLogout}>LOGOUT</button>
+    <>
+      <Header></Header>
+      <div className="p-4">
+        <div className="home_page">
+          <h4>
+            {" "}
+            Welcome <span>{username}</span>
+          </h4>
+          <button onClick={handleLogout}>LOGOUT</button>
+        </div>
+        <div>
+          <h2>Your Companies</h2>
+          {companies.map((company) => (
+            <div key={company._id}>
+              <h3>{company.name}</h3>
+              <p>About: {company.about}</p>
+              <p>Contact: {company.contact}</p>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="w-full items-center flex flex-col">
         <h1 className="text-2xl">Your Companies</h1>
@@ -91,6 +105,7 @@ const Profile = () => {
         CREATE NEW
       </Link>
     </div>
+</>
   );
 };
 

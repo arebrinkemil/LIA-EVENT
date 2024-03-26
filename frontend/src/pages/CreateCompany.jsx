@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import Header from "../components/Header";
 
 const CreateCompany = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
@@ -89,6 +90,8 @@ const CreateCompany = () => {
   };
 
   return (
+    <>
+    <Header></Header>
     <div className="p-4">
       <div className="home_page">
         <h4>
@@ -107,7 +110,7 @@ const CreateCompany = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
+            />
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">About Us</label>
@@ -116,7 +119,7 @@ const CreateCompany = () => {
             value={about}
             onChange={(e) => setAbout(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
+            />
         </div>
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Contact</label>
@@ -125,13 +128,14 @@ const CreateCompany = () => {
             value={contact}
             onChange={(e) => setContact(e.target.value)}
             className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
+            />
         </div>
         <button className="p-2 bg-sky-300 m-8" onClick={handleSaveCompany}>
           Save
         </button>
       </div>
     </div>
+  </>
   );
 };
 

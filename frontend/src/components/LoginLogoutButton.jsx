@@ -37,9 +37,11 @@ const LoginLogoutButton = () => {
   };
 
   return (
-    <button onClick={isLoggedIn ? handleLogout : handleLogin}>
-      <img src="" alt="Star Logo" />
-      {isLoggedIn ? "Logga ut" : "Logga in"}
+    <button
+      className="p-2 border-solid border-x-2 border-b-2 border-black w-full"
+      onClick={isLoggedIn ? handleLogout : handleLogin}
+    >
+      {isLoggedIn ? "LOG OUT" : "LOG IN"}
     </button>
   );
 };
