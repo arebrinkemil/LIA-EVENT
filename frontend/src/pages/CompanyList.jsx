@@ -6,6 +6,7 @@ import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import CompaniesCard from "../components/CompaniesCard";
 import CompaniesTable from "../components/CompaniesTable";
+import Header from "../components/Header";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -27,32 +28,35 @@ const CompanyList = () => {
   }, []);
 
   return (
-    <div className="p-4">
-      <div className="flex justify-center items-center gap-x-4">
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("table")}
-        >
-          Table
-        </button>
-        <button
-          className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
-          onClick={() => setShowType("card")}
-        >
-          Card
-        </button>
-      </div>
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Company List</h1>
-        <Link to="/companies/create">
-          <MdOutlineAddBox className="text-sky-800 text-4xl" />
-        </Link>
-      </div>
+    <>
+      <Header></Header>
+      <div className="p-4">
+        <div className="flex justify-center items-center gap-x-4">
+          <button
+            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+            onClick={() => setShowType("table")}
+          >
+            Table
+          </button>
+          <button
+            className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+            onClick={() => setShowType("card")}
+          >
+            Card
+          </button>
+        </div>
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl my-8">Company List</h1>
+          <Link to="/companies/create">
+            <MdOutlineAddBox className="text-sky-800 text-4xl" />
+          </Link>
+        </div>
 
-      <CompaniesTable companies={companies} />
+        <CompaniesTable companies={companies} />
 
-      <CompaniesCard companies={companies} />
-    </div>
+        <CompaniesCard companies={companies} />
+      </div>
+    </>
   );
 };
 

@@ -7,7 +7,6 @@ const Header = () => {
     <header className="flex flex-row justify-between px-4 py-3">
       <img src={logo} alt="Yrgo logo" />
       <BurgerStar></BurgerStar>
-      <LoginLogoutButton></LoginLogoutButton>
     </header>
   );
 };
