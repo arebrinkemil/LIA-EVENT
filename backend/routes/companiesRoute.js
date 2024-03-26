@@ -13,6 +13,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import fs from "fs";
+import CompanyInfoModel from "../models/Company_info.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -62,20 +63,29 @@ router.get("/upload/:companyId", (req, res) => {
   });
 });
 
-router.get("/upload/:companyId", (req, res) => {
-  const { companyId } = req.params;
-  const dirPath = path.resolve(__dirname, `../uploads/${companyId}`);
+router.delete("/upload/:companyId/:fileName", async (req, res) => {
+  const { companyId, fileName } = req.params;
+  const filePath = path.resolve(
+    __dirname,
+    `../uploads/${companyId}/${fileName}`
+  );
 
-  fs.readdir(dirPath, (err, files) => {
+  fs.unlink(filePath, async (err) => {
     if (err) {
-      return res.status(500).json({ message: "Unable to scan directory" });
+      return res.status(500).json({ message: "Unable to delete file" });
     }
 
-    const fileUrls = files.map(
-      (file) =>
-        `${req.protocol}://${req.get("host")}/uploads/${companyId}/${file}`
-    );
-    res.status(200).json(fileUrls);
+    try {
+      await CompanyInfoModel.updateOne(
+        { companyId: companyId },
+        { $set: { logotype: "" } }
+      );
+      res
+        .status(200)
+        .json({ message: "File and database reference deleted successfully" });
+    } catch (dbErr) {
+      res.status(500).json({ message: "Unable to delete database reference" });
+    }
   });
 });
 
