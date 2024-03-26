@@ -8,9 +8,11 @@ const ListItem = ({ company }) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5555/companies/upload/${company._id}`)
+      .get(`http://localhost:5555/companies/upload/${company.companyId}`)
       .then((response) => {
+        console.log(response.data);
         if (response.data.length > 0) {
+          console.log(response.data[0]);
           setLogotype(response.data[0]);
         }
       })
