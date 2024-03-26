@@ -7,6 +7,9 @@ import Header from "../components/Header";
 
 const CreateCompany = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
+  const [logotype, setLogotype] = useState(null);
+  const companyId = Math.floor(Math.random() * 1000000);
+
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
@@ -62,13 +65,42 @@ const CreateCompany = () => {
     }
   };
 
-  const handleSaveCompany = () => {
+  const handleFileChange = (e) => {
+    setLogotype(e.target.files[0]);
+  };
+
+  const handleUploadLogotype = () => {
+    const companyId = Math.floor(Math.random() * 1000000); // generates a random number between 0 and 999999
+    const data = new FormData();
+    data.append("logotype", logotype);
+
+    axios
+      .post(`http://localhost:5555/companies/upload/${companyId}`, data, {
+        headers: {
+          Authorization: `Bearer ${cookies.token}`,
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        handleSaveCompany(response.data.fileUrl, companyId);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleSaveCompany = (logotypeUrl, companyId) => {
+    console.log("logotypeUrl", logotypeUrl);
     const data = {
+      logotype: logotypeUrl,
       name,
       about,
       contact,
       owner_id,
+      companyId,
     };
+
     setLoading(true);
     axios
       .post("http://localhost:5555/companies", data, {
@@ -104,6 +136,14 @@ const CreateCompany = () => {
 
       <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
         <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Logotype</label>
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="border-2 border-gray-500 px-4 py-2 w-full"
+          />
+        </div>
+        <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Company Name</label>
           <input
             type="text"
@@ -130,7 +170,7 @@ const CreateCompany = () => {
             className="border-2 border-gray-500 px-4 py-2  w-full "
             />
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveCompany}>
+        <button className="p-2 bg-sky-300 m-8" onClick={handleUploadLogotype}>
           Save
         </button>
       </div>
