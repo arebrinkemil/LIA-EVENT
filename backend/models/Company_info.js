@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 // import uniqueValidator from "mongoose-unique-validator";
 
 const CompanyInfoSchema = mongoose.Schema({
+  logotype: String,
   name: {
     type: String,
     lowercase: true,
@@ -16,6 +17,7 @@ const CompanyInfoSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },
+  companyId: String,
 });
 
 // CompanyInfoSchema.plugin(uniqueValidator, { message: "is already taken." });

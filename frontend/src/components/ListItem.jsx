@@ -1,8 +1,24 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
 
 const ListItem = ({ company }) => {
+  const [logotype, setLogotype] = useState("");
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5555/companies/upload/${company._id}`)
+      .then((response) => {
+        if (response.data.length > 0) {
+          setLogotype(response.data[0]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [company._id]);
+
   const [cookies] = useCookies(["jwt"]);
 
   const deleteCompany = async () => {
@@ -28,6 +44,7 @@ const ListItem = ({ company }) => {
       <h3 className="text-2xl">{company.name}</h3>
       <p>About: {company.about}</p>
       <p>Contact: {company.contact}</p>
+      {logotype && <img src={logotype} alt="Company logotype" />}
       <Link
         className="border-black border-2 p-1"
         to={`/companies/${company._id}`}

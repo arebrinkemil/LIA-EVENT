@@ -7,6 +7,12 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRouth from "./routes/AuthRoute.js";
 import companiesRoute from "./routes/companiesRoute.js";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 
@@ -28,7 +34,7 @@ app.use(
 );
 
 app.use(cookieParser());
-
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 app.use(express.json());
 
 // app.use("/", authRouth);

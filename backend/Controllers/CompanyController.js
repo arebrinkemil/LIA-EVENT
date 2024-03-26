@@ -27,10 +27,12 @@ const createCompany = asyncHandler(async (request, response) => {
       });
     }
     const newCompany = {
+      logotype: request.body.logotype,
       name: request.body.name,
       about: request.body.about,
       contact: request.body.contact,
       owner_id: request.body.owner_id,
+      companyId: request.body.companyId,
     };
 
     const company = await CompanyInfoModel.create(newCompany);
