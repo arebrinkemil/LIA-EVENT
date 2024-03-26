@@ -104,8 +104,7 @@ const Profile = () => {
       <Link to="/companies/create" className="p-2 bg-sky-300 m-8">
         CREATE NEW
       </Link>
-    </div>
-</>
+    </>
   );
 };
 
