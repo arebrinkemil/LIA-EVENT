@@ -1,10 +1,17 @@
 import User from "../models/User.js";
 import CompanyInfoModel from "../models/Company_info.js";
 import asyncHandler from "express-async-handler";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 import generateToken from "../utils/generateToken.js";
 
 import bcrypt from "bcryptjs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const getCompanyInfo = asyncHandler(async (req, res) => {
   const companyInfo = await CompanyInfoModel.find({
@@ -98,17 +105,27 @@ const updateCompany = asyncHandler(async (request, response) => {
 
 const deleteCompany = asyncHandler(async (request, response) => {
   try {
+    console.log(request.params);
     const { id } = request.params;
 
-    const result = await CompanyInfoModel.findByIdAndDelete(id);
+    const result = await CompanyInfoModel.findOneAndDelete({
+      companyId: id,
+    });
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });
     }
 
+    const dirPath = path.resolve(__dirname, `../uploads/${id}`);
+    fs.rmdir(dirPath, { recursive: true }, (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+
     return response
       .status(200)
-      .send({ message: "Company deleted successfully" });
+      .send({ message: "Company and associated files deleted successfully" });
   } catch (error) {
     console.log(error.message);
     response.status(500).send({ message: error.message });
