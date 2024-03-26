@@ -55,7 +55,7 @@ const CreateCompany = () => {
           withCredentials: true,
         }
       );
-      removeCookie("jwt");
+
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);

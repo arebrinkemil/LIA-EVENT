@@ -1,7 +1,8 @@
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import Company from "../components/ListItem";
 import axios from "axios";
 import Header from "../components/Header";
 
@@ -45,6 +46,7 @@ const Profile = () => {
           withCredentials: true,
         });
         const { data } = response;
+        setUsername(data.name);
         console.log("Response data:", data);
       } catch (error) {
         console.error("Error verifying authentication:", error);
@@ -64,7 +66,7 @@ const Profile = () => {
           withCredentials: true,
         }
       );
-      removeCookie("jwt");
+
       navigate("/login");
     } catch (error) {
       console.error("Logout error:", error);
@@ -93,7 +95,17 @@ const Profile = () => {
           ))}
         </div>
       </div>
-    </>
+      <div className="w-full items-center flex flex-col">
+        <h1 className="text-2xl">Your Companies</h1>
+        {companies.map((company) => (
+          <Company className="" key={company._id} company={company} />
+        ))}
+      </div>
+      <Link to="/companies/create" className="p-2 bg-sky-300 m-8">
+        CREATE NEW
+      </Link>
+    </div>
+</>
   );
 };
 

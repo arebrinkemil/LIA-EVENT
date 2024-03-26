@@ -3,8 +3,6 @@ import CompanyInfoModel from "../models/Company_info.js";
 import asyncHandler from "express-async-handler";
 
 import generateToken from "../utils/generateToken.js";
-import { createSecretToken } from "../SecretToken.js";
-import bcrypt from "bcryptjs";
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -18,6 +16,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      success: true,
     });
   } else {
     res.status(401);

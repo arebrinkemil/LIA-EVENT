@@ -79,7 +79,7 @@ const updateCompany = asyncHandler(async (request, response) => {
 
     const { id } = request.params;
 
-    const result = await Company.findByIdAndUpdate(id, request.body);
+    const result = await CompanyInfoModel.findByIdAndUpdate(id, request.body);
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });
@@ -98,7 +98,7 @@ const deleteCompany = asyncHandler(async (request, response) => {
   try {
     const { id } = request.params;
 
-    const result = await Company.findByIdAndDelete(id);
+    const result = await CompanyInfoModel.findByIdAndDelete(id);
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });
