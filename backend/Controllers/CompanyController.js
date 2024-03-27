@@ -67,9 +67,9 @@ const getAllCompanies = asyncHandler(async (request, response) => {
 
 const getCompanyById = asyncHandler(async (request, response) => {
   try {
-    const { id } = request.params;
+    const { companyId } = request.params;
 
-    const company = await CompanyInfoModel.findById(id);
+    const company = await CompanyInfoModel.findById(companyId);
 
     return response.status(200).json(company);
   } catch (error) {
@@ -86,9 +86,12 @@ const updateCompany = asyncHandler(async (request, response) => {
       });
     }
 
-    const { id } = request.params;
+    const { companyId } = request.params;
 
-    const result = await CompanyInfoModel.findByIdAndUpdate(id, request.body);
+    const result = await CompanyInfoModel.findByIdAndUpdate(
+      companyId,
+      request.body
+    );
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });
@@ -106,17 +109,17 @@ const updateCompany = asyncHandler(async (request, response) => {
 const deleteCompany = asyncHandler(async (request, response) => {
   try {
     console.log(request.params);
-    const { id } = request.params;
+    const { companyId } = request.params;
 
     const result = await CompanyInfoModel.findOneAndDelete({
-      companyId: id,
+      companyId: companyId,
     });
 
     if (!result) {
       return response.status(404).json({ message: "Company not found" });
     }
 
-    const dirPath = path.resolve(__dirname, `../uploads/${id}`);
+    const dirPath = path.resolve(__dirname, `../uploads/${companyId}`);
     fs.rmdir(dirPath, { recursive: true }, (err) => {
       if (err) {
         throw err;

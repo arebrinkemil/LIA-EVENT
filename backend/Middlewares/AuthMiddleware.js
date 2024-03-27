@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import "dotenv/config";
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
+import CompanyInfoModel from "../models/Company_info.js";
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
@@ -26,4 +27,22 @@ const protect = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+const checkOwnership = asyncHandler(async (req, res, next) => {
+  const company = await CompanyInfoModel.findOne({
+    companyId: req.params.companyId,
+  });
+
+  console.log(req.params);
+  console.log("Company:", company);
+  console.log("Owner ID:", req.user._id);
+  console.log("Company owner ID:", company.owner_id);
+
+  if (company && String(company.owner_id) === String(req.user._id)) {
+    next();
+  } else {
+    res.status(403);
+    throw new Error("Not authorized as owner");
+  }
+});
+
+export { checkOwnership, protect };
