@@ -32,7 +32,7 @@ const BurgerStar = () => {
           onClick={handleClick}
         />
         <div
-          className={`absolute w-screen z-10 top-15 -right-4 bg-white flex flex-col align-middle justify-center text-center transition-transform duration-500 ease-in-out transform ${
+          className={`absolute w-screen z-20 top-15 -right-4 bg-white flex flex-col align-middle justify-center text-center transition-transform duration-500 ease-in-out transform ${
             isNavOpen ? "" : "translate-x-full"
           }`}
         >
