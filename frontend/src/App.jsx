@@ -7,6 +7,7 @@ import CreateCompany from "./pages/CreateCompany";
 import CompanyList from "./pages/CompanyList";
 import Profile from "./pages/Profile";
 import Company from "./components/Company";
+import EditCompany from "./components/EditCompany";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/signup" element={<Signup />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/companies/:id" element={<Company />} />
+      <Route path="/companies/:id/edit" element={<EditCompany />} />
     </Routes>
   );
 };
