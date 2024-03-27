@@ -43,7 +43,7 @@ const Company = () => {
         );
 
         await axios.delete(
-          `http://localhost:5555/companies/upload/${companyId}/${oldLogotypeFilename}`,
+          `http://localhost:5555/image/${companyId}/${oldLogotypeFilename}`,
           {
             withCredentials: true,
           }
@@ -73,7 +73,7 @@ const Company = () => {
         );
 
         await axios.delete(
-          `http://localhost:5555/companies/upload/${companyId}/${oldLogotypeFilename}`,
+          `http://localhost:5555/image/${companyId}/${oldLogotypeFilename}`,
           {
             withCredentials: true,
           }
@@ -81,7 +81,7 @@ const Company = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:5555/companies/upload/${companyId}`,
+        `http://localhost:5555/image/${companyId}`,
         formData,
         {
           withCredentials: true,

@@ -80,7 +80,7 @@ const CreateCompany = () => {
       data.append("logotype", logotype);
 
       axios
-        .post(`http://localhost:5555/companies/upload/${companyId}`, data, {
+        .post(`http://localhost:5555/image/${companyId}`, data, {
           headers: {
             Authorization: `Bearer ${cookies.token}`,
             "Content-Type": "multipart/form-data",

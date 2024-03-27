@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRouth from "./routes/AuthRoute.js";
+import imagesRoute from "./routes/imagesRoute.js";
+
 import companiesRoute from "./routes/companiesRoute.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -48,3 +50,4 @@ app.get("/", (request, response) => {
 
 app.use("/", authRouth);
 app.use("/companies", companiesRoute);
+app.use("/image", imagesRoute);

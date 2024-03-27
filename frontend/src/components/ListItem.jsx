@@ -9,7 +9,7 @@ const ListItem = ({ company }) => {
   useEffect(() => {
     if (company.logotype && company.logotype.trim()) {
       axios
-        .get(`http://localhost:5555/companies/upload/${company.companyId}`)
+        .get(`http://localhost:5555/image/${company.companyId}`)
         .then((response) => {
           console.log(response.data);
           if (response.data.length > 0) {
