@@ -33,6 +33,7 @@ const createCompany = asyncHandler(async (request, response) => {
         message: "Send all required fields: name, about us, contact",
       });
     }
+
     const newCompany = {
       logotype: request.body.logotype,
       name: request.body.name,
@@ -40,6 +41,13 @@ const createCompany = asyncHandler(async (request, response) => {
       contact: request.body.contact,
       owner_id: request.body.owner_id,
       companyId: request.body.companyId,
+      // Check if optional fields are provided in the request body
+      role: request.body.role,
+      amount: request.body.amount,
+      location: request.body.location,
+      tools: request.body.tools,
+      url: request.body.url,
+      task_description: request.body.task_description,
     };
 
     const company = await CompanyInfoModel.create(newCompany);

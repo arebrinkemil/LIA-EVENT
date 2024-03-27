@@ -15,6 +15,12 @@ const CreateCompany = () => {
   const [about, setAbout] = useState("");
   const [contact, setContact] = useState("");
   const [owner_id, setOwnerId] = useState("");
+  const [role, setRole] = useState("Webdeveloper");
+  const [amount, setAmount] = useState(0);
+  const [location, setLocation] = useState("Gothenburg");
+  const [tools, setTools] = useState([]);
+  const [url, setUrl] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -105,6 +111,12 @@ const CreateCompany = () => {
       contact,
       owner_id,
       companyId,
+      role,
+      amount,
+      location,
+      tools,
+      url,
+      task_description: taskDescription,
     };
 
     setLoading(true);
@@ -175,6 +187,68 @@ const CreateCompany = () => {
               onChange={(e) => setContact(e.target.value)}
               className="border-2 border-gray-500 px-4 py-2  w-full "
             />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Role</label>
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2  w-full "
+            >
+              <option value="Webdeveloper">Webdeveloper</option>
+              <option value="Designer">Designer</option>
+              <option value="Both">Both</option>
+            </select>
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Amount</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Location</label>
+            <select
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+            >
+              <option value="Gothenburg">Gothenburg</option>
+              <option value="Distance">Distance</option>
+              <option value="Outside_Gothenburg">Outside Gothenburg</option>
+            </select>
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Tools</label>
+            <input
+              type="text"
+              value={tools}
+              onChange={(e) => setTools(e.target.value.split(","))}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+              placeholder="Separate tools with commas (,)"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">URL</label>
+            <input
+              type="text"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full"
+            />
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">
+              Task Description
+            </label>
+            <textarea
+              value={taskDescription}
+              onChange={(e) => setTaskDescription(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2 w-full h-32"
+            ></textarea>
           </div>
           <button className="p-2 bg-sky-300 m-8" onClick={handleUploadLogotype}>
             Save

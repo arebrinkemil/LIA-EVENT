@@ -56,9 +56,15 @@ const ListItem = ({ company }) => {
       {logotype && <img src={logotype} alt="Company logotype" />}
       <Link
         className="border-black border-2 p-1"
-        to={`/companies/${company._id}`}
+        to={`/companies/${company._id}/edit`}
       >
         EDIT
+      </Link>
+      <Link
+        className="border-black border-2 p-1"
+        to={`/companies/${company._id}`}
+      >
+        VIEW
       </Link>
       <button className="border-black border-2 p-1" onClick={deleteCompany}>
         Delete

@@ -6,7 +6,6 @@ const CompanyInfoSchema = mongoose.Schema({
   name: {
     type: String,
     lowercase: true,
-    // unique: true,
     required: [true, "can't be blank"],
     match: [/^[a-zA-Z0-9]+$/, "is invalid"],
     index: true,
@@ -18,6 +17,20 @@ const CompanyInfoSchema = mongoose.Schema({
     ref: "user",
   },
   companyId: String,
+  role: {
+    type: String,
+    enum: ["Webdeveloper", "Designer", "Both"],
+    default: "Webdeveloper",
+  },
+  amount: Number,
+  location: {
+    type: String,
+    enum: ["Gothenburg", "Distance", "Outside_Gothenburg"],
+    default: "Gothenburg",
+  },
+  tools: [String],
+  url: String,
+  task_description: String,
 });
 
 // CompanyInfoSchema.plugin(uniqueValidator, { message: "is already taken." });
