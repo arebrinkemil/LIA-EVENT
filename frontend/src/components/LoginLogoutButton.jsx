@@ -38,7 +38,7 @@ const LoginLogoutButton = () => {
 
   return (
     <button
-      className="p-2 border-solid border-x-2 border-b-2 border-black w-full"
+      className="p-2 text-5xl border-solid border-x-2 border-b-2 border-black w-full"
       onClick={isLoggedIn ? handleLogout : handleLogin}
     >
       {isLoggedIn ? "LOG OUT" : "LOG IN"}
