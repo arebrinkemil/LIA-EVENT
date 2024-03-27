@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home_page w-screen overflow-hidden">
+      <div className="home_page overflow-x-clip pt-18">
         <Header></Header>
         <button
           className="p-4 text-4xl font-normal border-solid border-b-2 border-black w-full flex flex-row justify-between align-baseline"
