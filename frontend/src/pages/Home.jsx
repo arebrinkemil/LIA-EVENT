@@ -9,7 +9,8 @@ import HorizontalLine from "../components/HorizontalLine.jsx";
 import BulletPoint from "../components/BulletPoint.jsx";
 import arrowRU from "../assets/icons/arrow-right-up.svg";
 import asterisk from "../assets/icons/asterisk-black.svg";
-import students from "../assets/photos/students.png";
+import studentsLaptops from "../assets/photos/students-w-laptops.png";
+import studentsPaper from "../assets/photos/students-w-paper.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="home_page w-screen">
+      <div className="home_page w-screen overflow-hidden">
         <Header></Header>
         <button
           className="p-4 text-4xl font-normal border-solid border-b-2 border-black w-full flex flex-row justify-between align-baseline"
@@ -28,24 +29,28 @@ const Home = () => {
           VILKA KOMMER?
           <img src={arrowRU} alt="arrow right up" />
         </button>
-        <span className="p-4 text-8xl flex flex-row justify-between">
+        <section className="p-4 text-8xl flex flex-row justify-between">
           LIA &
           <img src={asterisk} alt="asterisk icon" />
-        </span>
+        </section>
         <span className="p-4 text-8xl font-bold text-right flex flex-row justify-end">
           YRGO
         </span>
-        <span className="px-4 flex flex-row justify-between align-middle items-center">
+        <section className="px-4 flex flex-row justify-between align-middle items-center">
           <div>
             <div>24 APRIL</div>
             <div>MEETUP</div>
           </div>
-          <img className="object-contain h-36" src={students} alt="students" />
+          <img
+            className="object-contain h-36"
+            src={studentsLaptops}
+            alt="students with laptops"
+          />
           2024
-        </span>
+        </section>
         <RedButton path={"/signup"}>Vi kommer</RedButton>
         <HorizontalLine></HorizontalLine>
-        <div className="pt-16 px-4">
+        <section className="pt-16 px-4">
           <h4 className="text-4xl mb-3">Vad är det?</h4>
           "LIA utan gränser" är ett evenemang som hjälper studenter att hitta
           den perfekta praktiken. På detta evenemang kan studenter:
@@ -57,7 +62,18 @@ const Home = () => {
           <BulletPoint>
             Få värdefulla tips från experter på karriärutveckling
           </BulletPoint>
-        </div>
+        </section>
+        <section className="flex flex-row px-4 ">
+          <img
+            className="object-contain h-36"
+            src={studentsPaper}
+            alt="students with a paper"
+          />
+          <div>
+            <h4 className="text-4xl mb-3">FÖR VEM?</h4>
+            Detta evenemang är för företag som:
+          </div>
+        </section>
         <h1>THIS IS A HOME PAGE EVERYONE CAN ACCESS</h1>
       </div>
       <ToastContainer />

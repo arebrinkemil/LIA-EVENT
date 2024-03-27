@@ -22,7 +22,7 @@ const BurgerStar = () => {
   };
   return (
     <>
-      <div className={`relative ${isNavOpen ? "" : "overflow-hidden"}`}>
+      <div className={`relative ${isNavOpen ? "" : ""}`}>
         <img
           className={`-rotate-180 transition ease-in-out duration-1000 ${
             isRotated ? "rotate-180" : ""
