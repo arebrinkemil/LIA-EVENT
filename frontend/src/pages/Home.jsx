@@ -7,6 +7,7 @@ import Header from "../components/Header.jsx";
 import RedButton from "../components/RedButton.jsx";
 import HorizontalLine from "../components/HorizontalLine.jsx";
 import BulletPoint from "../components/BulletPoint.jsx";
+import FromOffscreenSection from "../components/FromOffscreenSection.jsx";
 import arrowRU from "../assets/icons/arrow-right-up.svg";
 import asterisk from "../assets/icons/asterisk-black.svg";
 import studentsLaptops from "../assets/photos/students-w-laptops.png";
@@ -67,36 +68,40 @@ const Home = () => {
             Få värdefulla tips från experter på karriärutveckling
           </BulletPoint>
         </section>
-        <section className="flex flex-row px-4 pt-28 gap-3">
-          <img
-            className="object-contain h-36"
-            src={studentsPaper}
-            alt="students with a paper"
-          />
-          <div>
-            <h4 className="text-4xl mb-3">FÖR VEM?</h4>
-            Detta evenemang är för företag som:
-          </div>
-        </section>
-        <section className="px-4 pt-20 flex flex-col gap-3">
-          <div className="flex flex-row gap-3">
-            <div className="flex flex-col gap-3">
-              <BulletPoint>Vill skapa nya kontakter</BulletPoint>
-              <BulletPoint>
-                Letar efter praktikanter i enlighet med sina intressen och
-                färdigheter
-              </BulletPoint>
-            </div>
+        <FromOffscreenSection direction={"left"}>
+          <section className="flex flex-row px-4 pt-28 gap-3">
             <img
-              className="object-contain h-44"
-              src={eyesBook}
-              alt="person peeking over a book"
+              className="object-contain h-36"
+              src={studentsPaper}
+              alt="students with a paper"
             />
-          </div>
-          <BulletPoint>
-            Ett tillfälle att synas inför potentiella framtida kollegor
-          </BulletPoint>
-        </section>
+            <div>
+              <h4 className="text-4xl mb-3">FÖR VEM?</h4>
+              Detta evenemang är för företag som:
+            </div>
+          </section>
+        </FromOffscreenSection>
+        <FromOffscreenSection>
+          <section className="px-4 pt-20 flex flex-col gap-3">
+            <div className="flex flex-row gap-3">
+              <div className="flex flex-col gap-3">
+                <BulletPoint>Vill skapa nya kontakter</BulletPoint>
+                <BulletPoint>
+                  Letar efter praktikanter i enlighet med sina intressen och
+                  färdigheter
+                </BulletPoint>
+              </div>
+              <img
+                className="object-contain h-44"
+                src={eyesBook}
+                alt="person peeking over a book"
+              />
+            </div>
+            <BulletPoint>
+              Ett tillfälle att synas inför potentiella framtida kollegor
+            </BulletPoint>
+          </section>
+        </FromOffscreenSection>
         <section className="py-10 flex justify-center align-middle">
           <img
             className="animate-arrowUpDown"
