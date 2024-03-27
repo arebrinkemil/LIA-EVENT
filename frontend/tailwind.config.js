@@ -9,7 +9,18 @@ export default {
       black: "#333333",
       red: "#F52A3B",
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        arrowUpDown: {
+          "0%, 50%": { transform: "translateY(0)" },
+          "25%, 75%": { transform: "translateY(30px)" },
+          "100%": { transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        arrowUpDown: "arrowUpDown 3s cubic-bezier(0.1, 0.7, 0.1, 1) infinite",
+      },
+    },
   },
   plugins: [],
 };
