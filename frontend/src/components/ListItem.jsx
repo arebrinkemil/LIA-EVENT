@@ -2,9 +2,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useEffect, useState } from "react";
+import { useSnackbar } from "notistack";
 
 const ListItem = ({ company }) => {
   const [logotype, setLogotype] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     if (company.logotype && company.logotype.trim()) {
@@ -36,9 +38,15 @@ const ListItem = ({ company }) => {
           withCredentials: true,
         }
       );
+
+      enqueueSnackbar("Company Deleted", { variant: "success" });
+      //skulle varit bättre att ladda in listan igen
+      window.location.reload();
+
       console.log("Company deleted successfully");
     } catch (error) {
       console.error(error);
+      enqueueSnackbar("Error", { variant: "error" });
     }
   };
 

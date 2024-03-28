@@ -5,9 +5,9 @@ const CompanyInfoSchema = mongoose.Schema({
   logotype: String,
   name: {
     type: String,
-    lowercase: true,
+
     required: [true, "can't be blank"],
-    match: [/^[a-zA-Z0-9]+$/, "is invalid"],
+    match: [/^[a-zA-Z0-9\s]+$/, "is invalid"],
     index: true,
   },
   about: String,

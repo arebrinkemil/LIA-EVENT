@@ -130,7 +130,7 @@ const CreateCompany = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Company added successfully", { variant: "success" });
-        navigate("/");
+        navigate("/profile");
       })
       .catch((error) => {
         setLoading(false);
@@ -170,15 +170,7 @@ const CreateCompany = () => {
               className="border-2 border-gray-500 px-4 py-2 w-full"
             />
           </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">About Us</label>
-            <input
-              type="text"
-              value={about}
-              onChange={(e) => setAbout(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
-            />
-          </div>
+
           <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">Contact</label>
             <input
@@ -248,6 +240,14 @@ const CreateCompany = () => {
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
               className="border-2 border-gray-500 px-4 py-2 w-full h-32"
+            ></textarea>
+          </div>
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">About Us</label>
+            <textarea
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              className="border-2 border-gray-500 px-4 py-2  w-full "
             ></textarea>
           </div>
           <button className="p-2 bg-sky-300 m-8" onClick={handleUploadLogotype}>
