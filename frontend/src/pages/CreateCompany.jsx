@@ -4,19 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import Header from "../components/Header";
+import AmountInput from "../components/AmountInput";
 
 const CreateCompany = () => {
+  const [dragging, setDragging] = useState(false);
+  const [fileName, setFileName] = useState("");
   const [cookies, removeCookie] = useCookies(["jwt"]);
   const [logotype, setLogotype] = useState(null);
-  const companyId = Math.floor(Math.random() * 1000000);
-
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
   const [contact, setContact] = useState("");
   const [owner_id, setOwnerId] = useState("");
   const [role, setRole] = useState("Webdeveloper");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [location, setLocation] = useState("Gothenburg");
   const [tools, setTools] = useState([]);
   const [url, setUrl] = useState("");
@@ -48,7 +49,7 @@ const CreateCompany = () => {
         setOwnerId(_id);
       } catch (error) {
         console.error("Error verifying authentication:", error);
-        removeCookie("token");
+        removeCookie("jwt");
         navigate("/login");
       }
     };
@@ -72,38 +73,48 @@ const CreateCompany = () => {
   };
 
   const handleFileChange = (e) => {
-    setLogotype(e.target.files[0]);
-  };
-
-  const handleUploadLogotype = () => {
-    const companyId = Math.floor(Math.random() * 1000000); // generates a random number between 0 and 999999
-    const data = new FormData();
-
-    console.log("logotype", logotype);
-    if (!logotype) {
-      handleSaveCompany("", companyId);
-    } else {
-      data.append("logotype", logotype);
-
-      axios
-        .post(`http://134.122.48.238:5555/image/${companyId}`, data, {
-          headers: {
-            Authorization: `Bearer ${cookies.token}`,
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        })
-        .then((response) => {
-          handleSaveCompany(response.data.fileUrl, companyId);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    if (file) {
+      setFileName(file.name);
+      setLogotype(file);
     }
   };
 
-  const handleSaveCompany = (logotypeUrl, companyId) => {
-    console.log("logotypeUrl", logotypeUrl);
+  const autoResize = (e) => {
+    e.target.style.height = "inherit";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
+  const handleUploadLogotype = async () => {
+    setLoading(true);
+    const companyId = Math.floor(Math.random() * 1000000);
+    const data = new FormData();
+    if (logotype) {
+      data.append("logotype", logotype);
+      try {
+        const response = await axios.post(
+          `http://134.122.48.238:5555/image/${companyId}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.jwt}`,
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          }
+        );
+        handleSaveCompany(response.data.fileUrl, companyId);
+      } catch (error) {
+        console.error(error);
+        enqueueSnackbar("Error uploading logotype", { variant: "error" });
+        setLoading(false);
+      }
+    } else {
+      handleSaveCompany("", companyId);
+    }
+  };
+
+  const handleSaveCompany = async (logotypeUrl, companyId) => {
     const data = {
       logotype: logotypeUrl,
       name,
@@ -114,148 +125,214 @@ const CreateCompany = () => {
       role,
       amount,
       location,
-      tools,
+      tools: tools.length > 0 ? tools.split(",") : [],
       url,
       task_description: taskDescription,
     };
-
-    setLoading(true);
-    axios
-      .post("http://134.122.48.238:5555/companies", data, {
+    try {
+      await axios.post("http://134.122.48.238:5555/companies", data, {
         headers: {
-          Authorization: `Bearer ${cookies.token}`,
+          Authorization: `Bearer ${cookies.jwt}`,
         },
         withCredentials: true,
-      })
-      .then(() => {
-        setLoading(false);
-        enqueueSnackbar("Company added successfully", { variant: "success" });
-        navigate("/profile");
-      })
-      .catch((error) => {
-        setLoading(false);
-        enqueueSnackbar("Error", { variant: "error" });
-        console.log(error);
       });
+      enqueueSnackbar("Company added successfully", { variant: "success" });
+      navigate("/profile");
+    } catch (error) {
+      console.error(error);
+      enqueueSnackbar("Error saving company", { variant: "error" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-      <Header></Header>
-      <div className="p-4">
+    <div className="overflow-x-clip">
+      <Header />
+      <div className="w-full">
         <div className="home_page">
           <h4>
-            {" "}
             Welcome <span>{username}</span>
           </h4>
           <button onClick={handleLogout}>LOGOUT</button>
         </div>
-        <h1 className="text-3xl my-4">Create Book</h1>
+        <h1 className="my-4 text-6xl font-light md:text-center">
+          Företagsprofil
+        </h1>
 
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Logotype</label>
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-            />
+        <div className="flex flex-col border-sky-400 w-full px-4 md:px-48 mx-auto">
+          <label className="text-xl mr-4 text-gray-500">Logotyp</label>
+          <div
+            className="bg-gray-50 text-center px-4 rounded w-80 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-400 border-dashed mx-auto font-[sans-serif]"
+            onDragOver={(e) => {
+              e.preventDefault();
+              setDragging(true);
+            }}
+            onDragLeave={() => {
+              setDragging(false);
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              setDragging(false);
+              handleFileChange(e);
+            }}
+          >
+            {" "}
+            <div className="py-6">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-10 mb-2 fill-gray-600 inline-block"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                  data-original="#000000"
+                />
+                <path
+                  d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                  data-original="#000000"
+                />
+              </svg>
+              <h4 className="text-base font-semibold text-gray-600">
+                Drag and drop files here
+              </h4>
+            </div>
+            <hr className="w-full border-gray-400 my-2" />
+            <div className="py-6">
+              <input
+                type="file"
+                id="uploadFile1"
+                className="hidden"
+                onChange={handleFileChange}
+              />
+              <label
+                htmlFor="uploadFile1"
+                className="block px-6 py-2.5 rounded text-gray-600 text-sm tracking-wider font-semibold border-none outline-none bg-gray-200 hover:bg-gray-100"
+              >
+                Browse Files
+              </label>
+              <p className="text-xs text-gray-400 mt-4">
+                {fileName
+                  ? `Selected file: ${fileName}`
+                  : "PNG, JPG, SVG, WEBP, and GIF are allowed."}
+              </p>
+            </div>
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Company Name</label>
+            <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
+              className="form-input"
             />
           </div>
 
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Contact</label>
-            <input
-              type="text"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Role</label>
+            <label className="text-xl mr-4 text-gray-500">*Vad söker ni</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
+              className="form-input"
             >
               <option value="Webdeveloper">Webdeveloper</option>
               <option value="Designer">Designer</option>
               <option value="Both">Both</option>
             </select>
           </div>
+
+          <label className="text-xl mr-4 text-gray-500">
+            *Antal LIA platser
+          </label>
+          <AmountInput amount={amount} setAmount={setAmount} />
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Amount</label>
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Location</label>
+            <label className="text-xl mr-4 text-gray-500">Vart?</label>
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
+              className="form-input"
             >
               <option value="Gothenburg">Gothenburg</option>
               <option value="Distance">Distance</option>
               <option value="Outside_Gothenburg">Outside Gothenburg</option>
             </select>
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Tools</label>
+            <label className="text-xl mr-4 text-gray-500">Arbetsverktyg</label>
             <input
               type="text"
               value={tools}
-              onChange={(e) => setTools(e.target.value.split(","))}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-              placeholder="Separate tools with commas (,)"
+              onChange={(e) => setTools(e.target.value)}
+              className="form-input"
+              placeholder="separate with comma ex: figma, git, adobe"
             />
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">URL</label>
+            <label className="text-xl mr-4 text-gray-500">Webbsida</label>
             <input
               type="text"
+              placeholder="https://www.example.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
+              className="form-input"
             />
           </div>
+
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Kontakta oss</label>
+            <input
+              type="text"
+              placeholder="email eller telefonnummer"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className="form-input"
+            />
+          </div>
+
           <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">
-              Task Description
+              Arbetsuppgifter under LIA
             </label>
             <textarea
+              placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full h-32"
-            ></textarea>
+              onInput={autoResize}
+              className="textarea form-input min-h-[80px] overflow-hidden resize-none"
+            />
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">About Us</label>
+            <label className="text-xl mr-4 text-gray-500">Om oss</label>
             <textarea
+              placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
-            ></textarea>
+              onInput={autoResize}
+              className="textarea form-input min-h-[229px] overflow-hidden resize-none "
+            />
           </div>
-          <button className="p-2 bg-sky-300 m-8" onClick={handleUploadLogotype}>
+
+          <button
+            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3"
+            onClick={handleUploadLogotype}
+            disabled={loading}
+          >
             Save
+          </button>
+          <button
+            className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3"
+            onClick={() => navigate("/profile")}
+          >
+            Return
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
