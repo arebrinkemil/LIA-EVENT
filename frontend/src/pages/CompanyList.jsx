@@ -16,7 +16,7 @@ const CompanyList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/companies")
+      .get("http://134.122.48.238:5555/companies")
       .then((response) => {
         setCompanies(response.data.data);
         setLoading(false);

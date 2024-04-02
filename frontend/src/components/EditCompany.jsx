@@ -21,7 +21,7 @@ const EditCompany = () => {
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5555/companies/${id}`
+          `http://134.122.48.238:5555/companies/${id}`
         );
 
         setCompany(response.data);
@@ -55,7 +55,7 @@ const EditCompany = () => {
         );
 
         await axios.delete(
-          `http://localhost:5555/image/${companyId}/${oldLogotypeFilename}`,
+          `http://134.122.48.238:5555/image/${companyId}/${oldLogotypeFilename}`,
           {
             withCredentials: true,
           }
@@ -85,7 +85,7 @@ const EditCompany = () => {
         );
 
         await axios.delete(
-          `http://localhost:5555/image/${companyId}/${oldLogotypeFilename}`,
+          `http://134.122.48.238:5555/image/${companyId}/${oldLogotypeFilename}`,
           {
             withCredentials: true,
           }
@@ -93,7 +93,7 @@ const EditCompany = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:5555/image/${companyId}`,
+        `http://134.122.48.238:5555/image/${companyId}`,
         formData,
         {
           withCredentials: true,
@@ -109,7 +109,7 @@ const EditCompany = () => {
   const handleSaveCompany = async () => {
     try {
       await axios.put(
-        `http://localhost:5555/companies/${id}`,
+        `http://134.122.48.238:5555/companies/${id}`,
         {
           logotype,
           name,

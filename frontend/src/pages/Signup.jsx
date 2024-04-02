@@ -34,7 +34,7 @@ const Signup = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5555/",
+        "http://134.122.48.238:5555/",
         { email, password, name: username },
         { withCredentials: true }
       );

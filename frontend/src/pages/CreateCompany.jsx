@@ -32,7 +32,7 @@ const CreateCompany = () => {
         return;
       }
       try {
-        const response = await axios.get("http://localhost:5555/profile", {
+        const response = await axios.get("http://134.122.48.238:5555/profile", {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,
           },
@@ -58,7 +58,7 @@ const CreateCompany = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5555/logout",
+        "http://134.122.48.238:5555/logout",
         {},
         {
           withCredentials: true,
@@ -86,7 +86,7 @@ const CreateCompany = () => {
       data.append("logotype", logotype);
 
       axios
-        .post(`http://localhost:5555/image/${companyId}`, data, {
+        .post(`http://134.122.48.238:5555/image/${companyId}`, data, {
           headers: {
             Authorization: `Bearer ${cookies.token}`,
             "Content-Type": "multipart/form-data",
@@ -121,7 +121,7 @@ const CreateCompany = () => {
 
     setLoading(true);
     axios
-      .post("http://localhost:5555/companies", data, {
+      .post("http://134.122.48.238:5555/companies", data, {
         headers: {
           Authorization: `Bearer ${cookies.token}`,
         },

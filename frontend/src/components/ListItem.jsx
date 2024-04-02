@@ -11,7 +11,7 @@ const ListItem = ({ company }) => {
   useEffect(() => {
     if (company.logotype && company.logotype.trim()) {
       axios
-        .get(`http://localhost:5555/image/${company.companyId}`)
+        .get(`http://134.122.48.238:5555/image/${company.companyId}`)
         .then((response) => {
           console.log(response.data);
           if (response.data.length > 0) {
@@ -30,7 +30,7 @@ const ListItem = ({ company }) => {
   const deleteCompany = async () => {
     try {
       await axios.delete(
-        `http://localhost:5555/companies/${company.companyId}`,
+        `http://134.122.48.238:5555/companies/${company.companyId}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,

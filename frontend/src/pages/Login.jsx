@@ -33,7 +33,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5555/auth",
+        "http://134.122.48.238:5555/auth",
         {
           email,
           password,

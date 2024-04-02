@@ -10,7 +10,7 @@ const Company = () => {
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5555/companies/${id}`
+          `http://134.122.48.238:5555/companies/${id}`
         );
 
         setCompany(response.data);
