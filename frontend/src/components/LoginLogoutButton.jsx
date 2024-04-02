@@ -9,7 +9,7 @@ const LoginLogoutButton = () => {
   const [cookies] = useCookies(["jwt"]);
 
   useEffect(() => {
-    console.log(cookies.jwt);
+    //console.log(cookies.jwt);
     if (cookies.jwt) {
       setIsLoggedIn(true);
     } else {

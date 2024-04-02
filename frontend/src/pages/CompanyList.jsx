@@ -7,6 +7,7 @@ import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import CompaniesCard from "../components/CompaniesCard";
 import CompaniesTable from "../components/CompaniesTable";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -31,7 +32,7 @@ const CompanyList = () => {
     <>
       <Header></Header>
       <div className="p-4">
-        <div className="flex justify-center items-center gap-x-4">
+        {/* <div className="flex justify-center items-center gap-x-4">
           <button
             className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
             onClick={() => setShowType("table")}
@@ -50,12 +51,13 @@ const CompanyList = () => {
           <Link to="/companies/create">
             <MdOutlineAddBox className="text-sky-800 text-4xl" />
           </Link>
-        </div>
+        </div> */}
 
-        <CompaniesTable companies={companies} />
+        {/* <CompaniesTable companies={companies} /> */}
 
         <CompaniesCard companies={companies} />
       </div>
+      <Footer></Footer>
     </>
   );
 };
