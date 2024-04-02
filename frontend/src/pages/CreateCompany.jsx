@@ -4,19 +4,18 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 import Header from "../components/Header";
+import AmountInput from "../components/AmountInput";
 
 const CreateCompany = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
   const [logotype, setLogotype] = useState(null);
-  const companyId = Math.floor(Math.random() * 1000000);
-
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [about, setAbout] = useState("");
   const [contact, setContact] = useState("");
   const [owner_id, setOwnerId] = useState("");
   const [role, setRole] = useState("Webdeveloper");
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState(1);
   const [location, setLocation] = useState("Gothenburg");
   const [tools, setTools] = useState([]);
   const [url, setUrl] = useState("");
@@ -48,7 +47,7 @@ const CreateCompany = () => {
         setOwnerId(_id);
       } catch (error) {
         console.error("Error verifying authentication:", error);
-        removeCookie("token");
+        removeCookie("jwt");
         navigate("/login");
       }
     };
@@ -75,35 +74,41 @@ const CreateCompany = () => {
     setLogotype(e.target.files[0]);
   };
 
-  const handleUploadLogotype = () => {
-    const companyId = Math.floor(Math.random() * 1000000); // generates a random number between 0 and 999999
+  const autoResize = (e) => {
+    e.target.style.height = "inherit";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
+  const handleUploadLogotype = async () => {
+    setLoading(true);
+    const companyId = Math.floor(Math.random() * 1000000);
     const data = new FormData();
-
-    console.log("logotype", logotype);
-    if (!logotype) {
-      handleSaveCompany("", companyId);
-    } else {
+    if (logotype) {
       data.append("logotype", logotype);
-
-      axios
-        .post(`http://localhost:5555/image/${companyId}`, data, {
-          headers: {
-            Authorization: `Bearer ${cookies.token}`,
-            "Content-Type": "multipart/form-data",
-          },
-          withCredentials: true,
-        })
-        .then((response) => {
-          handleSaveCompany(response.data.fileUrl, companyId);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const response = await axios.post(
+          `http://localhost:5555/image/${companyId}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.jwt}`,
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          }
+        );
+        handleSaveCompany(response.data.fileUrl, companyId);
+      } catch (error) {
+        console.error(error);
+        enqueueSnackbar("Error uploading logotype", { variant: "error" });
+        setLoading(false);
+      }
+    } else {
+      handleSaveCompany("", companyId);
     }
   };
 
-  const handleSaveCompany = (logotypeUrl, companyId) => {
-    console.log("logotypeUrl", logotypeUrl);
+  const handleSaveCompany = async (logotypeUrl, companyId) => {
     const data = {
       logotype: logotypeUrl,
       name,
@@ -114,148 +119,157 @@ const CreateCompany = () => {
       role,
       amount,
       location,
-      tools,
+      tools: tools.length > 0 ? tools.split(",") : [],
       url,
       task_description: taskDescription,
     };
-
-    setLoading(true);
-    axios
-      .post("http://localhost:5555/companies", data, {
+    try {
+      await axios.post("http://localhost:5555/companies", data, {
         headers: {
-          Authorization: `Bearer ${cookies.token}`,
+          Authorization: `Bearer ${cookies.jwt}`,
         },
         withCredentials: true,
-      })
-      .then(() => {
-        setLoading(false);
-        enqueueSnackbar("Company added successfully", { variant: "success" });
-        navigate("/profile");
-      })
-      .catch((error) => {
-        setLoading(false);
-        enqueueSnackbar("Error", { variant: "error" });
-        console.log(error);
       });
+      enqueueSnackbar("Company added successfully", { variant: "success" });
+      navigate("/profile");
+    } catch (error) {
+      console.error(error);
+      enqueueSnackbar("Error saving company", { variant: "error" });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-      <Header></Header>
-      <div className="p-4">
+    <div className="overflow-x-clip">
+      <Header />
+      <div className="w-full">
         <div className="home_page">
           <h4>
-            {" "}
             Welcome <span>{username}</span>
           </h4>
           <button onClick={handleLogout}>LOGOUT</button>
         </div>
-        <h1 className="text-3xl my-4">Create Book</h1>
+        <h1 className="text-3xl my-4">Företagsprofil</h1>
 
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+        <div className="flex flex-col border-sky-400 w-full px-4 mx-auto">
           <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">Logotype</label>
             <input
               type="file"
               onChange={handleFileChange}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Company Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
+              className="form-input"
             />
           </div>
 
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Contact</label>
+            <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
             <input
               type="text"
-              value={contact}
-              onChange={(e) => setContact(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="form-input"
             />
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Role</label>
+            <label className="text-xl mr-4 text-gray-500">*Vad söker ni</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
+              className="form-input"
             >
               <option value="Webdeveloper">Webdeveloper</option>
               <option value="Designer">Designer</option>
               <option value="Both">Both</option>
             </select>
           </div>
+
+          <label className="text-xl mr-4 text-gray-500">
+            *Antal LIA platser
+          </label>
+          <AmountInput amount={amount} setAmount={setAmount} />
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Amount</label>
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-            />
-          </div>
-          <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Location</label>
+            <label className="text-xl mr-4 text-gray-500">Vart?</label>
             <select
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
+              className="form-input"
             >
               <option value="Gothenburg">Gothenburg</option>
               <option value="Distance">Distance</option>
               <option value="Outside_Gothenburg">Outside Gothenburg</option>
             </select>
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">Tools</label>
+            <label className="text-xl mr-4 text-gray-500">Arbetsverktyg</label>
             <input
               type="text"
               value={tools}
-              onChange={(e) => setTools(e.target.value.split(","))}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
-              placeholder="Separate tools with commas (,)"
+              onChange={(e) => setTools(e.target.value)}
+              className="form-input"
+              placeholder="separate with comma ex: figma, git, adobe"
             />
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">URL</label>
+            <label className="text-xl mr-4 text-gray-500">Webbsida</label>
             <input
               type="text"
+              placeholder="https://www.example.com"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full"
+              className="form-input"
             />
           </div>
+
+          <div className="my-4">
+            <label className="text-xl mr-4 text-gray-500">Kontakta oss</label>
+            <input
+              type="text"
+              placeholder="email eller telefonnummer"
+              value={contact}
+              onChange={(e) => setContact(e.target.value)}
+              className="form-input"
+            />
+          </div>
+
           <div className="my-4">
             <label className="text-xl mr-4 text-gray-500">
-              Task Description
+              Arbetsuppgifter under LIA
             </label>
             <textarea
+              placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
               value={taskDescription}
               onChange={(e) => setTaskDescription(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2 w-full h-32"
-            ></textarea>
+              onInput={autoResize}
+              className="textarea form-input min-h-[80px] overflow-hidden resize-none"
+            />
           </div>
+
           <div className="my-4">
-            <label className="text-xl mr-4 text-gray-500">About Us</label>
+            <label className="text-xl mr-4 text-gray-500">Om oss</label>
             <textarea
+              placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
               value={about}
               onChange={(e) => setAbout(e.target.value)}
-              className="border-2 border-gray-500 px-4 py-2  w-full "
-            ></textarea>
+              onInput={autoResize}
+              className="textarea form-input min-h-[229px] overflow-hidden resize-none "
+            />
           </div>
-          <button className="p-2 bg-sky-300 m-8" onClick={handleUploadLogotype}>
+
+          <button
+            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] my-12 p-3"
+            onClick={handleUploadLogotype}
+            disabled={loading}
+          >
             Save
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
