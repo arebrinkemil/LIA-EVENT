@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import CompaniesCard from "../components/CompaniesCard";
-import CompaniesTable from "../components/CompaniesTable";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Arrows from "../components/ArrowsDown";
@@ -16,7 +11,6 @@ import SearchFilter from "../components/SearchFilter";
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [showType, setShowType] = useState("table");
 
   useEffect(() => {
     setLoading(true);
@@ -34,7 +28,7 @@ const CompanyList = () => {
 
   return (
     <>
-      <div className="overflow-x-clip">
+      <div className="overflow-x-clip relative">
         <Header></Header>
         <section className="text-4xl p-4">
           HITTA RÄTT LIA PLATS FÖR DIG

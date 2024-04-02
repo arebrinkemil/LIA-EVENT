@@ -1,17 +1,8 @@
-import { Link } from "react-router-dom";
-import { PiBookOpenTextLight } from "react-icons/pi";
-import { BiUserCircle, BiShow } from "react-icons/bi";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineDelete } from "react-icons/md";
 import { useState } from "react";
-import CompanyModal from "./CompanyModal";
 import CardDividingLine from "./CardDividingLine";
 import editPen from "../assets/icons/edit-pen.svg";
 
 const CompanySingleCard = ({ company }) => {
-  const [showModal, setShowModal] = useState(false);
-
   return (
     <div className="border border-black p-4 m-2 relative hover:shadow-xl">
       <h1 className="font-bold text-3xl ">{company.role}</h1>
