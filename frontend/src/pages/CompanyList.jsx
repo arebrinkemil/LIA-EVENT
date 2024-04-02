@@ -8,6 +8,7 @@ import CompaniesCard from "../components/CompaniesCard";
 import CompaniesTable from "../components/CompaniesTable";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Arrows from "../components/ArrowsDown";
 import OverShoulder from "../assets/photos/over-shoulder.png";
 import Rotate from "../assets/icons/find-lia-rotate.svg";
 import SearchFilter from "../components/SearchFilter";
@@ -51,6 +52,7 @@ const CompanyList = () => {
           </div>
         </section>
         <SearchFilter></SearchFilter>
+        <Arrows></Arrows>
         <div className="p-4">
           <CompaniesCard companies={companies} />
         </div>

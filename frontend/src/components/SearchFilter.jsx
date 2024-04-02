@@ -3,7 +3,7 @@ import FilterIcon from "../assets/icons/filter-default.svg";
 const SearchFilter = () => {
   return (
     <>
-      <section className="mx-4 p-5 text-xl border border-black">
+      <section className="mx-4 my-2 p-5 text-xl border border-black">
         <h2>Sök efter företag</h2>
         <input
           type="text"
