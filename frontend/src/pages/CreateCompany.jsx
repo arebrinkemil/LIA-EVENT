@@ -318,7 +318,7 @@ const CreateCompany = () => {
           </div>
 
           <button
-            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5 p-3"
+            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3"
             onClick={handleUploadLogotype}
             disabled={loading}
           >

@@ -129,7 +129,7 @@ const deleteCompany = asyncHandler(async (request, response) => {
 
     const dirPath = path.resolve(__dirname, `../uploads/${companyId}`);
     fs.rmdir(dirPath, { recursive: true }, (err) => {
-      if (err) {
+      if (err && err.code !== "ENOENT") {
         throw err;
       }
     });

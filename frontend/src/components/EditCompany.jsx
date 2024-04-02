@@ -1,6 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -16,6 +19,9 @@ const EditCompany = () => {
   const [tools, setTools] = useState([]);
   const [url, setUrl] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [cookies] = useCookies(["jwt"]);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCompany = async () => {
@@ -69,6 +75,11 @@ const EditCompany = () => {
     setLogotype("");
   };
 
+  const autoResize = (e) => {
+    e.target.style.height = "inherit";
+    e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
   const handleFileChange = async (e) => {
     if (!e.target.files[0]) return;
 
@@ -106,6 +117,26 @@ const EditCompany = () => {
     }
   };
 
+  const deleteCompany = async () => {
+    try {
+      await axios.delete(
+        `http://localhost:5555/companies/${company.companyId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${cookies.jwt}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      enqueueSnackbar("Company Deleted", { variant: "success" });
+      navigate("/profile");
+      console.log("Company deleted successfully");
+    } catch (error) {
+      console.error(error);
+      enqueueSnackbar("Error", { variant: "error" });
+    }
+  };
   const handleSaveCompany = async () => {
     try {
       await axios.put(
@@ -141,7 +172,7 @@ const EditCompany = () => {
       <Link to="/profile" className="p-2 bg-sky-300 m-8">
         Go to Profile
       </Link>
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
+      <div className="flex flex-col border-sky-400 w-full px-4 md:px-48 mx-auto">
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Logotype</label>
           {logotype && logotype.trim() && (
@@ -158,53 +189,24 @@ const EditCompany = () => {
           <input
             type="file"
             onChange={handleFileChange}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="form-input"
           />
         </div>
         <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Company Name</label>
+          <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="form-input"
           />
         </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">About Us</label>
-          <input
-            type="text"
-            value={about}
-            onChange={(e) => setAbout(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Contact</label>
-          <input
-            type="text"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
-        </div>
-
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Contact</label>
-          <input
-            type="text"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
-        </div>
-
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Role</label>
           <select
             value={role}
             onChange={(e) => setRole(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
+            className="form-input "
           >
             <option value="Webdeveloper">Webdeveloper</option>
             <option value="Designer">Designer</option>
@@ -217,7 +219,7 @@ const EditCompany = () => {
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="form-input"
           />
         </div>
         <div className="my-4">
@@ -225,20 +227,21 @@ const EditCompany = () => {
           <select
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="form-input"
           >
             <option value="Gothenburg">Gothenburg</option>
             <option value="Distance">Distance</option>
             <option value="Outside_Gothenburg">Outside Gothenburg</option>
           </select>
         </div>
+
         <div className="my-4">
           <label className="text-xl mr-4 text-gray-500">Tools</label>
           <input
             type="text"
             value={tools}
             onChange={(e) => setTools(e.target.value.split(","))}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="form-input"
             placeholder="Separate tools with commas (,)"
           />
         </div>
@@ -248,19 +251,55 @@ const EditCompany = () => {
             type="text"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
+            className="form-input"
           />
         </div>
+
         <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Task Description</label>
+          <label className="text-xl mr-4 text-gray-500">Contact</label>
+          <input
+            type="text"
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+            className="form-input"
+          />
+        </div>
+
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">
+            Arbetsuppgifter under LIA
+          </label>
           <textarea
+            placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
             value={taskDescription}
             onChange={(e) => setTaskDescription(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full h-32"
-          ></textarea>
+            onInput={autoResize}
+            className="textarea form-input min-h-[80px] overflow-hidden resize-none"
+          />
         </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveCompany}>
+
+        <div className="my-4">
+          <label className="text-xl mr-4 text-gray-500">Om oss</label>
+          <textarea
+            placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
+            value={about}
+            onChange={(e) => setAbout(e.target.value)}
+            onInput={autoResize}
+            className="textarea form-input min-h-[229px] overflow-hidden resize-none "
+          />
+        </div>
+
+        <button
+          className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3"
+          onClick={handleSaveCompany}
+        >
           Save
+        </button>
+        <button
+          className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3"
+          onClick={deleteCompany}
+        >
+          Delete
         </button>
       </div>
     </div>
