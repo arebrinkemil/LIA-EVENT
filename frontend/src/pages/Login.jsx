@@ -6,6 +6,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import StudentWithLaptop from "../assets/photos/student-w-laptop-square.png";
 import Arrow from "../assets/icons/arrow-right-up.svg";
+import NavButton from "../components/NavButton";
+import DividerStar from "../components/NavDivider";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -67,6 +69,11 @@ const Login = () => {
     <>
       <div className="overflow-x-clip relative">
         <Header></Header>
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>LOGGA IN</NavButton>
+        </div>
         <section className="flex flex-row gap-4 m-4">
           Välj att antingen registrera er som användare eller logga in ifall ni
           tidigare skapat ett konto hos oss.
@@ -112,7 +119,7 @@ const Login = () => {
               eller
             </div>
             <button
-              onClick={navigate("/signup")}
+              onClick={() => navigate("/signup")}
               className="font-bold text-xl flex justify-between items-center rounded-3xl w-[calc(100vw-32px)] p-3 px-10 border mb-14 border-black"
             >
               Registrera användare
