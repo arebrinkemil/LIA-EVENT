@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FilterCheckbox from "../components/FilterCheckbox.jsx";
+import NavButton from "../components/NavButton.jsx";
+import DividerStar from "../components/NavDivider.jsx";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -64,6 +66,11 @@ const Signup = () => {
     <>
       <div className="overflow-x-clip relative">
         <Header></Header>
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>SKAPA ANVÄNDARE</NavButton>
+        </div>
         <div className="form_container m-4">
           <h2 className="text-4xl">Skapa användare för ert företag</h2>
           <form onSubmit={handleSubmit}>
