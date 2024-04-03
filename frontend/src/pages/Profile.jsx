@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import Company from "../components/ListItem";
 import axios from "axios";
 import Header from "../components/Header";
+import CompaniesCard from "../components/CompaniesCard";
 
 const Profile = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
@@ -95,11 +96,11 @@ const Profile = () => {
           ))}
         </div>
       </div>
-      <div className="w-full items-center flex flex-col">
+      <div className="w-full items-center">
         <h1 className="text-2xl">Your Companies</h1>
-        {companies.map((company) => (
-          <Company className="" key={company._id} company={company} />
-        ))}
+        <div className="p-4">
+          <CompaniesCard companies={companies} />
+        </div>
       </div>
       <Link to="/companies/create" className="p-2 bg-sky-300 m-8">
         CREATE NEW
