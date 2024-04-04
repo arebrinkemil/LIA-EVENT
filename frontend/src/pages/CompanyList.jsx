@@ -7,6 +7,8 @@ import Arrows from "../components/ArrowsDown";
 import OverShoulder from "../assets/photos/over-shoulder.png";
 import Rotate from "../assets/icons/find-lia-rotate.svg";
 import SearchFilter from "../components/SearchFilter";
+import NavButton from "../components/NavButton";
+import DividerStar from "../components/NavDivider";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -30,6 +32,11 @@ const CompanyList = () => {
     <>
       <div className="overflow-x-clip relative">
         <Header></Header>
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>HITTA LIA</NavButton>
+        </div>
         <section className="text-4xl p-4">
           HITTA RÄTT LIA PLATS FÖR DIG
           <div className="flex flex-row items-center justify-between pt-2">

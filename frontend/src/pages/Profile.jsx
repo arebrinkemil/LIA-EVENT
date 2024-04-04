@@ -5,6 +5,9 @@ import { useCookies } from "react-cookie";
 import Company from "../components/ListItem";
 import axios from "axios";
 import Header from "../components/Header";
+import CompaniesCard from "../components/CompaniesCard";
+import Footer from "../components/Footer";
+import plus from "../assets/icons/plus.svg";
 
 const Profile = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
@@ -75,35 +78,34 @@ const Profile = () => {
 
   return (
     <>
-      <Header></Header>
-      <div className="p-4">
-        <div className="home_page">
-          <h4>
+      <div className="relative min-h-screen overflow-x-clip">
+        <Header></Header>
+
+        <div className="w-full items-center p-4">
+          <h1 className="text-[34px]">Välkommen till kontosidan</h1>
+          <p className="text-lg">
             {" "}
-            Welcome <span>{username}</span>
-          </h4>
-          <button onClick={handleLogout}>LOGOUT</button>
+            Nedan kan ni redigera redan befintliga företagskort eller lägga till
+            ett nytt.
+          </p>
+          <div className="">
+            <CompaniesCard companies={companies} />
+          </div>
         </div>
-        <div>
-          <h2>Your Companies</h2>
-          {companies.map((company) => (
-            <div key={company._id}>
-              <h3>{company.name}</h3>
-              <p>About: {company.about}</p>
-              <p>Contact: {company.contact}</p>
-            </div>
-          ))}
+        <div className="w-full flex flex-col items-center">
+          <Link to="/companies/create">
+            <img
+              className="border-[1px] h-[50px] w-[50px] p-4 rounded-full"
+              src={plus}
+              alt="create company plus icon"
+            />
+          </Link>
+          <Link to="/companies/create" className=" bg-sky-300 m-3">
+            CREATE NEW
+          </Link>
         </div>
       </div>
-      <div className="w-full items-center flex flex-col">
-        <h1 className="text-2xl">Your Companies</h1>
-        {companies.map((company) => (
-          <Company className="" key={company._id} company={company} />
-        ))}
-      </div>
-      <Link to="/companies/create" className="p-2 bg-sky-300 m-8">
-        CREATE NEW
-      </Link>
+      <Footer></Footer>
     </>
   );
 };
