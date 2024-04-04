@@ -28,7 +28,7 @@ const CompanySingleCard = ({ company }) => {
   }, []);
 
   return (
-    <div className="border border-black p-4 m-2 relative hover:shadow-xl">
+    <div className="border border-black p-4 my-2 relative hover:shadow-xl">
       <h1 className="font-bold text-3xl ">{company.role}</h1>
       <CardDividingLine></CardDividingLine>
       <h2>{company.name}</h2>

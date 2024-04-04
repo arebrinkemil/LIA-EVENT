@@ -3,7 +3,7 @@ import Arrow from "../assets/icons/arrow-pixel-down.svg";
 const ArrowsDown = () => {
   return (
     <>
-      <div className="flex flex-row animate-arrowUpDown w-screen my-6">
+      <div className="flex flex-row animate-arrowUpDown my-6">
         <img
           src={Arrow}
           alt="pixelated arrow pointing down"

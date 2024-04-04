@@ -4,10 +4,15 @@
 
 * {
   font-family: "Inter", sans-serif;
+  color: #333;
 }
 
 @layer components {
   .form-input {
     @apply border-[1px] rounded-3xl px-4 py-1 w-full py-3;
+  }
+
+  .nowrap {
+    text-wrap: nowrap;
   }
 }
