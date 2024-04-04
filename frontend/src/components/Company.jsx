@@ -4,6 +4,9 @@ import axios from "axios";
 import HorizontalLine from "./HorizontalLine";
 import Header from "./Header";
 import Footer from "./Footer";
+import Arrows from "./ArrowsDown";
+import asterisk from "../assets/icons/asterisk-black.svg";
+import { CompanyDetails, CompanyAbout, CompanyContact } from "./CompanyFields";
 
 const Company = () => {
   const { id } = useParams();
@@ -38,7 +41,7 @@ const Company = () => {
           <Link to="/profile" className="p-2 bg-sky-300 m-8">
             Go to Profile
           </Link>
-          <div className="flex flex-col border-sky-400 rounded-xl w-3/4 ">
+          <div className="flex flex-col">
             <div className="my-4">
               <label className="text-xl mr-4 text-gray-500">Logotype</label>
               {company.logotype && company.logotype.trim() && (
@@ -52,66 +55,34 @@ const Company = () => {
                 <HorizontalLine></HorizontalLine>
                 <div className="my-4">
                   <label className="text-xl mr-4 text-gray-500"></label>
-                  <div className=" px-4 py-2 w-full">{company.name}</div>
-                </div>
-
-                <HorizontalLine></HorizontalLine>
-
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">Roll</label>
-                  <div className=" px-4 py-2 w-full">{company.role}</div>
-                </div>
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">Plats</label>
-                  <div className=" px-4 py-2 w-full">{company.location}</div>
-                </div>
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">
-                    Lia-platser
-                  </label>
-                  <div className=" px-4 py-2 w-full">{company.amount}</div>
-                </div>
-              </div>
-              <div>
-                <HorizontalLine></HorizontalLine>
-
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">About Us</label>
-                  <div className=" px-4 py-2 w-full">{company.about}</div>
-                </div>
-
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">Tools</label>
-                  <ul className=" px-4 py-2 w-full">
-                    {company.tools.map((tool, index) => (
-                      <li key={index}>{tool}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">
-                    Task Description
-                  </label>
-
-                  <div className=" px-4 py-2 w-full">
-                    {company.task_description}
+                  <div className=" px-4 py-2 w-full text-4xl">
+                    {company.name}
                   </div>
                 </div>
-              </div>
-              <div>
-                <HorizontalLine></HorizontalLine>
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">Contact</label>
-                  <div className=" px-4 py-2 w-full">{company.contact}</div>
+
+                <div className="lg:hidden">
+                  <HorizontalLine></HorizontalLine>
+                  <CompanyDetails company={company} />
+                  <Arrows />
+                  <CompanyAbout company={company} />
+                  <CompanyContact company={company} />
+                  <HorizontalLine></HorizontalLine>
                 </div>
-                <div className="my-4">
-                  <label className="text-xl mr-4 text-gray-500">URL</label>
-                  <div className=" px-4 py-2 w-full">{company.url}</div>
+
+                <div className="hidden lg:flex">
+                  <HorizontalLine></HorizontalLine>
+                  <CompanyAbout company={company} />
+                  <div>
+                    <CompanyDetails company={company} />
+                    <CompanyContact company={company} />
+                  </div>
+                  <Arrows />
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <Footer></Footer>
       </div>
     </>
