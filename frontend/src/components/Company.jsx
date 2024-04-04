@@ -59,9 +59,9 @@ const Company = () => {
                     {company.name}
                   </div>
                 </div>
+                <HorizontalLine></HorizontalLine>
 
                 <div className="lg:hidden">
-                  <HorizontalLine></HorizontalLine>
                   <CompanyDetails company={company} />
                   <Arrows />
                   <CompanyAbout company={company} />
@@ -70,13 +70,22 @@ const Company = () => {
                 </div>
 
                 <div className="hidden lg:flex">
-                  <HorizontalLine></HorizontalLine>
-                  <CompanyAbout company={company} />
-                  <div>
-                    <CompanyDetails company={company} />
-                    <CompanyContact company={company} />
+                  <div className="flex-3 w-3/4">
+                    <CompanyAbout company={company} />
                   </div>
-                  <Arrows />
+                  <div className="flex flex-col flex-1">
+                    <div className="">
+                      <Arrows />
+                    </div>
+                    <div className="">
+                      <div className="border-[1px]">
+                        <CompanyDetails company={company} />
+                      </div>
+                      <div className="border-[1px] border-t-0">
+                        <CompanyContact company={company} />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
