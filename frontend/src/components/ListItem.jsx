@@ -7,15 +7,15 @@ import { useSnackbar } from "notistack";
 const ListItem = ({ company }) => {
   const [logotype, setLogotype] = useState("");
   const { enqueueSnackbar } = useSnackbar();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cookies] = useCookies(["jwt"]);
 
   useEffect(() => {
     if (company.logotype && company.logotype.trim()) {
       axios
         .get(`http://localhost:5555/image/${company.companyId}`)
         .then((response) => {
-          console.log(response.data);
           if (response.data.length > 0) {
-            console.log(response.data[0]);
             setLogotype(response.data[0]);
           }
         })
@@ -25,7 +25,13 @@ const ListItem = ({ company }) => {
     }
   }, [company._id, company.logotype]);
 
-  const [cookies] = useCookies(["jwt"]);
+  const handleDeleteClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const deleteCompany = async () => {
     try {
@@ -38,12 +44,8 @@ const ListItem = ({ company }) => {
           withCredentials: true,
         }
       );
-
       enqueueSnackbar("Company Deleted", { variant: "success" });
-      //skulle varit bättre att ladda in listan igen
       window.location.reload();
-
-      console.log("Company deleted successfully");
     } catch (error) {
       console.error(error);
       enqueueSnackbar("Error", { variant: "error" });
@@ -55,28 +57,38 @@ const ListItem = ({ company }) => {
       className="border-black border-2 rounded-xl p-4 my-4 w-2/4"
       key={company._id}
     >
-      <br></br>
       <h3 className="text-2xl">{company.name}</h3>
-      <p>About: {company.about}</p>
-      <p>Contact: {company.contact}</p>
-      <p>id: {company.companyId}</p>
-      <p>{logotype}</p>
-      {logotype && <img src={logotype} alt="Company logotype" />}
-      <Link
-        className="border-black border-2 p-1"
-        to={`/companies/${company._id}/edit`}
-      >
-        EDIT
-      </Link>
-      <Link
-        className="border-black border-2 p-1"
-        to={`/companies/${company._id}`}
-      >
-        VIEW
-      </Link>
-      <button className="border-black border-2 p-1" onClick={deleteCompany}>
+      {/* Other content */}
+      <button className="border-black border-2 p-1" onClick={handleDeleteClick}>
         Delete
       </button>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        onCancel={closeModal}
+        onConfirm={deleteCompany}
+      />
+    </div>
+  );
+};
+
+const ConfirmModal = ({ isOpen, onCancel, onConfirm }) => {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        top: "20%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        backgroundColor: "white",
+        padding: "20px",
+        zIndex: 1000,
+      }}
+    >
+      <h2>Are you sure?</h2>
+      <button onClick={onCancel}>Cancel</button>
+      <button onClick={onConfirm}>Delete</button>
     </div>
   );
 };

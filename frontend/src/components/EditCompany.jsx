@@ -4,6 +4,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -21,6 +22,8 @@ const EditCompany = () => {
   const [taskDescription, setTaskDescription] = useState("");
   const [cookies] = useCookies(["jwt"]);
   const { enqueueSnackbar } = useSnackbar();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -78,6 +81,16 @@ const EditCompany = () => {
   const autoResize = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
+  const confirmDelete = async () => {
+    // Place your delete logic here
+    deleteCompany();
+    setShowDeleteModal(false); // Close modal after delete
+  };
+
+  const closeModal = () => {
+    setShowDeleteModal(false);
   };
 
   const handleFileChange = async (e) => {
@@ -297,10 +310,16 @@ const EditCompany = () => {
         </button>
         <button
           className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3"
-          onClick={deleteCompany}
+          onClick={() => setShowDeleteModal(true)}
         >
           Delete
         </button>
+        {showDeleteModal && (
+          <DeleteConfirmationModal
+            onClose={closeModal}
+            onConfirm={confirmDelete}
+          />
+        )}
       </div>
     </div>
   );
