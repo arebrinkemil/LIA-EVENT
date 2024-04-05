@@ -17,34 +17,35 @@
   }
 
   .hinge {
-    animation: hinge 2s ease infinite;
+    animation: hinge 10s ease 0s infinite;
   }
+
   @keyframes hinge {
     0% {
+      opacity: 0;
+      animation-timing-function: ease-in-out;
+    }
+    10%,
+    80% {
       transform: rotate(0);
       transform-origin: top left;
       animation-timing-function: ease-in-out;
+      opacity: 1;
     }
-    20%,
-    60% {
+    85%,
+    95% {
       transform: rotate(80deg);
       transform-origin: top left;
       animation-timing-function: ease-in-out;
     }
-    40% {
+    90% {
       transform: rotate(60deg);
-      transform-origin: top left;
-      animation-timing-function: ease-in-out;
-    }
-    80% {
-      transform: rotate(60deg) translateY(0);
-      opacity: 1;
       transform-origin: top left;
       animation-timing-function: ease-in-out;
     }
     100% {
       transform: translateY(700px);
-      opacity: 0;
+      opacity: 0.8;
     }
   }
 
@@ -64,49 +65,6 @@
     }
     75% {
       transform: scale(0.95, 1.05);
-    }
-  }
-
-  .text-pop-up-top {
-    -webkit-animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-      both;
-    animation: text-pop-up-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  }
-
-  @-webkit-keyframes text-pop-up-top {
-    0% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-transform-origin: 50% 50%;
-      transform-origin: 50% 50%;
-      text-shadow: none;
-    }
-    100% {
-      -webkit-transform: translateY(-50px);
-      transform: translateY(-50px);
-      -webkit-transform-origin: 50% 50%;
-      transform-origin: 50% 50%;
-      text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
-        0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
-        0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
-    }
-  }
-  @keyframes text-pop-up-top {
-    0% {
-      -webkit-transform: translateY(0);
-      transform: translateY(0);
-      -webkit-transform-origin: 50% 50%;
-      transform-origin: 50% 50%;
-      text-shadow: none;
-    }
-    100% {
-      -webkit-transform: translateY(-50px);
-      transform: translateY(-50px);
-      -webkit-transform-origin: 50% 50%;
-      transform-origin: 50% 50%;
-      text-shadow: 0 1px 0 #cccccc, 0 2px 0 #cccccc, 0 3px 0 #cccccc,
-        0 4px 0 #cccccc, 0 5px 0 #cccccc, 0 6px 0 #cccccc, 0 7px 0 #cccccc,
-        0 8px 0 #cccccc, 0 9px 0 #cccccc, 0 50px 30px rgba(0, 0, 0, 0.3);
     }
   }
 }

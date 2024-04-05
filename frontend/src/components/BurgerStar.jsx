@@ -24,7 +24,7 @@ const BurgerStar = () => {
     <>
       <div className={`relative ${isNavOpen ? "" : ""}`}>
         <img
-          className={`-rotate-180 transition ease-in-out duration-1000 hover:cursor-pointer ${
+          className={`-rotate-180 transition ease-in-out duration-1000 hover:cursor-pointer${
             isRotated ? "rotate-180" : ""
           }`}
           src={burger}
