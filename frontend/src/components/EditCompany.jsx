@@ -4,6 +4,11 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import Header from "./Header";
+import Footer from "./Footer";
+import NavButton from "./NavButton";
+import DividerStar from "./NavDivider";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -21,9 +26,13 @@ const EditCompany = () => {
   const [taskDescription, setTaskDescription] = useState("");
   const [cookies] = useCookies(["jwt"]);
   const { enqueueSnackbar } = useSnackbar();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
@@ -78,6 +87,16 @@ const EditCompany = () => {
   const autoResize = (e) => {
     e.target.style.height = "inherit";
     e.target.style.height = `${e.target.scrollHeight}px`;
+  };
+
+  const confirmDelete = async () => {
+    // Place your delete logic here
+    deleteCompany();
+    setShowDeleteModal(false); // Close modal after delete
+  };
+
+  const closeModal = () => {
+    setShowDeleteModal(false);
   };
 
   const handleFileChange = async (e) => {
@@ -159,150 +178,176 @@ const EditCompany = () => {
       );
 
       alert("Company updated successfully");
+
+      navigate("/profile");
     } catch (error) {
       console.error("Error updating company:", error);
     }
   };
 
+  let companyName = name.toUpperCase();
+
   if (!company) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="p-4">
-      <Link to="/profile" className="p-2 bg-sky-300 m-8">
-        Go to Profile
-      </Link>
-      <div className="flex flex-col border-sky-400 w-full px-4 md:px-48 mx-auto">
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Logotype</label>
-          {logotype && logotype.trim() && (
-            <>
-              <img src={logotype} alt="Company logotype" />
-              <button className="" onClick={deleteLogo}>
-                Delete logotype
-              </button>
-            </>
-          )}
+    <>
+      <div className="relative min-h-screen overflow-x-clip">
+        <Header></Header>
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton path={"/profile"}>PROFIL</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>{companyName}</NavButton>
         </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Replace Logotype</label>
-          <input
-            type="file"
-            onChange={handleFileChange}
-            className="form-input"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="form-input"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Role</label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="form-input "
-          >
-            <option value="Webdeveloper">Webdeveloper</option>
-            <option value="Designer">Designer</option>
-            <option value="Both">Both</option>
-          </select>
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Amount</label>
-          <input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="form-input"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Location</label>
-          <select
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="form-input"
-          >
-            <option value="Gothenburg">Gothenburg</option>
-            <option value="Distance">Distance</option>
-            <option value="Outside_Gothenburg">Outside Gothenburg</option>
-          </select>
-        </div>
+        <div className="p-4">
+          <div className="flex flex-col border-sky-400 w-full px-4 md:px-48 mx-auto">
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Logotype</label>
+              {logotype && logotype.trim() && (
+                <>
+                  <img
+                    className="max-w-[50vw] lg:max-w-[30vw] xl:max-w-[20vw] 2xl:max-w-[15vw]"
+                    src={logotype}
+                    alt="Company logotype"
+                  />
+                  <button className="" onClick={deleteLogo}>
+                    Delete logotype
+                  </button>
+                </>
+              )}
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                Replace Logotype
+              </label>
+              <input
+                type="file"
+                onChange={handleFileChange}
+                className="form-input"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="form-input"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Role</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="form-input "
+              >
+                <option value="Webdeveloper">Webdeveloper</option>
+                <option value="Designer">Designer</option>
+                <option value="Both">Both</option>
+              </select>
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Amount</label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="form-input"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Location</label>
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="form-input"
+              >
+                <option value="Gothenburg">Gothenburg</option>
+                <option value="Distance">Distance</option>
+                <option value="Outside_Gothenburg">Outside Gothenburg</option>
+              </select>
+            </div>
 
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Tools</label>
-          <input
-            type="text"
-            value={tools}
-            onChange={(e) => setTools(e.target.value.split(","))}
-            className="form-input"
-            placeholder="Separate tools with commas (,)"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">URL</label>
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="form-input"
-          />
-        </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Tools</label>
+              <input
+                type="text"
+                value={tools}
+                onChange={(e) => setTools(e.target.value.split(","))}
+                className="form-input"
+                placeholder="Separate tools with commas (,)"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">URL</label>
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                className="form-input"
+              />
+            </div>
 
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Contact</label>
-          <input
-            type="text"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            className="form-input"
-          />
-        </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Contact</label>
+              <input
+                type="text"
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
+                className="form-input"
+              />
+            </div>
 
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">
-            Arbetsuppgifter under LIA
-          </label>
-          <textarea
-            placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
-            onInput={autoResize}
-            className="textarea form-input min-h-[80px] overflow-hidden resize-none"
-          />
-        </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                Arbetsuppgifter under LIA
+              </label>
+              <textarea
+                placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
+                value={taskDescription}
+                onChange={(e) => setTaskDescription(e.target.value)}
+                onInput={autoResize}
+                className="textarea form-input min-h-[80px] overflow-hidden resize-none"
+              />
+            </div>
 
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Om oss</label>
-          <textarea
-            placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
-            value={about}
-            onChange={(e) => setAbout(e.target.value)}
-            onInput={autoResize}
-            className="textarea form-input min-h-[229px] overflow-hidden resize-none "
-          />
-        </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Om oss</label>
+              <textarea
+                placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
+                onInput={autoResize}
+                className="textarea form-input min-h-[229px] overflow-hidden resize-none "
+              />
+            </div>
 
-        <button
-          className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3"
-          onClick={handleSaveCompany}
-        >
-          Save
-        </button>
-        <button
-          className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3"
-          onClick={deleteCompany}
-        >
-          Delete
-        </button>
+            <button
+              className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3"
+              onClick={handleSaveCompany}
+            >
+              Save
+            </button>
+            <button
+              className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3"
+              onClick={() => setShowDeleteModal(true)}
+            >
+              Delete
+            </button>
+            {showDeleteModal && (
+              <DeleteConfirmationModal
+                onClose={closeModal}
+                onConfirm={confirmDelete}
+              />
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+      <Footer></Footer>
+    </>
   );
 };
 

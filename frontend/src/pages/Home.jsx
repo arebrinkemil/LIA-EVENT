@@ -23,6 +23,10 @@ const Home = () => {
     navigate("/companies");
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <div className="home_page overflow-x-clip">
@@ -53,7 +57,7 @@ const Home = () => {
           />
           2024
         </section>
-        <RedButton path={"/signup"}>Vi kommer</RedButton>
+        <RedButton path={"/profile"}>Vi kommer</RedButton>
         <HorizontalLine></HorizontalLine>
         <section className="pt-16 px-4 gap-4 flex flex-col">
           <h4 className="text-4xl mb-3">Vad är det?</h4>

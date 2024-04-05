@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,9 +6,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import FilterCheckbox from "../components/FilterCheckbox.jsx";
 import NavButton from "../components/NavButton.jsx";
+
 import DividerStar from "../components/NavDivider.jsx";
 
 const Signup = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",

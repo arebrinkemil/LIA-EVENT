@@ -5,6 +5,8 @@ import { useCookies } from "react-cookie";
 import axios from "axios";
 import Header from "../components/Header";
 import AmountInput from "../components/AmountInput";
+import NavButton from "../components/NavButton";
+import DividerStar from "../components/NavDivider";
 
 const CreateCompany = () => {
   const [dragging, setDragging] = useState(false);
@@ -149,13 +151,14 @@ const CreateCompany = () => {
   return (
     <div className="overflow-x-clip">
       <Header />
+      <div className="m-4 w-full flex flex-row gap-1 items-center">
+        <NavButton path={"/"}>HEM</NavButton>
+        <DividerStar></DividerStar>
+        <NavButton path={"/profile"}>PROFIL</NavButton>
+        <DividerStar></DividerStar>
+        <NavButton>SKAPA NYTT FÖRETAGSKORT</NavButton>
+      </div>
       <div className="w-full">
-        <div className="home_page">
-          <h4>
-            Welcome <span>{username}</span>
-          </h4>
-          <button onClick={handleLogout}>LOGOUT</button>
-        </div>
         <h1 className="my-4 text-6xl font-light md:text-center">
           Företagsprofil
         </h1>
