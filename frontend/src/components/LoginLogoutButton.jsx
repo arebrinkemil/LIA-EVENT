@@ -30,6 +30,7 @@ const LoginLogoutButton = () => {
           withCredentials: true,
         }
       );
+      setIsLoggedIn(false);
       navigate("/");
     } catch (error) {
       console.error("Logout error:", error);

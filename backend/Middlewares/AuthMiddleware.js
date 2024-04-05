@@ -7,7 +7,6 @@ import CompanyInfoModel from "../models/Company_info.js";
 const protect = asyncHandler(async (req, res, next) => {
   let token;
 
-  console.log(req);
   token = req.cookies.jwt;
 
   if (token) {
