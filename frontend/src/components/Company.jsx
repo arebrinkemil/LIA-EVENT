@@ -7,12 +7,16 @@ import Footer from "./Footer";
 import Arrows from "./ArrowsDown";
 import asterisk from "../assets/icons/asterisk-black.svg";
 import { CompanyDetails, CompanyAbout, CompanyContact } from "./CompanyFields";
+import NavButton from "./NavButton";
+import DividerStar from "./NavDivider";
 
 const Company = () => {
   const { id } = useParams();
   const [company, setCompany] = useState(null);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
@@ -32,15 +36,21 @@ const Company = () => {
     return <div>Loading...</div>;
   }
 
+  let companyName = company.name.toUpperCase();
+
   return (
     <>
       <div className="relative min-h-screen overflow-x-clip">
         <Header></Header>
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton path={"/companies"}>HITTA LIA</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>{companyName}</NavButton>
+        </div>
 
         <div className="">
-          <Link to="/profile" className="p-2 bg-sky-300 m-8">
-            Go to Profile
-          </Link>
           <div className="flex flex-col">
             <div className="my-4">
               <label className="text-xl mr-4 text-gray-500">Logotype</label>
