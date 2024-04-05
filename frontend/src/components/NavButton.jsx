@@ -5,6 +5,10 @@ const NavButton = ({ path, children }) => {
   const handleClick = () => {
     navigate(path);
   };
-  return <button onClick={handleClick}>{children}</button>;
+  return (
+    <button className="hover:font-bold" onClick={handleClick}>
+      {children}
+    </button>
+  );
 };
 export default NavButton;

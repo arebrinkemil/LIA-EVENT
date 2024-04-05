@@ -2,12 +2,13 @@ import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import Company from "../components/ListItem";
 import axios from "axios";
 import Header from "../components/Header";
 import CompaniesCard from "../components/CompaniesCard";
 import Footer from "../components/Footer";
 import plus from "../assets/icons/plus.svg";
+import NavButton from "../components/NavButton";
+import DividerStar from "../components/NavDivider";
 
 const Profile = () => {
   const [cookies, removeCookie] = useCookies(["jwt"]);
@@ -17,6 +18,7 @@ const Profile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     const fetchCompanies = async () => {
       try {
         const response = await axios.get(
@@ -80,6 +82,11 @@ const Profile = () => {
     <>
       <div className="relative min-h-screen overflow-x-clip">
         <Header></Header>
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>PROFIL</NavButton>
+        </div>
 
         <div className="w-full items-center p-4">
           <h1 className="text-[34px]">Välkommen till kontosidan</h1>
