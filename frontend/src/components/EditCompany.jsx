@@ -207,7 +207,11 @@ const EditCompany = () => {
               <label className="text-xl mr-4 text-gray-500">Logotype</label>
               {logotype && logotype.trim() && (
                 <>
-                  <img src={logotype} alt="Company logotype" />
+                  <img
+                    className="max-w-[50vw] lg:max-w-[30vw] xl:max-w-[20vw] 2xl:max-w-[15vw]"
+                    src={logotype}
+                    alt="Company logotype"
+                  />
                   <button className="" onClick={deleteLogo}>
                     Delete logotype
                   </button>
