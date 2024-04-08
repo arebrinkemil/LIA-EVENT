@@ -37,6 +37,125 @@ const CompanyList = () => {
         setLoading(false);
         const fetchedData = response.data.data;
         const filteredData = fetchedData.filter((company) => {
+          const bothRolesActive = filters.Webdeveloper && filters.Designer;
+          const bothLocationsActive =
+            filters.Gothenburg && filters.Outside_Gothenburg;
+          const bothAmountsActive =
+            filters.Two_or_fewer && filters.More_than_two;
+          if (bothRolesActive) {
+            if (
+              !filters.Gothenburg &&
+              !filters.Outside_Gothenburg &&
+              !filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return (
+                company.role === "Webdeveloper" || company.role === "Designer"
+              );
+            } else if (
+              filters.Gothenburg &&
+              !filters.Outside_Gothenburg &&
+              !filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.location === "Gothenburg";
+            } else if (
+              !filters.Gothenburg &&
+              filters.Outside_Gothenburg &&
+              !filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.location === "Outside_Gothenburg";
+            } else if (
+              filters.Gothenburg &&
+              !filters.Outside_Gothenburg &&
+              filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.amount <= 2 && company.location === "Gothenburg";
+            } else if (
+              filters.Gothenburg &&
+              !filters.Outside_Gothenburg &&
+              !filters.Two_or_fewer &&
+              filters.More_than_two
+            ) {
+              return company.amount > 2 && company.location === "Gothenburg";
+            } else if (
+              !filters.Gothenburg &&
+              filters.Outside_Gothenburg &&
+              filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return (
+                company.amount <= 2 && company.location === "Outside_Gothenburg"
+              );
+            } else if (
+              !filters.Gothenburg &&
+              filters.Outside_Gothenburg &&
+              !filters.Two_or_fewer &&
+              filters.More_than_two
+            ) {
+              return (
+                company.amount > 2 && company.location === "Outside_Gothenburg"
+              );
+            }
+          }
+          if (bothLocationsActive) {
+            if (
+              !filters.Designer &&
+              !filters.Webdeveloper &&
+              !filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return (
+                company.location === "Gothenburg" ||
+                company.location === "Outside_Gothenburg"
+              );
+            } else if (
+              filters.Designer &&
+              !filters.Webdeveloper &&
+              !filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.role === "Designer";
+            } else if (
+              !filters.Designer &&
+              filters.Webdeveloper &&
+              !filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.role === "Webdeveloper";
+            } else if (
+              !filters.Designer &&
+              !filters.Webdeveloper &&
+              filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.amount <= 2;
+            } else if (
+              !filters.Designer &&
+              !filters.Webdeveloper &&
+              !filters.Two_or_fewer &&
+              filters.More_than_two
+            ) {
+              return company.amount > 2;
+            } else if (bothRolesActive && !bothAmountsActive) {
+              return company.role === "Designer";
+            } else if (
+              bothRolesActive &&
+              filters.Two_or_fewer &&
+              !filters.More_than_two
+            ) {
+              return company.amount <= 2;
+            } else if (
+              bothRolesActive &&
+              !filters.Two_or_fewer &&
+              filters.More_than_two
+            ) {
+              return company.amount > 2;
+            }
+          }
+
           for (const [key, value] of Object.entries(filters)) {
             if (value) {
               if (key === "Webdeveloper" && company.role !== key) return false;
@@ -59,7 +178,6 @@ const CompanyList = () => {
         setLoading(false);
       });
   }, [filters]);
-  console.log(filters);
 
   return (
     <>
