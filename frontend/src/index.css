@@ -9,6 +9,13 @@
 }
 
 @layer components {
+  .responsive-heading {
+    font-size: clamp(
+      2.25rem,
+      4vw + 1rem,
+      4rem
+    ); /* Adjust the values as needed */
+  }
   .overlapBox {
     font-size: clamp(12px, 34px, 48px);
   }
