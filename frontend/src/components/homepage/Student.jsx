@@ -2,11 +2,16 @@ import React from "react";
 import BulletPoint from "../BulletPoint";
 
 const Student = () => (
-  <section className="px-4 flex flex-col gap-3">
-    <div className="w-44 mb-3">
-      <h4 className="text-4xl mb-3">STUDENT?</h4>
-      Detta evenemang är för företag som:
+  <section className="px-4 flex my-2 flex-col gap">
+    <div className=" bg-black flex w-fit justify-start items-center text-center">
+      <h1 className="responsive-heading text-white px-2">STUDENT?</h1>
     </div>
+    <div className="">
+      <span className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+        Evenemang för studenter som:
+      </span>
+    </div>
+
     <BulletPoint>
       Vill skapa nya kontakter relaterat till ditt kommande yrke
     </BulletPoint>

@@ -11,6 +11,10 @@ export default {
     },
     extend: {
       keyframes: {
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
         arrowUpDown: {
           "0%, 50%": { transform: "translateY(0)" },
           "25%, 75%": { transform: "translateY(30px)" },
@@ -22,6 +26,7 @@ export default {
         },
       },
       animation: {
+        "infinite-scroll": "infinite-scroll 25s linear infinite",
         arrowUpDown: "arrowUpDown 3s cubic-bezier(0.1, 0.7, 0.1, 1) infinite",
         rotate: "rotation 15s infinite linear",
       },

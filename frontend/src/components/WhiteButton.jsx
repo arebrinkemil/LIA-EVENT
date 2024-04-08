@@ -7,7 +7,7 @@ const RedButton = ({ path, children, type = "button" }) => {
   };
   return (
     <button
-      className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] mx-4 p-3"
+      className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] mx-4 p-3"
       onClick={handleClick}
     >
       {children}

@@ -3,7 +3,7 @@ import studentsPaper from "../../assets/photos/students-w-paper.png";
 
 const ForWho = () => (
   <>
-    <section className="flex items-end px-3">
+    <section className="flex items-end px-3 mt-9">
       <div className="w-1/2">
         <img
           className="object-contain"
@@ -16,7 +16,7 @@ const ForWho = () => (
       </div>
     </section>
     <div className="px-3">
-      <span className="text-2xl px-1 bg-red text-white line-clamp-none">
+      <span className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
         Evenemang för företag som:
       </span>
     </div>
