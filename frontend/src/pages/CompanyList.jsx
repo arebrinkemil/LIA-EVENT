@@ -36,139 +36,42 @@ const CompanyList = () => {
         setCompanies(response.data.data);
         setLoading(false);
         const fetchedData = response.data.data;
-        const filteredData = fetchedData.filter((company) => {
-          const bothRolesActive = filters.Webdeveloper && filters.Designer;
-          const bothLocationsActive =
-            filters.Gothenburg && filters.Outside_Gothenburg;
-          const bothAmountsActive =
-            filters.Two_or_fewer && filters.More_than_two;
-          if (bothRolesActive) {
-            if (
-              !filters.Gothenburg &&
-              !filters.Outside_Gothenburg &&
-              !filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return (
-                company.role === "Webdeveloper" || company.role === "Designer"
-              );
-            } else if (
-              filters.Gothenburg &&
-              !filters.Outside_Gothenburg &&
-              !filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.location === "Gothenburg";
-            } else if (
-              !filters.Gothenburg &&
-              filters.Outside_Gothenburg &&
-              !filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.location === "Outside_Gothenburg";
-            } else if (
-              filters.Gothenburg &&
-              !filters.Outside_Gothenburg &&
-              filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.amount <= 2 && company.location === "Gothenburg";
-            } else if (
-              filters.Gothenburg &&
-              !filters.Outside_Gothenburg &&
-              !filters.Two_or_fewer &&
-              filters.More_than_two
-            ) {
-              return company.amount > 2 && company.location === "Gothenburg";
-            } else if (
-              !filters.Gothenburg &&
-              filters.Outside_Gothenburg &&
-              filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return (
-                company.amount <= 2 && company.location === "Outside_Gothenburg"
-              );
-            } else if (
-              !filters.Gothenburg &&
-              filters.Outside_Gothenburg &&
-              !filters.Two_or_fewer &&
-              filters.More_than_two
-            ) {
-              return (
-                company.amount > 2 && company.location === "Outside_Gothenburg"
-              );
-            }
-          }
-          if (bothLocationsActive) {
-            if (
-              !filters.Designer &&
-              !filters.Webdeveloper &&
-              !filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return (
-                company.location === "Gothenburg" ||
-                company.location === "Outside_Gothenburg"
-              );
-            } else if (
-              filters.Designer &&
-              !filters.Webdeveloper &&
-              !filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.role === "Designer";
-            } else if (
-              !filters.Designer &&
-              filters.Webdeveloper &&
-              !filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.role === "Webdeveloper";
-            } else if (
-              !filters.Designer &&
-              !filters.Webdeveloper &&
-              filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.amount <= 2;
-            } else if (
-              !filters.Designer &&
-              !filters.Webdeveloper &&
-              !filters.Two_or_fewer &&
-              filters.More_than_two
-            ) {
-              return company.amount > 2;
-            } else if (bothRolesActive && !bothAmountsActive) {
-              return company.role === "Designer";
-            } else if (
-              bothRolesActive &&
-              filters.Two_or_fewer &&
-              !filters.More_than_two
-            ) {
-              return company.amount <= 2;
-            } else if (
-              bothRolesActive &&
-              !filters.Two_or_fewer &&
-              filters.More_than_two
-            ) {
-              return company.amount > 2;
-            }
-          }
+        const roleFilters = {
+          Webdeveloper: (company) => company.role === "Webdeveloper",
+          Designer: (company) => company.role === "Designer",
+        };
 
-          for (const [key, value] of Object.entries(filters)) {
-            if (value) {
-              if (key === "Webdeveloper" && company.role !== key) return false;
-              if (key === "Designer" && company.role !== key) return false;
-              if (key === "Gothenburg" && company.location !== key)
-                return false;
-              if (key === "Outside_Gothenburg" && company.location !== key)
-                return false;
-              if (key === "Two_or_fewer" && company.amount > 2) return false;
-              if (key === "More_than_two" && company.amount <= 2) return false;
+        const locationFilters = {
+          Gothenburg: (company) => company.location === "Gothenburg",
+          Outside_Gothenburg: (company) =>
+            company.location === "Outside_Gothenburg",
+        };
+        const exclusiveFilters = {
+          Two_or_fewer: (company) => company.amount <= 2,
+          More_than_two: (company) => company.amount > 2,
+        };
+
+        const filteredData = fetchedData.filter((company) => {
+          const activeRoleFilters = Object.entries(filters).filter(
+            ([key, value]) => value && roleFilters[key]
+          );
+          const rolePass =
+            !activeRoleFilters.length ||
+            activeRoleFilters.some(([key, _]) => roleFilters[key](company));
+          const activeLocationFilters = Object.entries(filters).filter(
+            ([key, value]) => value && locationFilters[key]
+          );
+          const locationPass =
+            !activeLocationFilters.length ||
+            activeLocationFilters.some(([key, _]) =>
+              locationFilters[key](company)
+            );
+          const exclusivePass = Object.entries(exclusiveFilters).every(
+            ([key, condition]) => {
+              return !filters[key] || condition(company);
             }
-          }
-          return true;
+          );
+          return rolePass && locationPass && exclusivePass;
         });
 
         setFiltered(filteredData);
