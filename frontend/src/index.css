@@ -9,6 +9,13 @@
 }
 
 @layer components {
+  .overlapBox {
+    font-size: clamp(12px, 34px, 48px);
+  }
+
+  .nowrap {
+    text-wrap: nowrap;
+  }
   .form-input {
     @apply border-[1px] rounded-3xl px-4 py-1 w-full py-3;
   }
