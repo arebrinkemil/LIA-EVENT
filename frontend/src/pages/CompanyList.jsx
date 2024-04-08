@@ -7,12 +7,26 @@ import Arrows from "../components/ArrowsDown";
 import OverShoulder from "../assets/photos/over-shoulder.png";
 import Rotate from "../assets/icons/find-lia-rotate.svg";
 import SearchFilter from "../components/SearchFilter";
-import NavButton from "../components/NavButton";
-import DividerStar from "../components/NavDivider";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [filtered, setFiltered] = useState(companies);
+  const [filters, setFilters] = useState({
+    Webdeveloper: false,
+    Designer: false,
+    Gothenburg: false,
+    Outside_Gothenburg: false,
+    Two_or_fewer: false,
+    More_than_two: false,
+  });
+
+  const toggleFilter = (filterName, isChecked) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: isChecked,
+    }));
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -21,22 +35,36 @@ const CompanyList = () => {
       .then((response) => {
         setCompanies(response.data.data);
         setLoading(false);
+        const fetchedData = response.data.data;
+        const filteredData = fetchedData.filter((company) => {
+          for (const [key, value] of Object.entries(filters)) {
+            if (value) {
+              if (key === "Webdeveloper" && company.role !== key) return false;
+              if (key === "Designer" && company.role !== key) return false;
+              if (key === "Gothenburg" && company.location !== key)
+                return false;
+              if (key === "Outside_Gothenburg" && company.location !== key)
+                return false;
+              if (key === "Two_or_fewer" && company.amount > 2) return false;
+              if (key === "More_than_two" && company.amount <= 2) return false;
+            }
+          }
+          return true;
+        });
+
+        setFiltered(filteredData);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
       });
-  }, []);
+  }, [filters]);
+  console.log(filters);
 
   return (
     <>
       <div className="overflow-x-clip relative">
         <Header></Header>
-        <div className="m-4 w-full flex flex-row gap-1 items-center">
-          <NavButton path={"/"}>HEM</NavButton>
-          <DividerStar></DividerStar>
-          <NavButton>HITTA LIA</NavButton>
-        </div>
         <section className="text-4xl p-4">
           HITTA RÄTT LIA PLATS FÖR DIG
           <div className="flex flex-row items-center justify-between pt-2">
@@ -52,10 +80,10 @@ const CompanyList = () => {
             />
           </div>
         </section>
-        <SearchFilter></SearchFilter>
+        <SearchFilter toggleFilter={toggleFilter} />
         <Arrows></Arrows>
         <div className="p-4">
-          <CompaniesCard companies={companies} />
+          <CompaniesCard companies={filtered} />
         </div>
       </div>
       <Footer></Footer>
