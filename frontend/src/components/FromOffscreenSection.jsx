@@ -32,7 +32,7 @@ const FromOffscreenSection = ({ children, direction }) => {
   return (
     <div
       ref={ref}
-      className={`w-screen transition ease-in-out duration-1000 ${
+      className={` transition ease-in-out duration-1000 ${
         isVisible ? "" : translateClass
       }`}
     >

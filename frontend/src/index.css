@@ -16,13 +16,24 @@
       4rem
     ); /* Adjust the values as needed */
   }
+
+  .inherit {
+    height: inherit;
+  }
+
+  .noLineBanner {
+    line-height: 145px !important;
+  }
   .overlapBox {
     font-size: clamp(12px, 34px, 48px);
   }
 
-  .nowrap {
+  .bannerText {
+    font-size: clamp(150px, 200px, 250px);
+    line-height: clamp(150px, 200px, 250px);
     text-wrap: nowrap;
   }
+
   .form-input {
     @apply border-[1px] rounded-3xl px-4 py-1 w-full py-3;
   }

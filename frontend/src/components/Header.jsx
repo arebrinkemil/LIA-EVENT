@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <>
       <header className="sticky top-0 z-50">
-        <div className="flex flex-row justify-between px-4 py-3 bg-black w-screen h-18 z-10">
+        <div className="flex flex-row justify-between px-4 py-3 bg-black h-18 z-10">
           <img
             className="hover:cursor-pointer"
             onClick={handleLogo}
