@@ -7,11 +7,13 @@ import Arrows from "../components/ArrowsDown";
 import OverShoulder from "../assets/photos/over-shoulder.png";
 import Rotate from "../assets/icons/find-lia-rotate.svg";
 import SearchFilter from "../components/SearchFilter";
+import DOMpurify from "dompurify";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filtered, setFiltered] = useState(companies);
+  const [searchInput, setSearchInput] = useState("");
   const [filters, setFilters] = useState({
     Webdeveloper: false,
     Designer: false,
@@ -20,6 +22,11 @@ const CompanyList = () => {
     Two_or_fewer: false,
     More_than_two: false,
   });
+
+  const handleSearchInput = (e) => {
+    const clean = DOMpurify.sanitize(e.target.value);
+    setSearchInput(clean);
+  };
 
   const toggleFilter = (filterName, isChecked) => {
     setFilters((prevFilters) => ({
@@ -71,7 +78,11 @@ const CompanyList = () => {
               return !filters[key] || condition(company);
             }
           );
-          return rolePass && locationPass && exclusivePass;
+          const nameStartsWith = searchInput
+            ? company.name.toLowerCase().startsWith(searchInput.toLowerCase())
+            : true;
+
+          return rolePass && locationPass && exclusivePass && nameStartsWith;
         });
 
         setFiltered(filteredData);
@@ -80,7 +91,7 @@ const CompanyList = () => {
         console.log(error);
         setLoading(false);
       });
-  }, [filters]);
+  }, [filters, searchInput]);
 
   return (
     <>
@@ -101,7 +112,10 @@ const CompanyList = () => {
             />
           </div>
         </section>
-        <SearchFilter toggleFilter={toggleFilter} />
+        <SearchFilter
+          toggleFilter={toggleFilter}
+          handleSearchInput={handleSearchInput}
+        />
         <Arrows></Arrows>
         <div className="p-4">
           <CompaniesCard companies={filtered} />
