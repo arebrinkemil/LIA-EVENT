@@ -69,10 +69,11 @@ const Home = () => {
           <div className="flex flex-row gap-6 mt-28">
             {/* left column */}
             <div className="flex flex-col w-1/2">
-              <div className="flex flex-col h-[120vh] justify-between">
+              <div className="flex flex-col 2xl:min-h-[100vh] xl:min-h-[80vh] lg:min-h-[70vh] min-h-[60vh] justify-between">
+                {" "}
                 <FromOffscreenSection direction={"left"}>
                   <img
-                    className="object-cover w-full"
+                    className="object-cover w-full mb-28"
                     src={studentsPaper}
                     alt="students with a paper"
                   />
@@ -105,24 +106,14 @@ const Home = () => {
                   </div>
                 </FromOffscreenSection>
               </div>
-              <div className="flex flex-col h-fit justify-between">
-                <FromOffscreenSection direction={"left"} className="basis-1/2">
-                  <div className="w-full h-[50vh] flex justify-center items-center">
-                    <img
-                      className="object-fit inherit animate-arrowUpDown "
-                      src={arrowDown}
-                      alt="arrow pointing down"
-                    />
-                  </div>
-                </FromOffscreenSection>
-              </div>
             </div>
 
             {/* right collumn */}
             <div className="flex flex-col w-1/2">
-              <div className="flex flex-col h-[120vh] justify-between">
+              <div className="flex flex-col 2xl:min-h-[100vh] xl:min-h-[80vh] lg:min-h-[70vh] min-h-[60vh] justify-between">
+                {" "}
                 <FromOffscreenSection direction={"right"}>
-                  <div>
+                  <div className="mb-28">
                     <h2 className="bg-black responsive-heading text-white px-2">
                       VAD ÄR DET?
                     </h2>
@@ -133,59 +124,79 @@ const Home = () => {
                     </p>
                   </div>
                 </FromOffscreenSection>
-
-                <FromOffscreenSection direction={"right"}>
+                <FromOffscreenSection direction={"right"} fullHeight={true}>
                   <img
-                    className="object-cover w-full"
+                    className="object-cover w-full h-full"
                     src={eyes}
                     alt="students with a paper"
                   />
                 </FromOffscreenSection>
               </div>
-              <div className="flex flex-col h-[50vh] justify-between">
-                <FromOffscreenSection
-                  direction={"right"}
-                  className="basis-1/2 h-full"
-                >
-                  <section className=" mt-28 flex flex-col gap">
-                    <div className=" bg-black flex justify-start items-center text-center">
-                      <h1 className="responsive-heading text-white px-2">
-                        STUDENT?
-                      </h1>
-                    </div>
-                    <div className="">
-                      <span className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
-                        Evenemang för studenter som:
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col gap-6 mt-6 ">
-                      <BulletPoint>
-                        Vill skapa nya kontakter relaterat till ditt kommande
-                        yrke
-                      </BulletPoint>
-                      <BulletPoint>
-                        Letar efter praktik i enlighet med sina intressen och
-                        färdigheter
-                      </BulletPoint>
-                      <BulletPoint>
-                        Vill ta det första steget mot en framgångsrik karriär
-                      </BulletPoint>
-                    </div>
-                  </section>
-                </FromOffscreenSection>
-              </div>
             </div>
           </div>
-          <div className="flex flex-row">
+          {/* slut */} {/* slut */} {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */} {/* slut */}
+          <div className="flex flex-row gap-5 mb-28">
             <div className="flex flex-col justify-between basis-1/2">
-              <FromOffscreenSection direction={"left"} className="h-full">
-                <div className="flex flex-col justify-between">
-                  <div className="flex flex-col">
+              <FromOffscreenSection direction={"left"} className="basis-1/2">
+                <div className="w-full h-[50vh] flex justify-center items-center">
+                  <img
+                    className="object-fit w-1/2 animate-arrowUpDown "
+                    src={arrowDown}
+                    alt="arrow pointing down"
+                  />
+                </div>
+              </FromOffscreenSection>
+            </div>
+            <div className="flex flex-col justify-between basis-1/2">
+              <FromOffscreenSection
+                direction={"right"}
+                className="basis-1/2 h-full"
+              >
+                <section className=" mt-28 flex flex-col gap">
+                  <div className=" bg-black flex justify-start items-center text-center">
+                    <h1 className="responsive-heading text-white px-2">
+                      STUDENT?
+                    </h1>
+                  </div>
+                  <div className="">
+                    <span className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                      Evenemang för studenter som:
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-6 mt-6 ">
+                    <BulletPoint>
+                      Vill skapa nya kontakter relaterat till ditt kommande yrke
+                    </BulletPoint>
+                    <BulletPoint>
+                      Letar efter praktik i enlighet med sina intressen och
+                      färdigheter
+                    </BulletPoint>
+                    <BulletPoint>
+                      Vill ta det första steget mot en framgångsrik karriär
+                    </BulletPoint>
+                  </div>
+                </section>
+              </FromOffscreenSection>
+            </div>
+          </div>
+          {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */}
+          {/* slut */}
+          {/* slut */} {/* slut */} {/* slut */}
+          {/* slut */}
+          <div className="flex flex-row gap-5 mb-28 h-[80vh]">
+            <div className="flex flex-col justify-between basis-1/2 h-full">
+              <FromOffscreenSection direction="left" fullHeight={true}>
+                <div className="flex flex-col justify-between h-full">
+                  <div className="flex flex-col h-full  ">
                     <h2 className="bg-black responsive-heading text-white px-2">
                       NÄR & VAR?
                     </h2>
-                    <section className=" flex flex-col   justify-between ">
+                    <section className=" flex flex-col justify-between ">
                       <div>
                         <p className="bg-red w-fit text-white">Datum:</p>
                         <p>24 April 2025</p>
@@ -200,20 +211,17 @@ const Home = () => {
                       </div>
                     </section>
                   </div>
-                  <RedButton width="" path={"/profile"}>
+                  <RedButton className="mt-auto" path={"/profile"}>
                     Registrera er här
                   </RedButton>
                 </div>
               </FromOffscreenSection>
             </div>
 
-            <div className="flex flex-col justify-between basis-1/2">
-              <FromOffscreenSection
-                direction={"right"}
-                className="basis-1/2 h-full "
-              >
+            <div className="flex flex-col justify-between basis-1/2 h-full">
+              <FromOffscreenSection direction="right" fullHeight={true}>
                 <img
-                  className="h-full object-cover object-center"
+                  className="h-full w-full object-cover object-center"
                   src={studentLaptop}
                   alt="students with laptops"
                 />
