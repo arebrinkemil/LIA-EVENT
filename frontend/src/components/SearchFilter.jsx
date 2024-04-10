@@ -3,7 +3,12 @@ import FilterIcon from "../assets/icons/filter-default.svg";
 import Line from "./HorizontalLine";
 import FilterCheckbox from "./FilterCheckbox";
 
-const SearchFilter = ({ onFilterChange, setFilters, toggleFilter }) => {
+const SearchFilter = ({
+  onFilterChange,
+  setFilters,
+  toggleFilter,
+  handleSearchInput,
+}) => {
   const [isFilterShown, setIsFilterShown] = useState(false);
   const handleClick = () => {
     setIsFilterShown((prev) => !prev);
@@ -13,6 +18,7 @@ const SearchFilter = ({ onFilterChange, setFilters, toggleFilter }) => {
       <section className="mx-4 my-2 p-5 text-xl border border-black">
         <h2>Sök efter företag</h2>
         <input
+          onChange={handleSearchInput}
           type="text"
           className="border border-black rounded-3xl my-4 p-3 text-sm w-full"
           placeholder="Sök efter företag"
