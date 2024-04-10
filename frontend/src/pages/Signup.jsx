@@ -114,12 +114,12 @@ const Signup = () => {
                 onChange={handleOnChange}
               />
             </div>
-            <FilterCheckbox>
+            <div>
               Jag samtycker till
               <a href="">
                 <u>databehandling</u>
               </a>
-            </FilterCheckbox>
+            </div>
             <button
               className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] p-3 mt-8"
               type="submit"
