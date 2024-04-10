@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import NavButton from "../components/NavButton.jsx";
 import DividerStar from "../components/NavDivider.jsx";
 import GDPR from "../components/GDPRPopup.jsx";
+import CheckboxChecked from "../assets/icons/checkbox-checked.svg";
+import CheckboxUnchecked from "../assets/icons/checkbox-unchecked.svg";
 
 const Signup = () => {
   useEffect(() => {
@@ -30,7 +32,7 @@ const Signup = () => {
     });
   };
   const handleCheckboxChange = (e) => {
-    setIsChecked(e.target.checked);
+    setIsChecked(!isChecked);
   };
   const handlePopup = (e) => {
     setShowGDPR(true);
@@ -128,17 +130,27 @@ const Signup = () => {
                 onChange={handleOnChange}
               />
             </div>
-            <div>
+            <div className="flex flex-row items-center gap-3 mt-3">
               <input
                 type="checkbox"
                 id="consent"
                 checked={isChecked}
                 onChange={handleCheckboxChange}
+                style={{ display: "none" }}
               />
-              <label htmlFor="consent">Jag samtycker till </label>
-              <u onClick={handlePopup} className="hover:cursor-pointer">
-                databehandling
-              </u>
+              <div className="cursor-pointer" onClick={handleCheckboxChange}>
+                {isChecked ? (
+                  <img src={CheckboxChecked} alt="" />
+                ) : (
+                  <img src={CheckboxUnchecked} alt="" />
+                )}
+              </div>
+              <label htmlFor="consent">
+                Jag samtycker till &nbsp;
+                <u onClick={handlePopup} className="hover:cursor-pointer">
+                  databehandling
+                </u>
+              </label>
               {showGDPR && <GDPR onClose={handleClose} />}
             </div>
 
