@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import AmountInput from "../components/AmountInput";
 import NavButton from "../components/NavButton";
 import DividerStar from "../components/NavDivider";
+import DOMpurify from "dompurify";
 
 const CreateCompany = () => {
   const [dragging, setDragging] = useState(false);
@@ -18,9 +19,9 @@ const CreateCompany = () => {
   const [about, setAbout] = useState("");
   const [contact, setContact] = useState("");
   const [owner_id, setOwnerId] = useState("");
-  const [role, setRole] = useState("Webdeveloper");
+  const [role, setRole] = useState("Webbutvecklare");
   const [amount, setAmount] = useState(1);
-  const [location, setLocation] = useState("Gothenburg");
+  const [location, setLocation] = useState("Göteborg");
   const [tools, setTools] = useState([]);
   const [url, setUrl] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
@@ -42,7 +43,7 @@ const CreateCompany = () => {
           withCredentials: true,
         });
         const { data } = response;
-        console.log("Response data:", data);
+        //console.log("Response data:", data);
         const { _id, name, email } = data;
         if (!_id || !name || !email) {
           throw new Error("Invalid user data received from the server");
@@ -227,7 +228,7 @@ const CreateCompany = () => {
             <input
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setName(DOMpurify.sanitize(e.target.value))}
               className="form-input"
             />
           </div>
@@ -236,12 +237,11 @@ const CreateCompany = () => {
             <label className="text-xl mr-4 text-gray-500">*Vad söker ni</label>
             <select
               value={role}
-              onChange={(e) => setRole(e.target.value)}
+              onChange={(e) => setRole(DOMpurify.sanitize(e.target.value))}
               className="form-input"
             >
-              <option value="Webdeveloper">Webdeveloper</option>
-              <option value="Designer">Designer</option>
-              <option value="Both">Both</option>
+              <option value="Webbutvecklare">Webbutvecklare</option>
+              <option value="Digital Designer">Digital Designer</option>
             </select>
           </div>
 
@@ -257,9 +257,8 @@ const CreateCompany = () => {
               onChange={(e) => setLocation(e.target.value)}
               className="form-input"
             >
-              <option value="Gothenburg">Gothenburg</option>
-              <option value="Distance">Distance</option>
-              <option value="Outside_Gothenburg">Outside Gothenburg</option>
+              <option value="Göteborg">Göteborg</option>
+              <option value="Annan Plats">Annan Plats</option>
             </select>
           </div>
 
@@ -280,7 +279,7 @@ const CreateCompany = () => {
               type="text"
               placeholder="https://www.example.com"
               value={url}
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={(e) => setUrl(DOMpurify.sanitize(e.target.value))}
               className="form-input"
             />
           </div>
@@ -291,7 +290,7 @@ const CreateCompany = () => {
               type="text"
               placeholder="email eller telefonnummer"
               value={contact}
-              onChange={(e) => setContact(e.target.value)}
+              onChange={(e) => setContact(DOMpurify.sanitize(e.target.value))}
               className="form-input"
             />
           </div>
@@ -303,7 +302,9 @@ const CreateCompany = () => {
             <textarea
               placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
               value={taskDescription}
-              onChange={(e) => setTaskDescription(e.target.value)}
+              onChange={(e) =>
+                setTaskDescription(DOMpurify.sanitize(e.target.value))
+              }
               onInput={autoResize}
               className="textarea form-input min-h-[80px] overflow-hidden resize-none"
             />
@@ -314,7 +315,7 @@ const CreateCompany = () => {
             <textarea
               placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
               value={about}
-              onChange={(e) => setAbout(e.target.value)}
+              onChange={(e) => setAbout(DOMpurify.sanitize(e.target.value))}
               onInput={autoResize}
               className="textarea form-input min-h-[229px] overflow-hidden resize-none "
             />

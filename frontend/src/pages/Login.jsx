@@ -8,6 +8,7 @@ import StudentWithLaptop from "../assets/photos/student-w-laptop-square.png";
 import Arrow from "../assets/icons/arrow-right-up.svg";
 import NavButton from "../components/NavButton";
 import DividerStar from "../components/NavDivider";
+import DOMPurify from "dompurify";
 
 const Login = () => {
   useEffect(() => {
@@ -23,9 +24,10 @@ const Login = () => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    const clean = DOMPurify.sanitize(value);
     setInputValue({
       ...inputValue,
-      [name]: value,
+      [name]: clean,
     });
   };
 
@@ -49,7 +51,7 @@ const Login = () => {
         },
         { withCredentials: true }
       );
-      console.log(data);
+      //console.log(data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);

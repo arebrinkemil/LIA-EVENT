@@ -9,6 +9,7 @@ import DividerStar from "../components/NavDivider.jsx";
 import GDPR from "../components/GDPRPopup.jsx";
 import CheckboxChecked from "../assets/icons/checkbox-checked.svg";
 import CheckboxUnchecked from "../assets/icons/checkbox-unchecked.svg";
+import DOMpurify from "dompurify";
 
 const Signup = () => {
   useEffect(() => {
@@ -26,9 +27,10 @@ const Signup = () => {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    const clean = DOMpurify.sanitize(value);
     setInputValue({
       ...inputValue,
-      [name]: value,
+      [name]: clean,
     });
   };
   const handleCheckboxChange = (e) => {
