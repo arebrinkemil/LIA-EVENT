@@ -60,7 +60,7 @@ const Banner = () => {
               <p>24 APRIL MEETUP</p>
               <p>2024</p>
             </div>
-            <div className="flex grow flex-row basis-3/12 gap-5">
+            <div className="flex grow flex-row basis-3/12 gap-5 px-4">
               <div className="basis-1/2 flex flex-col justify-end">
                 <RedButton width="" path={"/profile"}>
                   Registrera er här
