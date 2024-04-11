@@ -12,7 +12,6 @@ const Banner = () => {
       <div className="md:hidden">
         <section className="p-4 text-8xl flex flex-row justify-between">
           LIA &
-          <img src={asterisk} alt="asterisk icon" />
         </section>
         <span className="p-4 text-8xl font-bold text-right flex flex-row justify-end">
           YRGO

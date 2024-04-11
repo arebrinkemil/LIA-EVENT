@@ -1,4 +1,4 @@
-import Arrow from "../assets/icons/arrow-pixel-down.svg";
+import Arrow from "../assets/icons/arrow_downward.svg";
 
 const ArrowsDown = () => {
   return (
@@ -6,27 +6,27 @@ const ArrowsDown = () => {
       <div className="flex flex-row animate-arrowUpDown my-6">
         <img
           src={Arrow}
-          alt="pixelated arrow pointing down"
+          alt="arrow pointing down"
           className="flex-grow max-w-full max-h-full h-11 w-11"
         />
         <img
           src={Arrow}
-          alt="pixelated arrow pointing down"
+          alt="arrow pointing down"
           className="flex-grow max-w-full max-h-full h-11 w-11"
         />
         <img
           src={Arrow}
-          alt="pixelated arrow pointing down"
+          alt="arrow pointing down"
           className="flex-grow max-w-full max-h-full h-11 w-11"
         />
         <img
           src={Arrow}
-          alt="pixelated arrow pointing down"
+          alt="arrow pointing down"
           className="flex-grow max-w-full max-h-full h-11 w-11"
         />
         <img
           src={Arrow}
-          alt="pixelated arrow pointing down"
+          alt="arrow pointing down"
           className="flex-grow max-w-full max-h-full h-11 w-11"
         />
       </div>
