@@ -3,7 +3,12 @@ import FilterIcon from "../assets/icons/filter-default.svg";
 import Line from "./HorizontalLine";
 import FilterCheckbox from "./FilterCheckbox";
 
-const SearchFilter = () => {
+const SearchFilter = ({
+  onFilterChange,
+  setFilters,
+  toggleFilter,
+  handleSearchInput,
+}) => {
   const [isFilterShown, setIsFilterShown] = useState(false);
   const handleClick = () => {
     setIsFilterShown((prev) => !prev);
@@ -13,6 +18,7 @@ const SearchFilter = () => {
       <section className="mx-4 my-2 p-5 text-xl border border-black">
         <h2>Sök efter företag</h2>
         <input
+          onChange={handleSearchInput}
           type="text"
           className="border border-black rounded-3xl my-4 p-3 text-sm w-full"
           placeholder="Sök efter företag"
@@ -36,17 +42,29 @@ const SearchFilter = () => {
           kryssa i eller ur check-rutan.
         </p>
         <Line></Line>
-        <h3>YRKE</h3>
-        <FilterCheckbox>DIGITAL DESIGNER</FilterCheckbox>
-        <FilterCheckbox>WEBBUTVECKLARE</FilterCheckbox>
+        <FilterCheckbox
+          toggleFilter={toggleFilter}
+          label="YRKE"
+          options={["Designer", "Webdeveloper"]}
+          name={["DIGITAL DESIGNER", "WEBBUTVECKLARE"]}
+          onChange={onFilterChange}
+        ></FilterCheckbox>
         <Line></Line>
-        <h3>PLATS</h3>
-        <FilterCheckbox>GÖTEBORG</FilterCheckbox>
-        <FilterCheckbox>ANNAN PLATS</FilterCheckbox>
+        <FilterCheckbox
+          toggleFilter={toggleFilter}
+          label="PLATS"
+          options={["Gothenburg", "Outside_Gothenburg"]}
+          name={["GÖTEBORG", "ANNAN PLATS"]}
+          onChange={onFilterChange}
+        ></FilterCheckbox>
         <Line></Line>
-        <h3>ANTAL LIA-PLATSER</h3>
-        <FilterCheckbox>1-2</FilterCheckbox>
-        <FilterCheckbox>2-4</FilterCheckbox>
+        <FilterCheckbox
+          toggleFilter={toggleFilter}
+          label="ANTAL LIA-PLATSER"
+          options={["Two_or_fewer", "More_than_two"]}
+          name={["1-2", "2-4"]}
+          onChange={onFilterChange}
+        />
         <Line></Line>
         <button
           onClick={handleClick}

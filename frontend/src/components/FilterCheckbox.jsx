@@ -1,23 +1,39 @@
-import { useState } from "react";
-import RedStar from "../assets/icons/burgerStar.svg";
+import React, { useState } from "react";
+import CheckboxChecked from "../assets/icons/checkbox-checked.svg";
+import CheckboxUnchecked from "../assets/icons/checkbox-unchecked.svg";
 
-//TODO: lägg till individuell prop som identifierar vad som är checkat, för att använda i verklig filtrering
-
-const FilterCheckbox = ({ children }) => {
-  const [isChecked, setIsChecked] = useState(false);
-  const handleClick = () => {
-    setIsChecked((prev) => !prev);
+const FilterCheckbox = ({ label, options, toggleFilter, name }) => {
+  const [checkedStates, setCheckedStates] = useState(options.map(() => false));
+  const handleChange = (index) => {
+    const newCheckedStates = [...checkedStates];
+    newCheckedStates[index] = !newCheckedStates[index];
+    setCheckedStates(newCheckedStates);
+    toggleFilter(options[index], newCheckedStates[index]);
   };
+
   return (
-    <div className="flex flex-row items-center gap-2 pt-0 mt-2 hover:cursor-pointer">
-      <div
-        className="border border-black rounded-lg w-11 h-11"
-        onClick={handleClick}
-      >
-        {isChecked && <img src={RedStar} alt="checked" />}
-      </div>
-      {children}
+    <div>
+      <label>{label}</label>
+      {options.map((option, index) => (
+        <div key={index}>
+          <label className="flex flex-row gap-3 items-center mb-2">
+            <input
+              type="checkbox"
+              checked={checkedStates[index]}
+              onChange={() => handleChange(index)}
+              style={{ display: "none" }}
+            />
+            {checkedStates[index] ? (
+              <img src={CheckboxChecked} alt="" />
+            ) : (
+              <img src={CheckboxUnchecked} alt="" />
+            )}
+            {name[index]}
+          </label>
+        </div>
+      ))}
     </div>
   );
 };
+
 export default FilterCheckbox;

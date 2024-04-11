@@ -4,16 +4,19 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import FilterCheckbox from "../components/FilterCheckbox.jsx";
 import NavButton from "../components/NavButton.jsx";
-
 import DividerStar from "../components/NavDivider.jsx";
+import GDPR from "../components/GDPRPopup.jsx";
+import CheckboxChecked from "../assets/icons/checkbox-checked.svg";
+import CheckboxUnchecked from "../assets/icons/checkbox-unchecked.svg";
 
 const Signup = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const navigate = useNavigate();
+  const [isChecked, setIsChecked] = useState(false);
+  const [showGDPR, setShowGDPR] = useState(false);
   const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
@@ -28,6 +31,15 @@ const Signup = () => {
       [name]: value,
     });
   };
+  const handleCheckboxChange = (e) => {
+    setIsChecked(!isChecked);
+  };
+  const handlePopup = (e) => {
+    setShowGDPR(true);
+  };
+  const handleClose = () => {
+    setShowGDPR(false);
+  };
 
   const handleError = (err) =>
     toast.error(err, {
@@ -40,6 +52,10 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!isChecked) {
+      handleError("Datahantering måste godkännas");
+      return;
+    }
     try {
       const { data } = await axios.post(
         "http://134.122.48.238:5555/",
@@ -114,15 +130,34 @@ const Signup = () => {
                 onChange={handleOnChange}
               />
             </div>
-            <FilterCheckbox>
-              Jag samtycker till
-              <a href="">
-                <u>databehandling</u>
-              </a>
-            </FilterCheckbox>
+            <div className="flex flex-row items-center gap-3 mt-3">
+              <input
+                type="checkbox"
+                id="consent"
+                checked={isChecked}
+                onChange={handleCheckboxChange}
+                style={{ display: "none" }}
+              />
+              <div className="cursor-pointer" onClick={handleCheckboxChange}>
+                {isChecked ? (
+                  <img src={CheckboxChecked} alt="" />
+                ) : (
+                  <img src={CheckboxUnchecked} alt="" />
+                )}
+              </div>
+              <label htmlFor="consent">
+                Jag samtycker till &nbsp;
+                <u onClick={handlePopup} className="hover:cursor-pointer">
+                  databehandling
+                </u>
+              </label>
+              {showGDPR && <GDPR onClose={handleClose} />}
+            </div>
+
             <button
-              className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] p-3 mt-8"
+              className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl border border-red w-[calc(100vw-32px)] p-3 mt-8 disabled:bg-white disabled:text-grey disabled:border disabled:border-grey"
               type="submit"
+              disabled={!isChecked}
             >
               Skapa användare
             </button>

@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
-import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Header from "../components/Header.jsx";
 import RedButton from "../components/RedButton.jsx";
+import WhiteButton from "../components/WhiteButton.jsx";
 import HorizontalLine from "../components/HorizontalLine.jsx";
-import BulletPoint from "../components/BulletPoint.jsx";
 import FromOffscreenSection from "../components/FromOffscreenSection.jsx";
-import arrowRU from "../assets/icons/arrow-right-up.svg";
 import asterisk from "../assets/icons/asterisk-black.svg";
-import studentsLaptops from "../assets/photos/students-w-laptops.png";
-import studentsPaper from "../assets/photos/students-w-paper.png";
-import eyesBook from "../assets/photos/eyes-over-book.png";
-import studentLaptop from "../assets/photos/student-w-laptop.png";
+import arrowDown from "../assets/icons/arrow_downward.svg";
+import studentLaptop from "../assets/photos/student-w-laptop-square.png";
+
 import arrowPxDown from "../assets/icons/arrow-pixel-down.svg";
 import Footer from "../components/Footer.jsx";
+import BulletPoint from "../components/BulletPoint.jsx";
+import EventInfoSection from "../components/homepage/EventInfoSection.jsx";
+import WhatIsIt from "../components/homepage/WhatIsIt.jsx";
+import ForWho from "../components/homepage/ForWho.jsx";
+import Bullets from "../components/homepage/Bullets.jsx";
+import Student from "../components/homepage/Student.jsx";
+import Location from "../components/homepage/Location.jsx";
+import ScrollBanner from "../components/homepage/ScrollBanner.jsx";
+import Banner from "../components/homepage/Banner.jsx";
+import studentsPaper from "../assets/photos/students-w-paper.png";
+import eyes from "../assets/photos/eyes-over-book.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -29,119 +36,203 @@ const Home = () => {
 
   return (
     <>
-      <div className="home_page overflow-x-clip">
+      <div className="md:hidden home_page overflow-x-clip">
         <Header></Header>
-        <button
-          className="p-4 text-4xl font-normal border-solid border-b-2 border-black w-full flex flex-row justify-between align-baseline"
-          onClick={handleLIA}
-        >
-          VILKA KOMMER?
-          <img src={arrowRU} alt="arrow right up" />
-        </button>
-        <section className="p-4 text-8xl flex flex-row justify-between">
-          LIA &
-          <img src={asterisk} alt="asterisk icon" />
-        </section>
-        <span className="p-4 text-8xl font-bold text-right flex flex-row justify-end">
-          YRGO
-        </span>
-        <section className="px-4 flex flex-row justify-between align-middle items-center">
-          <div>
-            <div>24 APRIL</div>
-            <div>MEETUP</div>
-          </div>
-          <img
-            className="object-contain h-36"
-            src={studentsLaptops}
-            alt="students with laptops"
-          />
-          2024
-        </section>
-        <RedButton path={"/profile"}>Vi kommer</RedButton>
-        <HorizontalLine></HorizontalLine>
-        <section className="pt-16 px-4 gap-4 flex flex-col">
-          <h4 className="text-4xl mb-3">Vad är det?</h4>
-          "LIA utan gränser" är ett evenemang som hjälper studenter att hitta
-          den perfekta praktiken. På detta evenemang kan studenter:
-          <BulletPoint>Presentera sig direkt för arbetsgivare</BulletPoint>
-          <BulletPoint>
-            Få information om de mest aktuella praktikplatserna
-          </BulletPoint>
-          <BulletPoint>Lär känna ledande företag i sin bransch</BulletPoint>
-          <BulletPoint>
-            Få värdefulla tips från experter på karriärutveckling
-          </BulletPoint>
-        </section>
+        <ScrollBanner />
+        <Banner />
+        <WhatIsIt />
         <FromOffscreenSection direction={"left"}>
-          <section className="flex flex-row px-4 pt-28 gap-3">
-            <img
-              className="object-contain h-36"
-              src={studentsPaper}
-              alt="students with a paper"
-            />
-            <div>
-              <h4 className="text-4xl mb-3">FÖR VEM?</h4>
-              Detta evenemang är för företag som:
-            </div>
-          </section>
+          <ForWho />
         </FromOffscreenSection>
         <FromOffscreenSection>
-          <section className="px-4 pt-20 flex flex-col gap-3">
-            <div className="flex flex-row gap-3">
-              <div className="flex flex-col gap-3">
-                <BulletPoint>Vill skapa nya kontakter</BulletPoint>
-                <BulletPoint>
-                  Letar efter praktikanter i enlighet med sina intressen och
-                  färdigheter
-                </BulletPoint>
-              </div>
-              <img
-                className="object-contain h-44"
-                src={eyesBook}
-                alt="person peeking over a book"
-              />
-            </div>
-            <BulletPoint>
-              Ett tillfälle att synas inför potentiella framtida kollegor
-            </BulletPoint>
-          </section>
+          <Bullets />
         </FromOffscreenSection>
-        <section className="py-10 flex justify-center align-middle">
+        <Student />{" "}
+        <section className="pb-10 flex justify-center align-middle">
           <img
             className="animate-arrowUpDown"
-            src={arrowPxDown}
+            src={arrowDown}
             alt="pixelated arrow pointing down"
           />
         </section>
-        <section className="px-4 flex flex-col gap-3">
-          <div className="w-44 mb-3">
-            <h4 className="text-4xl mb-3">STUDENT?</h4>
-            Detta evenemang är för företag som:
+        <Location />
+        <div className="px-4 mb-9">
+          <RedButton path="/signup" width={"100%"}>
+            Skapa en användare
+          </RedButton>
+        </div>
+        <Footer></Footer>
+      </div>
+
+      <div className="hidden md:block home_page overflow-x-clip">
+        <Header></Header>
+        <ScrollBanner />
+        <div className="px-20">
+          <Banner />
+          <div className="flex flex-row gap-6 mt-28">
+            {/* left column */}
+            <div className="flex flex-col w-1/2">
+              <div className="flex flex-col 2xl:min-h-[100vh] xl:min-h-[80vh] lg:min-h-[70vh] min-h-[60vh] justify-between">
+                {" "}
+                <FromOffscreenSection direction={"left"}>
+                  <img
+                    className="object-cover w-full mb-28"
+                    src={studentsPaper}
+                    alt="students with a paper"
+                  />
+                </FromOffscreenSection>
+                <FromOffscreenSection direction={"left"}>
+                  <div className="flex flex-col">
+                    <h2 className="bg-black responsive-heading text-white px-2">
+                      FÖR VEM?
+                    </h2>
+                    <h3 className="bg-red text-white">
+                      Evenemang för företag som:
+                    </h3>
+                    <div className="flex flex-col gap-6 mt-6">
+                      <BulletPoint>
+                        <p>Vill skapa nya kontakter</p>
+                      </BulletPoint>
+                      <BulletPoint>
+                        <p>
+                          Letar efter praktikanter i enlighet med sina intressen
+                          och färdigheter
+                        </p>
+                      </BulletPoint>
+                      <BulletPoint>
+                        <p>
+                          Ett tillfälle att synas inför potentiella framtida
+                          kollegor
+                        </p>
+                      </BulletPoint>
+                    </div>
+                  </div>
+                </FromOffscreenSection>
+              </div>
+            </div>
+
+            {/* right collumn */}
+            <div className="flex flex-col w-1/2">
+              <div className="flex flex-col 2xl:min-h-[100vh] xl:min-h-[80vh] lg:min-h-[70vh] min-h-[60vh] justify-between">
+                {" "}
+                <FromOffscreenSection direction={"right"}>
+                  <div className="mb-28">
+                    <h2 className="bg-black responsive-heading text-white px-2">
+                      VAD ÄR DET?
+                    </h2>
+                    <p className="text-xl w-4/5">
+                      LIA utan gränser – ett evenemang som hjälper studenter att
+                      hitta den perfekta praktiken. På detta evenemang kan
+                      studenter:
+                    </p>
+                  </div>
+                </FromOffscreenSection>
+                <FromOffscreenSection direction={"right"} fullHeight={true}>
+                  <img
+                    className="object-cover w-full h-full"
+                    src={eyes}
+                    alt="students with a paper"
+                  />
+                </FromOffscreenSection>
+              </div>
+            </div>
           </div>
-          <BulletPoint>
-            Vill skapa nya kontakter relaterat till ditt kommande yrke
-          </BulletPoint>
-          <BulletPoint>
-            Letar efter praktik i enlighet med sina intressen och färdigheter
-          </BulletPoint>
-          <BulletPoint>
-            Vill ta det första steget mot en framgångsrik karriär
-          </BulletPoint>
-        </section>
-        <section className="px-4 pt-36 flex flex-row gap-3">
-          <img
-            className="w-32"
-            src={studentLaptop}
-            alt="happy student with laptop"
-          />
-          <div>
-            <p>NÄR & VAR?</p>
-            <p>Datum: 24 april 2024</p>
-            <p>Tid: 15:00-19:00</p>
-            <p>Plats: Lärdomsgatan 3, 417 56 Göteborg</p>
+          {/* slut */} {/* slut */} {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */} {/* slut */}
+          <div className="flex flex-row gap-5 mb-28">
+            <div className="flex flex-col justify-between basis-1/2">
+              <FromOffscreenSection direction={"left"} className="basis-1/2">
+                <div className="w-full h-[50vh] flex justify-center items-center">
+                  <img
+                    className="object-fit w-1/2 animate-arrowUpDown "
+                    src={arrowDown}
+                    alt="arrow pointing down"
+                  />
+                </div>
+              </FromOffscreenSection>
+            </div>
+            <div className="flex flex-col justify-between basis-1/2">
+              <FromOffscreenSection
+                direction={"right"}
+                className="basis-1/2 h-full"
+              >
+                <section className=" mt-28 flex flex-col gap">
+                  <div className=" bg-black flex justify-start items-center text-center">
+                    <h1 className="responsive-heading text-white px-2">
+                      STUDENT?
+                    </h1>
+                  </div>
+                  <div className="">
+                    <span className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                      Evenemang för studenter som:
+                    </span>
+                  </div>
+
+                  <div className="flex flex-col gap-6 mt-6 ">
+                    <BulletPoint>
+                      Vill skapa nya kontakter relaterat till ditt kommande yrke
+                    </BulletPoint>
+                    <BulletPoint>
+                      Letar efter praktik i enlighet med sina intressen och
+                      färdigheter
+                    </BulletPoint>
+                    <BulletPoint>
+                      Vill ta det första steget mot en framgångsrik karriär
+                    </BulletPoint>
+                  </div>
+                </section>
+              </FromOffscreenSection>
+            </div>
           </div>
-        </section>
-        <RedButton path="/signup">Skapa en användare</RedButton>
+          {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */}
+          {/* slut */} {/* slut */}
+          {/* slut */}
+          {/* slut */} {/* slut */} {/* slut */}
+          {/* slut */}
+          <div className="flex flex-row gap-5 mb-28 h-[80vh]">
+            <div className="flex flex-col justify-between basis-1/2 h-full">
+              <FromOffscreenSection direction="left" fullHeight={true}>
+                <div className="flex flex-col justify-between h-full">
+                  <div className="flex flex-col h-full  ">
+                    <h2 className="bg-black responsive-heading text-white px-2">
+                      NÄR & VAR?
+                    </h2>
+                    <section className=" flex flex-col justify-between ">
+                      <div>
+                        <p className="bg-red w-fit text-white">Datum:</p>
+                        <p>24 April 2025</p>
+                      </div>
+                      <div>
+                        <p className="bg-red w-fit text-white">Tid:</p>
+                        <p>15:00-19:00</p>
+                      </div>
+                      <div>
+                        <p className="bg-red w-fit text-white">Plats:</p>
+                        <p>Lärdomsgatan 3, 417 56 Göteborg</p>
+                      </div>
+                    </section>
+                  </div>
+                  <RedButton className="mt-auto" path={"/profile"}>
+                    Registrera er här
+                  </RedButton>
+                </div>
+              </FromOffscreenSection>
+            </div>
+
+            <div className="flex flex-col justify-between basis-1/2 h-full">
+              <FromOffscreenSection direction="right" fullHeight={true}>
+                <img
+                  className="h-full w-full object-cover object-center"
+                  src={studentLaptop}
+                  alt="students with laptops"
+                />
+              </FromOffscreenSection>
+            </div>
+          </div>
+        </div>
+
         <Footer></Footer>
       </div>
       <ToastContainer />

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const FromOffscreenSection = ({ children, direction }) => {
+const FromOffscreenSection = ({ children, direction, fullHeight }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef(null);
 
@@ -29,13 +29,13 @@ const FromOffscreenSection = ({ children, direction }) => {
   const translateClass =
     direction === "left" ? "-translate-x-48" : "translate-x-48";
 
+  // Add 'h-full' to the class list if fullHeight is true
+  const sectionClasses = `transition ease-in-out duration-1000 ${
+    isVisible ? "" : translateClass
+  } ${fullHeight ? "h-full" : ""}`;
+
   return (
-    <div
-      ref={ref}
-      className={`w-screen transition ease-in-out duration-1000 ${
-        isVisible ? "" : translateClass
-      }`}
-    >
+    <div ref={ref} className={sectionClasses}>
       {children}
     </div>
   );
