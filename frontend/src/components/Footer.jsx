@@ -24,7 +24,6 @@ const Footer = () => {
             alt="Göteborgs stad logo"
           />
         </div>
-        <img className="absolute top-12 right-4" src={star} alt="star" />
       </div>
     </>
   );
