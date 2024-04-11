@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import NavButton from "./NavButton";
 import DividerStar from "./NavDivider";
+import DOMPurify from "dompurify";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -42,15 +43,15 @@ const EditCompany = () => {
         setCompany(response.data);
         setLogotype(response.data.logotype);
         setCompanyId(response.data.companyId);
-        setName(response.data.name);
-        setAbout(response.data.about);
-        setContact(response.data.contact);
+        setName(DOMPurify.sanitize(response.data.name));
+        setAbout(DOMPurify.sanitize(response.data.about));
+        setContact(DOMPurify.sanitize(response.data.contact));
         setRole(response.data.role);
         setAmount(response.data.amount);
         setLocation(response.data.location);
-        setTools(response.data.tools);
-        setUrl(response.data.url);
-        setTaskDescription(response.data.task_description);
+        setTools(DOMPurify.sanitize(response.data.tools));
+        setUrl(DOMPurify.sanitize(response.data.url));
+        setTaskDescription(DOMPurify.sanitize(response.data.task_description));
       } catch (error) {
         console.error("Error fetching company:", error);
       }
