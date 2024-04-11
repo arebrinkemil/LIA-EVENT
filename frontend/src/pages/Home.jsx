@@ -40,7 +40,6 @@ const Home = () => {
         <Header></Header>
         <ScrollBanner />
         <Banner />
-        <HorizontalLine></HorizontalLine>
         <WhatIsIt />
         <FromOffscreenSection direction={"left"}>
           <ForWho />
@@ -49,15 +48,19 @@ const Home = () => {
           <Bullets />
         </FromOffscreenSection>
         <Student />{" "}
-        <section className="py-10 flex justify-center align-middle">
+        <section className="pb-10 flex justify-center align-middle">
           <img
             className="animate-arrowUpDown"
-            src={arrowPxDown}
+            src={arrowDown}
             alt="pixelated arrow pointing down"
           />
         </section>
         <Location />
-        <RedButton path="/signup">Skapa en användare</RedButton>
+        <div className="px-4 mb-9">
+          <RedButton path="/signup" width={"100%"}>
+            Skapa en användare
+          </RedButton>
+        </div>
         <Footer></Footer>
       </div>
 

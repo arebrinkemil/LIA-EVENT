@@ -7,7 +7,7 @@ const WhiteButton = ({ path, children, type = "button", width }) => {
   };
   return (
     <button
-      className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mx-4 p-3"
+      className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl p-3"
       onClick={handleClick}
       style={{ width: width }}
     >

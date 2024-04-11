@@ -7,7 +7,7 @@ const BulletPoint = ({ children }) => {
         {children}
       </div>
 
-      <div className="hidden: md:flex flex-row gap-2 pt-0 items-center">
+      <div className="hidden md:flex flex-row gap-2 pt-0 items-center">
         <img className="w-11 h-11" src={RedStar} alt="bulletpoint" />
         {children}
       </div>

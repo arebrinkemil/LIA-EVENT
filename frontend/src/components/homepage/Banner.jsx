@@ -18,13 +18,17 @@ const Banner = () => {
           YRGO
         </span>
         <EventInfoSection />
-        <div className="mb-2 mt-20">
-          <RedButton path={"/profile"}>Registrera er här</RedButton>
-        </div>
-        <div className="my-2">
-          <WhiteButton className="my-1" path={"/companies"}>
-            Vilka kommer?
-          </WhiteButton>
+        <div className="w-full px-4">
+          <div className="mb-2 mt-20">
+            <RedButton path={"/profile"} width={"100%"}>
+              Registrera er här
+            </RedButton>
+          </div>
+          <div className="my-2">
+            <WhiteButton className="my-1" path={"/companies"} width={"100%"}>
+              Vilka kommer?
+            </WhiteButton>
+          </div>
         </div>
       </div>
 
@@ -56,16 +60,14 @@ const Banner = () => {
               <p>24 APRIL MEETUP</p>
               <p>2024</p>
             </div>
-            <div className="flex grow flex-row basis-3/12 gap-5">
+            <div className="flex grow flex-row basis-3/12 gap-5 px-4">
               <div className="basis-1/2 flex flex-col justify-end">
                 <RedButton width="" path={"/profile"}>
                   Registrera er här
                 </RedButton>
               </div>
-              <div className="basis-1/2 flex flex-col justify-end">
-                <WhiteButton width="" path={"/companies"}>
-                  Vilka kommer?
-                </WhiteButton>
+              <div className="basis-1/2 flex px-4 flex-col justify-end">
+                <WhiteButton path={"/companies"}>Vilka kommer?</WhiteButton>
               </div>
             </div>
           </div>
