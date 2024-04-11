@@ -44,14 +44,13 @@ const CompanyList = () => {
         setLoading(false);
         const fetchedData = response.data.data;
         const roleFilters = {
-          Webdeveloper: (company) => company.role === "Webdeveloper",
-          Designer: (company) => company.role === "Designer",
+          Webdeveloper: (company) => company.role === "Webbutvecklare",
+          Designer: (company) => company.role === "Digital Designer",
         };
 
         const locationFilters = {
-          Gothenburg: (company) => company.location === "Gothenburg",
-          Outside_Gothenburg: (company) =>
-            company.location === "Outside_Gothenburg",
+          Gothenburg: (company) => company.location === "Göteborg",
+          Outside_Gothenburg: (company) => company.location === "Annan Plats",
         };
         const exclusiveFilters = {
           Two_or_fewer: (company) => company.amount <= 2,

@@ -9,6 +9,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import NavButton from "./NavButton";
 import DividerStar from "./NavDivider";
+import DOMPurify from "dompurify";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -42,15 +43,15 @@ const EditCompany = () => {
         setCompany(response.data);
         setLogotype(response.data.logotype);
         setCompanyId(response.data.companyId);
-        setName(response.data.name);
-        setAbout(response.data.about);
-        setContact(response.data.contact);
+        setName(DOMPurify.sanitize(response.data.name));
+        setAbout(DOMPurify.sanitize(response.data.about));
+        setContact(DOMPurify.sanitize(response.data.contact));
         setRole(response.data.role);
         setAmount(response.data.amount);
         setLocation(response.data.location);
-        setTools(response.data.tools);
-        setUrl(response.data.url);
-        setTaskDescription(response.data.task_description);
+        setTools(DOMPurify.sanitize(response.data.tools));
+        setUrl(DOMPurify.sanitize(response.data.url));
+        setTaskDescription(DOMPurify.sanitize(response.data.task_description));
       } catch (error) {
         console.error("Error fetching company:", error);
       }
@@ -240,9 +241,8 @@ const EditCompany = () => {
                 onChange={(e) => setRole(e.target.value)}
                 className="form-input "
               >
-                <option value="Webdeveloper">Webdeveloper</option>
-                <option value="Designer">Designer</option>
-                <option value="Both">Both</option>
+                <option value="Webbutvecklare">Webbutvecklare</option>
+                <option value="Digital Designer">Digital Designer</option>
               </select>
             </div>
             <div className="my-4">
@@ -261,9 +261,8 @@ const EditCompany = () => {
                 onChange={(e) => setLocation(e.target.value)}
                 className="form-input"
               >
-                <option value="Gothenburg">Gothenburg</option>
-                <option value="Distance">Distance</option>
-                <option value="Outside_Gothenburg">Outside Gothenburg</option>
+                <option value="Göteborg">Göteborg</option>
+                <option value="Annan Plats">Annan Plats</option>
               </select>
             </div>
 

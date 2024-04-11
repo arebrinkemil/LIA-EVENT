@@ -19,14 +19,14 @@ const CompanyInfoSchema = mongoose.Schema({
   companyId: String,
   role: {
     type: String,
-    enum: ["Webdeveloper", "Designer", "Both"],
-    default: "Webdeveloper",
+    enum: ["Webbutvecklare", "Digital Designer"],
+    default: "Webbutvecklare",
   },
   amount: Number,
   location: {
     type: String,
-    enum: ["Gothenburg", "Distance", "Outside_Gothenburg"],
-    default: "Gothenburg",
+    enum: ["Göteborg", "Annan Plats"],
+    default: "Göteborg",
   },
   tools: [String],
   url: String,
