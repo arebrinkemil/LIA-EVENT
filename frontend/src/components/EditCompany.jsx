@@ -139,7 +139,7 @@ const EditCompany = () => {
   const deleteCompany = async () => {
     try {
       await axios.delete(
-        `http://localhost:5555/companies/${company.companyId}`,
+        `http://134.122.48.238:5555/companies/${company.companyId}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,
