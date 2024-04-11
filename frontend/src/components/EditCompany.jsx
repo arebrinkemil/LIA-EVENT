@@ -244,9 +244,8 @@ const EditCompany = () => {
                 onChange={(e) => setRole(e.target.value)}
                 className="form-input "
               >
-                <option value="Webdeveloper">Webdeveloper</option>
-                <option value="Designer">Designer</option>
-                <option value="Both">Both</option>
+                <option value="Webbutvecklare">Webbutvecklare</option>
+                <option value="Digital Designer">Digital Designer</option>
               </select>
             </div>
             <div className="my-4">
@@ -265,9 +264,8 @@ const EditCompany = () => {
                 onChange={(e) => setLocation(e.target.value)}
                 className="form-input"
               >
-                <option value="Gothenburg">Gothenburg</option>
-                <option value="Distance">Distance</option>
-                <option value="Outside_Gothenburg">Outside Gothenburg</option>
+                <option value="Göteborg">Göteborg</option>
+                <option value="Annan Plats">Annan Plats</option>
               </select>
             </div>
 
