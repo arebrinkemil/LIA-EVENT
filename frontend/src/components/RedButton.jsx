@@ -7,7 +7,7 @@ const RedButton = ({ path, children, type = "button", width }) => {
   };
   return (
     <button
-      className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl  mx-4 p-3"
+      className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl p-3"
       onClick={handleClick}
       style={{ width: width }}
     >
