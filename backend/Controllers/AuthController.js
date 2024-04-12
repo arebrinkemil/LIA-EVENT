@@ -114,7 +114,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   const otp = Math.floor(1000 + Math.random() * 9000);
-  const otpExpire = Date.now() + 60 * 5000; // OTP expires in 1 minute
+  const otpExpire = Date.now() + 60 * 10000; // OTP expires in 10 minute
 
   user.otp = otp;
   user.otpExpire = otpExpire;
@@ -130,10 +130,10 @@ const forgotPassword = asyncHandler(async (req, res) => {
   });
 
   const mailOptions = {
-    from: "youremail@gmail.com",
+    from: process.env.EMAIL_USER,
     to: email,
-    subject: "Password Reset OTP",
-    text: `Your OTP (expires after 1 minute): ${otp}`,
+    subject: "återställ lösenord",
+    text: `Din kod för att återställa lösenordet (giltig i 10 minuter): ${otp}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {

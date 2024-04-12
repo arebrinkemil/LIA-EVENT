@@ -125,7 +125,9 @@ const Login = () => {
             >
               Logga in
             </button>
-            <a onClick={handleClick}>Glömt lösenord?</a>
+            <a onClick={handleClick} className="cursor-pointer hover:font-bold">
+              Glömt lösenord?
+            </a>
             <div className="flex flex-row items-center justify-center w-full my-3">
               eller
             </div>
