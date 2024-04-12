@@ -42,14 +42,6 @@ const SearchFilterDesktop = ({ onFilterChange, setFilters, toggleFilter }) => {
             onChange={onFilterChange}
           />
         </div>
-        <div className="px-3">
-          <button
-            onClick={handleClick}
-            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-full my-12 p-3"
-          >
-            Spara ändringar
-          </button>
-        </div>
       </div>
     </>
   );

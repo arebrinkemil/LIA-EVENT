@@ -10,6 +10,8 @@ import SearchFilter from "../components/SearchFilter";
 import SearchFilterDesktop from "../components/homepage/SearchFilterDesktop";
 import DOMpurify from "dompurify";
 import FreeSearch from "../components/FreeSearch";
+import NavButton from "../components/NavButton";
+import DividerStar from "../components/NavDivider";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -98,11 +100,16 @@ const CompanyList = () => {
     <>
       <div className="overflow-x-clip relative">
         <Header></Header>
-        <section className="text-4xl p-4 md:flex md:flex-row-reverse md:items-center md:justify-end">
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>HITTA LIA</NavButton>
+        </div>
+        <section className="text-4xl p-4 md:flex md:flex-row-reverse md:items-center md:justify-end gap-5">
           HITTA RÄTT LIA PLATS FÖR DIG
           <div className="flex flex-row items-center justify-between pt-2">
             <img
-              className="h-24"
+              className="h-24 md:h-40"
               src={OverShoulder}
               alt="datorskärm över axeln på student"
             />
