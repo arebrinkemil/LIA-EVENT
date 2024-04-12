@@ -15,6 +15,10 @@ const Login = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleClick = () => {
+    navigate("/forgotpassword");
+  };
+
   const navigate = useNavigate();
   const [inputValue, setInputValue] = useState({
     email: "",
@@ -121,6 +125,9 @@ const Login = () => {
             >
               Logga in
             </button>
+            <a onClick={handleClick} className="cursor-pointer hover:font-bold">
+              Glömt lösenord?
+            </a>
             <div className="flex flex-row items-center justify-center w-full my-3">
               eller
             </div>

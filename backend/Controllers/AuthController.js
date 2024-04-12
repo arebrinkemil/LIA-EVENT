@@ -1,8 +1,10 @@
 import User from "../models/User.js";
 import CompanyInfoModel from "../models/Company_info.js";
 import asyncHandler from "express-async-handler";
-
+import bcrypt from "bcryptjs";
+import nodemailer from "nodemailer";
 import generateToken from "../utils/generateToken.js";
+import "dotenv/config";
 
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -100,10 +102,82 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     throw new Error("User not found");
   }
 });
+
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    console.log("User not found");
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const otp = Math.floor(1000 + Math.random() * 9000);
+  const otpExpire = Date.now() + 60 * 10000; // OTP expires in 10 minute
+
+  user.otp = otp;
+  user.otpExpire = otpExpire;
+
+  await user.save();
+
+  const transporter = nodemailer.createTransport({
+    service: "Gmail",
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "återställ lösenord",
+    text: `Din kod för att återställa lösenordet (giltig i 10 minuter): ${otp}`,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ message: "Error sending email" });
+    }
+    res.json({ message: "OTP sent to email" });
+  });
+});
+
+const resetPassword = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  const { email, otp, password } = req.body;
+  console.log(email, otp, password);
+
+  const user = await User.findOne({
+    email,
+    otp,
+    otpExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    console.log("Invalid or expired OTP");
+    return res.status(400).json({ message: "Invalid or expired OTP" });
+  }
+
+  const salt = await bcrypt.genSalt(10);
+
+  user.password = password;
+  user.otp = undefined;
+  user.otpExpire = undefined;
+
+  await user.save();
+
+  res.json({ message: "Password reset successful" });
+});
+
 export {
   authUser,
   registerUser,
   logoutUser,
   getUserProfile,
   updateUserProfile,
+  forgotPassword,
+  resetPassword,
 };

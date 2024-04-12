@@ -7,7 +7,7 @@ const RedButton = ({ path, children, type = "button", width }) => {
   };
   return (
     <button
-      className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl p-3"
+      className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl p-3 hover:bg-redHover"
       onClick={handleClick}
       style={{ width: width }}
     >
