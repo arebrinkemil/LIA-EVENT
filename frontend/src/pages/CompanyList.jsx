@@ -7,7 +7,11 @@ import Arrows from "../components/ArrowsDown";
 import OverShoulder from "../assets/photos/over-shoulder.png";
 import Rotate from "../assets/icons/find-lia-rotate.svg";
 import SearchFilter from "../components/SearchFilter";
+import SearchFilterDesktop from "../components/homepage/SearchFilterDesktop";
 import DOMpurify from "dompurify";
+import FreeSearch from "../components/FreeSearch";
+import NavButton from "../components/NavButton";
+import DividerStar from "../components/NavDivider";
 
 const CompanyList = () => {
   const [companies, setCompanies] = useState([]);
@@ -96,29 +100,46 @@ const CompanyList = () => {
     <>
       <div className="overflow-x-clip relative">
         <Header></Header>
-        <section className="text-4xl p-4">
+        <div className="m-4 w-full flex flex-row gap-1 items-center">
+          <NavButton path={"/"}>HEM</NavButton>
+          <DividerStar></DividerStar>
+          <NavButton>HITTA LIA</NavButton>
+        </div>
+        <section className="text-4xl p-4 md:flex md:flex-row-reverse md:items-center md:justify-end gap-5">
           HITTA RÄTT LIA PLATS FÖR DIG
           <div className="flex flex-row items-center justify-between pt-2">
             <img
-              className="h-24"
+              className="h-24 md:h-40"
               src={OverShoulder}
               alt="datorskärm över axeln på student"
             />
             <img
-              className="animate-rotate"
+              className="animate-rotate md:hidden"
               src={Rotate}
               alt="hitta en lia som passar dig"
             />
           </div>
         </section>
-        <SearchFilter
-          toggleFilter={toggleFilter}
-          handleSearchInput={handleSearchInput}
-        />
-        <Arrows></Arrows>
-        <div className="p-4">
+        <section className="md:hidden">
+          <SearchFilter
+            toggleFilter={toggleFilter}
+            handleSearchInput={handleSearchInput}
+          />
+          <Arrows></Arrows>
           <CompaniesCard companies={filtered} />
-        </div>
+        </section>
+        <section className="hidden w-screen md:grid grid-cols-4 gap-4">
+          <div className="col-span-3 p-4">
+            <FreeSearch handleSearchInput={handleSearchInput} />
+            <CompaniesCard companies={filtered} />
+          </div>
+          <div className="col-span-1 p-4">
+            <SearchFilterDesktop
+              toggleFilter={toggleFilter}
+              handleSearchInput={handleSearchInput}
+            />
+          </div>
+        </section>
       </div>
       <Footer></Footer>
     </>
