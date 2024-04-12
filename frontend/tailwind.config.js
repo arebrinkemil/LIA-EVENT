@@ -9,6 +9,7 @@ export default {
       black: "#333333",
       red: "#F52A3B",
       grey: "#C4C4C4",
+      redHover: "#E90115",
     },
     extend: {
       keyframes: {

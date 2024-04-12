@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import BurgerStar from "./BurgerStar.jsx";
 import logo from "../assets/icons/yrgoLogo.svg";
-import LoginLogoutButton from "./LoginLogoutButton.jsx";
+import LoginProfileButton from "./LoginProfileButton.jsx";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <>
       <header className="sticky top-0 z-50  px-4 py-3 bg-black h-18 justify-center">
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between items-center">
           <img
             className="hover:cursor-pointer md:h-8"
             onClick={handleLogo}
@@ -36,7 +36,7 @@ const Header = () => {
             Hitta LIA
           </div>
           <div className="hidden md:flex md:flex-row">
-            <LoginLogoutButton></LoginLogoutButton>
+            <LoginProfileButton />
           </div>
         </div>
       </header>
