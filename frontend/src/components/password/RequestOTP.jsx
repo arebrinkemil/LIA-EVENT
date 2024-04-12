@@ -18,17 +18,32 @@ const RequestOTP = ({ onEmailSubmit }) => {
   };
 
   return (
-    <div>
+    <div className=" w-full lg:w-1/2 flex flex-col px-10 lg:px-0 max-w-7xl">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="email">Email:</label>
+        <h2 className="text-lg font-bold">
+          Behöver du återställa ditt lösenord?
+        </h2>
+        <p>Ange din e-postadress nedan.</p>
+        <label htmlFor="email"></label>
         <input
           id="email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          className="form-input mt-4"
+          placeholder="E-postadress"
         />
-        <button type="submit">Send OTP</button>
+        <button
+          type="submit"
+          className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl p-3 w-full mt-8"
+        >
+          Skicka
+        </button>
+        <p>
+          Vi skickar en kod till dig. Använd den för att skapa ett nytt
+          lösenord. Koden är giltig i 10 minuter.
+        </p>
       </form>
     </div>
   );

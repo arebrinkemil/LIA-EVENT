@@ -20,7 +20,7 @@ const PasswordPage = () => {
     <>
       <div className="overflow-x-clip relative">
         <Header />
-        <div className="h-screen flex justify-center items-center">
+        <div className="min-h-[90vh] flex justify-center items-center">
           <ToastContainer />
           {!emailSubmitted ? (
             <RequestOTP onEmailSubmit={handleEmailSubmit} />
