@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import Company from "./components/Company";
 import EditCompany from "./components/EditCompany";
 import NotFoundPage from "./pages/NotFoundPage";
+import Password from "./pages/Password";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
       <Route path="/profile" element={<Profile />} />
       <Route path="/companies/:id" element={<Company />} />
       <Route path="/companies/:id/edit" element={<EditCompany />} />
+      <Route path="/forgotpassword" element={<Password />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
