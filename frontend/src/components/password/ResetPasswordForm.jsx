@@ -16,7 +16,6 @@ const ResetPassword = ({ email }) => {
         password,
       });
       toast.success("Password reset successful.");
-      // Here you might want to redirect the user or give further instructions
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred.");
     }

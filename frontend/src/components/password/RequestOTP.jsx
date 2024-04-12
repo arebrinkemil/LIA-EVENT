@@ -11,7 +11,7 @@ const RequestOTP = ({ onEmailSubmit }) => {
     try {
       await axios.post("http://localhost:5555/forgotPassword", { email });
       toast.success("OTP has been sent to your email.");
-      onEmailSubmit(email); // Callback function to notify the parent component
+      onEmailSubmit(email);
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred.");
     }
