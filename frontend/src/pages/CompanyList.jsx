@@ -128,8 +128,8 @@ const CompanyList = () => {
           <Arrows></Arrows>
           <CompaniesCard companies={filtered} />
         </section>
-        <section className="hidden w-screen md:grid grid-cols-4 gap-4">
-          <div className="col-span-3 p-4">
+        <section className="hidden w-screen md:grid grid-cols-3 gap-4">
+          <div className="col-span-2 p-4">
             <FreeSearch handleSearchInput={handleSearchInput} />
             <CompaniesCard companies={filtered} />
           </div>
