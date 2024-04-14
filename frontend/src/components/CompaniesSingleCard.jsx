@@ -33,7 +33,7 @@ const CompanySingleCard = ({ company }) => {
   return (
     <div
       onClick={() => navigate(`/companies/${company._id}`)}
-      className="card border border-black p-4 my-2 relative hover:shadow-xl transition ease-in-out cursor-pointer"
+      className="card border border-black p-4 m-2 relative hover:shadow-xl transition ease-in-out cursor-pointer"
     >
       <h1 className="font-bold text-3xl">{company.role}</h1>
       <div className="border-[1px] w-36 h-px my-3"></div>

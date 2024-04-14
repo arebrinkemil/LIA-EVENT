@@ -93,8 +93,10 @@ const Signup = () => {
           <DividerStar></DividerStar>
           <NavButton>SKAPA ANVÄNDARE</NavButton>
         </div>
-        <div className="form_container m-4">
-          <h2 className="text-4xl">Skapa användare för ert företag</h2>
+        <div className="form_container m-4 mt-12 mb-12 sm:mx-28 md:mx-40 lg:mx-60 xl:mx-96">
+          <h2 className="text-4xl md:mb-6 md:text-center">
+            Skapa användare för ert företag
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="flex flex-col mt-3">
               <label htmlFor="email">*E-mail</label>
@@ -157,7 +159,7 @@ const Signup = () => {
             </div>
 
             <button
-              className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl border border-red w-[calc(100vw-32px)] p-3 mt-8 disabled:bg-white disabled:text-grey disabled:border disabled:border-grey"
+              className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl border border-red w-[calc(100vw-32px)] max-w-full p-3 mt-8 disabled:bg-white disabled:text-grey disabled:border disabled:border-grey hover:bg-redHover"
               type="submit"
               disabled={!isChecked}
             >
