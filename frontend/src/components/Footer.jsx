@@ -6,9 +6,9 @@ const Footer = () => {
   return (
     <>
       <div className="relative">
-        <div className="bg-black text-white px-4">
-          <img className="py-3" src={yrgo} alt="yrgo logo" />
-          <a className="pt-3" href="https://www.yrgo.se">
+        <div className="bg-black text-white px-4 md:px-8 lg:px-12 md:py-6">
+          <img className="py-3 md:w-32" src={yrgo} alt="yrgo logo" />
+          <a className="pt-3 lg:mt-8" href="https://www.yrgo.se">
             Om YRGO
           </a>
           <p className="pt-3 pb-3 text-white">Location</p>
