@@ -55,14 +55,14 @@ export const CompanyContact = ({ company }) => (
     <div className="lg:hidden">
       <HorizontalLine />
     </div>
-    <div className="px-4 my-4  flex justify-between lg:my-0 lg:pt-4">
+    <div className="px-4 my-4 flex flex-wrap justify-between lg:my-0 lg:pt-4">
       <div>
         <label className="text-xl mr-4 text-gray-500 font-bold">
           Kontaktperson
         </label>
         <div className="py-2 w-full">{company.contact}</div>
       </div>
-      <img src={asterisk} alt="asterisk icon" />
+      <img className="w-14 h-14" src={asterisk} alt="asterisk icon" />
     </div>
     <div className="px-4 my-4">
       <label className="text-xl mr-4 text-gray-500 font-bold">Webbsida</label>

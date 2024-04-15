@@ -27,21 +27,23 @@ const GDPR = ({ onClose }) => {
         <h2 className="text-[clamp(1rem,2rem,48px)] text-center">
           Datahantering
         </h2>
-        <h6 className="text-[clamp(1rem,2rem,28px)]">Användare</h6>
+        <h6 className="text-[clamp(1rem,2rem,28px)] mt-4">Användare</h6>
         <p className="text-center">
           Namn, mailadress och lösenord används enbart till inloggning, inget av
           dem är synligt eller åtkommligt för andra användare
         </p>
-        <h6 className="text-[clamp(1rem,2rem,28px)]">Företagsinformation</h6>
+        <h6 className="text-[clamp(1rem,2rem,28px)] mt-4">
+          Företagsinformation
+        </h6>
         <p className="text-center">
           Information som matas in i företagsprofilen finns öppet på sidan,
           inloggad användare kan ändra eller ta bort information fritt.
         </p>
-        <h6 className="text-[clamp(1rem,2rem,28px)]">Cookies</h6>
+        <h6 className="text-[clamp(1rem,2rem,28px)] mt-4">Cookies</h6>
         <p className="text-center">
           Sidan använder en kaka för inloggning och auktorisering av användare.
         </p>
-        <h6 className="text-[clamp(1rem,2rem,28px)]">Lagring</h6>
+        <h6 className="text-[clamp(1rem,2rem,28px)] mt-4">Lagring</h6>
         <p className="text-center">
           Användardata och företagsinformation ligger kvar så länge sidan är
           relevant, efter det kommer databasen tömmas.
@@ -49,13 +51,13 @@ const GDPR = ({ onClose }) => {
         <p className="text-center">
           Om en användare vill tas bort tidigare kontakta oss
         </p>
-        <h6 className="text-[clamp(1rem,2rem,28px)]">Övrig</h6>
+        <h6 className="text-[clamp(1rem,2rem,28px)] mt-4">Övrig</h6>
         <p className="text-center">
           Ingen inmatad information delas eller säljs vidare
         </p>
         <div className="flex justify-around gap-2 mt-4">
           <button
-            className="bg-gray-300 border-[1px] px-10 py-4 rounded-full font-bold"
+            className="bg-gray-300 border-[1px] px-10 py-4 rounded-full font-bold hover:bg-redHover hover:border-redHover hover:text-white"
             onClick={onClose}
           >
             OK
