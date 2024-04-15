@@ -32,7 +32,7 @@ const Profile = () => {
         );
         setCompanies(response.data);
       } catch (error) {
-        console.error("Error fetching companies:", error);
+        // console.error("Error fetching companies:", error);
       }
     };
 
@@ -52,9 +52,7 @@ const Profile = () => {
         });
         const { data } = response;
         setUsername(data.name);
-        console.log("Response data:", data);
       } catch (error) {
-        console.error("Error verifying authentication:", error);
         removeCookie("jwt");
         navigate("/login");
       }

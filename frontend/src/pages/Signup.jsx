@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import NavButton from "../components/NavButton.jsx";
@@ -12,10 +12,8 @@ import CheckboxUnchecked from "../assets/icons/checkbox-unchecked.svg";
 import DOMpurify from "dompurify";
 
 const Signup = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const [isChecked, setIsChecked] = useState(false);
   const [showGDPR, setShowGDPR] = useState(false);
   const [inputValue, setInputValue] = useState({
@@ -25,72 +23,76 @@ const Signup = () => {
   });
   const { email, password, username } = inputValue;
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-    const clean = DOMpurify.sanitize(value);
-    setInputValue({
-      ...inputValue,
-      [name]: clean,
-    });
+    const cleanValue = DOMpurify.sanitize(value);
+    setInputValue((prev) => ({ ...prev, [name]: cleanValue }));
   };
-  const handleCheckboxChange = (e) => {
+
+  const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
-  const handlePopup = (e) => {
+
+  const handlePopup = () => {
     setShowGDPR(true);
   };
+
   const handleClose = () => {
     setShowGDPR(false);
   };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isChecked) {
-      handleError("Datahantering måste godkännas");
+      enqueueSnackbar("Datahantering måste godkännas", { variant: "error" });
       return;
     }
     try {
-      const { data } = await axios.post(
+      const response = await axios.post(
         "http://localhost:5555/",
-        { email, password, name: username },
-        { withCredentials: true }
+        {
+          email,
+          password,
+          name: username,
+        },
+        {
+          withCredentials: true,
+        }
       );
+      const { data } = response;
       const { success, message } = data;
+
       if (success) {
-        handleSuccess(message);
+        enqueueSnackbar(message || "Registration successful!", {
+          variant: "success",
+        });
         setTimeout(() => {
-          navigate("/login");
+          navigate("/profile");
         }, 1000);
       } else {
-        handleError(message);
+        enqueueSnackbar(message || "Registration failed, please try again!", {
+          variant: "error",
+        });
       }
     } catch (error) {
-      console.log(error);
-      handleError("Something went wrong. Please try again later.");
+      console.error(error);
+      enqueueSnackbar("Network error, please try again later.", {
+        variant: "error",
+      });
     }
-    setInputValue({
-      email: "",
-      password: "",
-      username: "",
-    });
   };
 
   return (
     <>
       <div className="overflow-x-clip relative">
-        <Header></Header>
+        <Header />
         <div className="m-4 w-full flex flex-row gap-1 items-center">
           <NavButton path={"/"}>HEM</NavButton>
-          <DividerStar></DividerStar>
+          <DividerStar />
           <NavButton>SKAPA ANVÄNDARE</NavButton>
         </div>
         <div className="form_container m-4 mt-12 mb-12 sm:mx-28 md:mx-40 lg:mx-60 xl:mx-96">
@@ -157,7 +159,6 @@ const Signup = () => {
               </label>
               {showGDPR && <GDPR onClose={handleClose} />}
             </div>
-
             <button
               className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl border border-red w-[calc(100vw-32px)] max-w-full p-3 mt-8 disabled:bg-white disabled:text-grey disabled:border disabled:border-grey hover:bg-redHover"
               type="submit"
@@ -166,9 +167,8 @@ const Signup = () => {
               Skapa användare
             </button>
           </form>
-          <ToastContainer />
         </div>
-        <Footer></Footer>
+        <Footer />
       </div>
     </>
   );

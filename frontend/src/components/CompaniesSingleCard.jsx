@@ -12,22 +12,24 @@ const CompanySingleCard = ({ company }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5555/profile`, {
-        headers: {
-          Authorization: `Bearer ${cookies.jwt}`,
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response.data);
-        if (response.data._id === company.owner_id) {
-          setOwner(true);
-        }
-      })
-      .catch(() => {
-        console.log("not logged in");
-      });
+    if (cookies.jwt) {
+      axios
+        .get(`http://localhost:5555/profile`, {
+          headers: {
+            Authorization: `Bearer ${cookies.jwt}`,
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.data._id === company.owner_id) {
+            setOwner(true);
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+          }
+        });
+    }
   }, []);
 
   return (
