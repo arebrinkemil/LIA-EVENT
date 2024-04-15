@@ -88,20 +88,20 @@ const Profile = () => {
           <NavButton>PROFIL</NavButton>
         </div>
 
-        <div className="w-full items-center p-4 lg:mx-10">
+        <div className="w-full items-center p-4">
           <h1 className="text-[34px]">Välkommen till kontosidan</h1>
           <p className="text-lg">
             {" "}
             Nedan kan ni redigera redan befintliga företagskort eller lägga till
             ett nytt.
           </p>
-          <div className="">
+          <div className="lg:mr-10">
             <CompaniesCard companies={companies} />
           </div>
         </div>
         <div className="w-full flex flex-col items-center md:items-end">
           <Link to="/companies/create">
-            <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 font-bold text-xl md:mr-20">
+            <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 text-xl md:mr-6 lg:mr-16">
               Lägg till kort
               <img src={plus} alt="create company plus icon" />
             </div>
