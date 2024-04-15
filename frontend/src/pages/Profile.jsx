@@ -88,7 +88,7 @@ const Profile = () => {
           <NavButton>PROFIL</NavButton>
         </div>
 
-        <div className="w-full items-center p-4">
+        <div className="w-full items-center p-4 lg:mx-10">
           <h1 className="text-[34px]">Välkommen till kontosidan</h1>
           <p className="text-lg">
             {" "}
@@ -99,16 +99,12 @@ const Profile = () => {
             <CompaniesCard companies={companies} />
           </div>
         </div>
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center md:items-end">
           <Link to="/companies/create">
-            <img
-              className="border-[1px] h-[50px] w-[50px] p-4 rounded-full"
-              src={plus}
-              alt="create company plus icon"
-            />
-          </Link>
-          <Link to="/companies/create" className=" bg-sky-300 m-3">
-            CREATE NEW
+            <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 font-bold text-xl md:mr-20">
+              Lägg till kort
+              <img src={plus} alt="create company plus icon" />
+            </div>
           </Link>
         </div>
       </div>
