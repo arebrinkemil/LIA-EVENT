@@ -43,7 +43,6 @@ const CreateCompany = () => {
           withCredentials: true,
         });
         const { data } = response;
-        //console.log("Response data:", data);
         const { _id, name, email } = data;
         if (!_id || !name || !email) {
           throw new Error("Invalid user data received from the server");

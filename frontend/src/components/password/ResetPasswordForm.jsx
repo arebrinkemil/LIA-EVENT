@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Link, useNavigate } from "react-router-dom";
 
 const ResetPassword = ({ email }) => {
+  const navigate = useNavigate();
+
   const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -21,6 +24,9 @@ const ResetPassword = ({ email }) => {
         password,
       });
       toast.success("Lösenordet har återställts.");
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     } catch (error) {
       toast.error(error.response?.data?.message || "Ett fel uppstod.");
     }
