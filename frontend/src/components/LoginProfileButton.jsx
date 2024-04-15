@@ -72,7 +72,7 @@ const LoginProfileButton = () => {
         {isLoggedIn ? <img src={ProfileIcon} alt="profile icon" /> : "Logga in"}
       </div>
       <div
-        className={`absolute z-20 top-15 -right-0 bg-white flex flex-col align-middle justify-center text-center transition-transform duration-500 ease-in-out transform ${
+        className={`absolute z-20 top-16 -right-0 bg-white flex flex-col align-middle justify-center text-center transition-transform duration-500 ease-in-out transform ${
           isNavOpen ? "" : "translate-x-full"
         }`}
         ref={modalRef}
