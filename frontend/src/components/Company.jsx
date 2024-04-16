@@ -50,8 +50,8 @@ const Company = () => {
           <NavButton>{companyName}</NavButton>
         </div>
 
-        <div className=" lg:grid grid-cols-4 gap-5 lg:mx-20">
-          <div className="flex flex-col col-span-3">
+        <div className=" lg:grid grid-cols-3 gap-5 lg:mx-20">
+          <div className="flex flex-col col-span-2">
             <div className="my-4">
               <label className="text-xl mr-4 text-gray-500"></label>
               {company.logotype && company.logotype.trim() && (

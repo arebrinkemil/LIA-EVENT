@@ -206,11 +206,12 @@ const Home = () => {
                       </div>
                       <div>
                         <p className="bg-red w-fit text-white">Tid:</p>
-                        <p>15:00-19:00</p>
+                        <p>17:00-19:00</p>
                       </div>
                       <div>
                         <p className="bg-red w-fit text-white">Plats:</p>
-                        <p>Lärdomsgatan 3, 417 56 Göteborg</p>
+                        <p>Visual Arena</p>
+                        <p>Lindholmspiren 3, 417 56 Göteborg</p>
                       </div>
                     </section>
                   </div>
