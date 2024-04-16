@@ -207,11 +207,15 @@ const Home = () => {
                         <p>24 April 2025</p>
                       </div>
                       <div>
-                        <p className="bg-red w-fit text-white">Tid:</p>
+                        <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                          Tid:
+                        </p>
                         <p>17:00-19:00</p>
                       </div>
                       <div>
-                        <p className="bg-red w-fit text-white">Plats:</p>
+                        <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                          Plats:
+                        </p>
                         <p>Visual Arena</p>
                         <p>Lindholmspiren 3, 417 56 Göteborg</p>
                       </div>
