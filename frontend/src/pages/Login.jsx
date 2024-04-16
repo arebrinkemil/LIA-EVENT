@@ -125,18 +125,19 @@ const Login = () => {
                     onChange={handleOnChange}
                   />
                 </div>
-                <button
-                  className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] max-w-full p-3 mt-8 hover:bg-redHover"
-                  type="submit"
-                >
-                  Logga in
-                </button>
                 <a
                   onClick={handleClick}
                   className="cursor-pointer hover:font-bold"
                 >
                   Glömt lösenord?
                 </a>
+                <button
+                  className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl w-[calc(100vw-32px)] max-w-full p-3 mt-8 hover:bg-redHover"
+                  type="submit"
+                >
+                  Logga in
+                </button>
+
                 <div className="flex flex-row items-center justify-center w-full my-3">
                   eller
                 </div>

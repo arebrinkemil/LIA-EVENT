@@ -36,13 +36,11 @@ app.use(
 
 app.use(cookieParser());
 
-// Serve static files from the "/uploads" directory, including subdirectories
 const uploadsDir = path.join(__dirname, "/uploads");
 console.log("Serving static files from:", uploadsDir);
 app.use("/uploads", express.static(uploadsDir));
 app.use(express.json());
 
-// Define your routes here
 app.get("/", (request, response) => {
   console.log(request);
   return response.status(234).send("Welcome");

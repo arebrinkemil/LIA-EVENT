@@ -205,7 +205,112 @@ const EditCompany = () => {
         <div className="p-4">
           <div className="flex flex-col border-sky-400 w-full px-4 md:px-48 mx-auto">
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Logotype</label>
+              <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="form-input"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                *Vad söker ni
+              </label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="form-input "
+              >
+                <option value="Webbutvecklare">Webbutvecklare</option>
+                <option value="Digital Designer">Digital Designer</option>
+              </select>
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                *Hur många planerade LIA platser tar ni in?{" "}
+              </label>
+              <input
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                className="form-input"
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Vart?</label>
+              <select
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="form-input"
+              >
+                <option value="Göteborg">Göteborg</option>
+                <option value="Annan Plats">Annan Plats</option>
+              </select>
+            </div>
+
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                Företagskompetenser
+              </label>
+              <input
+                type="text"
+                value={tools}
+                onChange={(e) => setTools(e.target.value.split(","))}
+                className="form-input"
+                placeholder="Separate tools with commas (,)"
+              />
+            </div>
+
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                Vad kan studenterna förvänta sig under sin LIA-period?{" "}
+              </label>
+              <textarea
+                placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
+                value={taskDescription}
+                onChange={(e) => setTaskDescription(e.target.value)}
+                onInput={autoResize}
+                className="textarea form-input min-h-[80px] overflow-hidden resize-none"
+              />
+            </div>
+
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Webbsida</label>
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                className="form-input"
+              />
+            </div>
+
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                Kontakta oss{" "}
+              </label>
+              <input
+                type="text"
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
+                className="form-input"
+              />
+            </div>
+
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">
+                Övrig information om er
+              </label>
+              <textarea
+                placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
+                value={about}
+                onChange={(e) => setAbout(e.target.value)}
+                onInput={autoResize}
+                className="textarea form-input min-h-[229px] overflow-hidden resize-none "
+              />
+            </div>
+            <div className="my-4">
+              <label className="text-xl mr-4 text-gray-500">Logotyp</label>
               {logotype && logotype.trim() && (
                 <>
                   <img src={logotype} alt="Company logotype" />
@@ -223,100 +328,6 @@ const EditCompany = () => {
                 type="file"
                 onChange={handleFileChange}
                 className="form-input"
-              />
-            </div>
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">*Företagnamn</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="form-input"
-              />
-            </div>
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Role</label>
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="form-input "
-              >
-                <option value="Webbutvecklare">Webbutvecklare</option>
-                <option value="Digital Designer">Digital Designer</option>
-              </select>
-            </div>
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Amount</label>
-              <input
-                type="number"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="form-input"
-              />
-            </div>
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Location</label>
-              <select
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="form-input"
-              >
-                <option value="Göteborg">Göteborg</option>
-                <option value="Annan Plats">Annan Plats</option>
-              </select>
-            </div>
-
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Tools</label>
-              <input
-                type="text"
-                value={tools}
-                onChange={(e) => setTools(e.target.value.split(","))}
-                className="form-input"
-                placeholder="Separate tools with commas (,)"
-              />
-            </div>
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">URL</label>
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                className="form-input"
-              />
-            </div>
-
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Contact</label>
-              <input
-                type="text"
-                value={contact}
-                onChange={(e) => setContact(e.target.value)}
-                className="form-input"
-              />
-            </div>
-
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">
-                Arbetsuppgifter under LIA
-              </label>
-              <textarea
-                placeholder="Berätta vad för typ av arbetsuppgifter som man kan förvänta sig under lia-perioden ..."
-                value={taskDescription}
-                onChange={(e) => setTaskDescription(e.target.value)}
-                onInput={autoResize}
-                className="textarea form-input min-h-[80px] overflow-hidden resize-none"
-              />
-            </div>
-
-            <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Om oss</label>
-              <textarea
-                placeholder="Berätta mer om er verksamhet, ex: Arbetsuppgifter, arbetsplatskultur osv ..."
-                value={about}
-                onChange={(e) => setAbout(e.target.value)}
-                onInput={autoResize}
-                className="textarea form-input min-h-[229px] overflow-hidden resize-none "
               />
             </div>
 
