@@ -49,6 +49,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      success: true,
     });
   } else {
     res.status(400);
@@ -109,7 +110,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    console.log("User not found");
+    // console.log("User not found");
     return res.status(404).json({ message: "User not found" });
   }
 
@@ -146,9 +147,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
 });
 
 const resetPassword = asyncHandler(async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const { email, otp, password } = req.body;
-  console.log(email, otp, password);
+  // console.log(email, otp, password);
 
   const user = await User.findOne({
     email,

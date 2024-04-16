@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useSnackbar } from "notistack";
+
 import Header from "../components/Header.jsx";
 import RedButton from "../components/RedButton.jsx";
 import HorizontalLine from "../components/HorizontalLine.jsx";
@@ -144,7 +145,6 @@ const Home = () => {
         <RedButton path="/signup">Skapa en användare</RedButton>
         <Footer></Footer>
       </div>
-      <ToastContainer />
     </>
   );
 };

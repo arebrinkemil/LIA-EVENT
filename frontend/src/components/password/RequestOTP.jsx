@@ -1,19 +1,25 @@
 // RequestOTP.js
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 
 const RequestOTP = ({ onEmailSubmit }) => {
   const [email, setEmail] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:5555/forgotPassword", { email });
-      toast.success("OTP has been sent to your email.");
+      enqueueSnackbar("OTP has been sent to your email.", {
+        variant: "success",
+      });
+
       onEmailSubmit(email);
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred.");
+      enqueueSnackbar(error.response?.data?.message || "An error occurred.", {
+        variant: "error",
+      });
     }
   };
 
