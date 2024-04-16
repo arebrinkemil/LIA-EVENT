@@ -93,7 +93,7 @@ const Home = () => {
                     <h2 className="bg-black responsive-heading text-white px-2">
                       FÖR VEM?
                     </h2>
-                    <h3 className="bg-red text-white">
+                    <h3 className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block">
                       Evenemang för företag som:
                     </h3>
                     <div className="flex flex-col gap-6 mt-6">
@@ -201,15 +201,21 @@ const Home = () => {
                     </h2>
                     <section className=" flex flex-col justify-between ">
                       <div>
-                        <p className="bg-red w-fit text-white">Datum:</p>
+                        <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                          Datum:
+                        </p>
                         <p>24 April 2025</p>
                       </div>
                       <div>
-                        <p className="bg-red w-fit text-white">Tid:</p>
+                        <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                          Tid:
+                        </p>
                         <p>15:00-19:00</p>
                       </div>
                       <div>
-                        <p className="bg-red w-fit text-white">Plats:</p>
+                        <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
+                          Plats:
+                        </p>
                         <p>Lärdomsgatan 3, 417 56 Göteborg</p>
                       </div>
                     </section>
