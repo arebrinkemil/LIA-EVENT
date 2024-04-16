@@ -88,16 +88,17 @@ const Profile = () => {
 
         <div className="w-full items-center p-4">
           <h1 className="text-[34px]">Välkommen till kontosidan</h1>
-          <p className="text-lg">
+          <p className="text-xl md:w-1/2 w-full ">
             {" "}
-            Nedan kan ni redigera redan befintliga företagskort eller lägga till
-            ett nytt.
+            Nedan kan ni lägga till eller redigera ert företagskort. Efter att
+            ni publicerar företagskortet kommer det att bli synligt för
+            studenter som besöker sidan “Hitta LIA”.
           </p>
           <div className="lg:mr-10">
             <CompaniesCard companies={companies} />
           </div>
         </div>
-        <div className="w-full flex flex-col items-center md:items-end">
+        <div className="w-full flex flex-col items-center md:items-center">
           <Link to="/companies/create">
             <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 text-xl md:mr-6 lg:mr-16">
               Lägg till kort
