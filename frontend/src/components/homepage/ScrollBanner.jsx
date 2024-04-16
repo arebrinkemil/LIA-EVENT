@@ -10,10 +10,10 @@ const ScrollBanner = () => {
   };
   return (
     <div
-      className="w-full inline-flex flex-nowrap mt-2"
+      className="w-full inline-flex flex-nowrap mt-2 hover:cursor-pointer"
       onClick={scrollToBottom}
     >
-      <ul className=" text-lg h-fit flex nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
+      <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
         <li>
           <p>När & var?</p>
         </li>
@@ -39,7 +39,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
       </ul>
-      <ul className=" text-lg h-fit flex nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
+      <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
         <li>
           <p>När & var?</p>
         </li>
@@ -65,7 +65,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
       </ul>
-      <ul className=" text-lg h-fit flex nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
+      <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
         <li>
           <p>När & var?</p>
         </li>
@@ -91,7 +91,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
       </ul>
-      <ul className=" text-lg h-fit flex nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
+      <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
         <li>
           <p>När & var?</p>
         </li>

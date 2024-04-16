@@ -43,7 +43,6 @@ const CreateCompany = () => {
           withCredentials: true,
         });
         const { data } = response;
-        //console.log("Response data:", data);
         const { _id, name, email } = data;
         if (!_id || !name || !email) {
           throw new Error("Invalid user data received from the server");
@@ -322,14 +321,14 @@ const CreateCompany = () => {
           </div>
 
           <button
-            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3"
+            className="bg-red text-white font-bold text-xl flex justify-center align-middle rounded-3xl mb-5  p-3 hover:bg-redHover"
             onClick={handleUploadLogotype}
             disabled={loading}
           >
             Save
           </button>
           <button
-            className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3"
+            className=" border-[1px] font-bold text-xl flex justify-center align-middle rounded-3xl mb-10 p-3 hover:bg-redHover hover:border-redHover hover:text-white"
             onClick={() => navigate("/profile")}
           >
             Return

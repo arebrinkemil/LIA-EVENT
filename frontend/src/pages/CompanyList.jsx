@@ -105,7 +105,7 @@ const CompanyList = () => {
           <DividerStar></DividerStar>
           <NavButton>HITTA LIA</NavButton>
         </div>
-        <section className="text-4xl p-4 md:flex md:flex-row-reverse md:items-center md:justify-end gap-5">
+        <section className="text-4xl p-4 md:flex md:flex-row-reverse md:items-center md:justify-end gap-5 lg:ml-12">
           HITTA RÄTT LIA PLATS FÖR DIG
           <div className="flex flex-row items-center justify-between pt-2">
             <img
@@ -128,8 +128,8 @@ const CompanyList = () => {
           <Arrows></Arrows>
           <CompaniesCard companies={filtered} />
         </section>
-        <section className="hidden w-screen md:grid grid-cols-4 gap-4">
-          <div className="col-span-3 p-4">
+        <section className="hidden w-screen md:grid grid-cols-3 gap-4 lg:mx-10">
+          <div className="col-span-2 p-4">
             <FreeSearch handleSearchInput={handleSearchInput} />
             <CompaniesCard companies={filtered} />
           </div>

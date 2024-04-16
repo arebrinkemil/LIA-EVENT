@@ -32,7 +32,7 @@ const Profile = () => {
         );
         setCompanies(response.data);
       } catch (error) {
-        console.error("Error fetching companies:", error);
+        // console.error("Error fetching companies:", error);
       }
     };
 
@@ -52,9 +52,7 @@ const Profile = () => {
         });
         const { data } = response;
         setUsername(data.name);
-        console.log("Response data:", data);
       } catch (error) {
-        console.error("Error verifying authentication:", error);
         removeCookie("jwt");
         navigate("/login");
       }
@@ -95,20 +93,16 @@ const Profile = () => {
             Nedan kan ni redigera redan befintliga företagskort eller lägga till
             ett nytt.
           </p>
-          <div className="">
+          <div className="lg:mr-10">
             <CompaniesCard companies={companies} />
           </div>
         </div>
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center md:items-end">
           <Link to="/companies/create">
-            <img
-              className="border-[1px] h-[50px] w-[50px] p-4 rounded-full"
-              src={plus}
-              alt="create company plus icon"
-            />
-          </Link>
-          <Link to="/companies/create" className=" bg-sky-300 m-3">
-            CREATE NEW
+            <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 text-xl md:mr-6 lg:mr-16">
+              Lägg till kort
+              <img src={plus} alt="create company plus icon" />
+            </div>
           </Link>
         </div>
       </div>

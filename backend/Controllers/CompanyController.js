@@ -116,7 +116,7 @@ const updateCompany = asyncHandler(async (request, response) => {
 
 const deleteCompany = asyncHandler(async (request, response) => {
   try {
-    console.log(request.params);
+    // console.log(request.params);
     const { companyId } = request.params;
 
     const result = await CompanyInfoModel.findOneAndDelete({

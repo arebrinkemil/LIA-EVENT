@@ -12,28 +12,30 @@ const CompanySingleCard = ({ company }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios
-      .get(`http://134.122.48.238:5555/profile`, {
-        headers: {
-          Authorization: `Bearer ${cookies.jwt}`,
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        console.log(response.data);
-        if (response.data._id === company.owner_id) {
-          setOwner(true);
-        }
-      })
-      .catch(() => {
-        console.log("not logged in");
-      });
+    if (cookies.jwt) {
+      axios
+        .get(`http://localhost:5555/profile`, {
+          headers: {
+            Authorization: `Bearer ${cookies.jwt}`,
+          },
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.data._id === company.owner_id) {
+            setOwner(true);
+          }
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+          }
+        });
+    }
   }, []);
 
   return (
     <div
       onClick={() => navigate(`/companies/${company._id}`)}
-      className=" border border-black p-4 my-2 relative hover:shadow-xl transition ease-in-out cursor-pointer"
+      className="card border border-black p-4 m-2 relative hover:shadow-xl transition ease-in-out cursor-pointer"
     >
       <h1 className="font-bold text-3xl">{company.role}</h1>
       <div className="border-[1px] w-36 h-px my-3"></div>

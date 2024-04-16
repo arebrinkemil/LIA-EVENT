@@ -50,13 +50,15 @@ const Company = () => {
           <NavButton>{companyName}</NavButton>
         </div>
 
-        <div className="">
-          <div className="flex flex-col">
+        <div className=" lg:grid grid-cols-4 gap-5 lg:mx-20">
+          <div className="flex flex-col col-span-3">
             <div className="my-4">
-              <label className="text-xl mr-4 text-gray-500">Logotype</label>
+              <label className="text-xl mr-4 text-gray-500"></label>
               {company.logotype && company.logotype.trim() && (
                 <>
-                  <img src={company.logotype} alt="Company logotype" />
+                  <div className="max-w-xl max-h-96 overflow-hidden flex items-center justify-center">
+                    <img src={company.logotype} alt="Company logotype" />
+                  </div>
                 </>
               )}
             </div>
@@ -78,25 +80,23 @@ const Company = () => {
                   <CompanyContact company={company} />
                   <HorizontalLine></HorizontalLine>
                 </div>
+              </div>
+            </div>
 
-                <div className="hidden lg:flex">
-                  <div className="flex-3 w-3/4">
-                    <CompanyAbout company={company} />
-                  </div>
-                  <div className="flex flex-col flex-1">
-                    <div className="">
-                      <Arrows />
-                    </div>
-                    <div className="">
-                      <div className="border-[1px]">
-                        <CompanyDetails company={company} />
-                      </div>
-                      <div className="border-[1px] border-t-0">
-                        <CompanyContact company={company} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div className="hidden lg:flex">
+              <div className="flex-3 w-3/4">
+                <CompanyAbout company={company} />
+              </div>
+            </div>
+          </div>
+          <div className="hidden lg:flex flex-col flex-1 mt-14 mb-24">
+            <div className="">
+              <Arrows />
+              <div className="border-[1px] py-4 mt-16">
+                <CompanyDetails company={company} />
+              </div>
+              <div className="border-[1px] border-t-0 py-4">
+                <CompanyContact company={company} />
               </div>
             </div>
           </div>

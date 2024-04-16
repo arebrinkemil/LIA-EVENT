@@ -39,27 +39,35 @@
   }
 
   .card:hover {
-    transition: all 0.5s ease-in-out !important;
+    transition: all 0.1s !important;
     background-color: #333 !important;
     scale: 1.05;
   }
 
+  .snackbar.success {
+    background-color: #b2e8ba;
+  }
+
+  .snackbar.error {
+    background-color: #970c0c;
+  }
+
   .card:hover * {
-    transition: all 0.5s ease-in-out !important;
+    transition: all 0.1s !important;
     color: white !important;
     border-color: white !important;
     fill: white !important;
   }
 
   .card:hover .edit-icon #pen {
-    transition: all 0.5s ease-in-out !important;
+    transition: all 0.1s !important;
 
     display: none !important;
   }
 
   .card:hover .edit-icon #pen-white {
     display: block !important;
-    transition: all 0.5s ease-in-out !important;
+    transition: all 0.1s !important;
   }
 
   .nowrap {
