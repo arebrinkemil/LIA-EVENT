@@ -120,7 +120,7 @@ const CompanyList = () => {
             />
           </div>
         </section>
-        <section className="md:hidden">
+        <section className="lg:hidden">
           <SearchFilter
             toggleFilter={toggleFilter}
             handleSearchInput={handleSearchInput}
@@ -128,7 +128,7 @@ const CompanyList = () => {
           <Arrows></Arrows>
           <CompaniesCard companies={filtered} />
         </section>
-        <section className="hidden w-screen md:grid grid-cols-3 gap-4 lg:mx-10">
+        <section className="hidden w-screen lg:grid grid-cols-3 lg:mx-6">
           <div className="col-span-2 p-4">
             <FreeSearch handleSearchInput={handleSearchInput} />
             <CompaniesCard companies={filtered} />
