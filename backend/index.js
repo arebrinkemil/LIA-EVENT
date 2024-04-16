@@ -4,9 +4,8 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import authRouth from "./routes/AuthRoute.js";
+import authRoute from "./routes/AuthRoute.js";
 import imagesRoute from "./routes/imagesRoute.js";
-
 import companiesRoute from "./routes/companiesRoute.js";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -22,10 +21,6 @@ mongoose.connect(mongoDBURL, {
   useUnifiedTopology: true,
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
 app.use(
   cors({
     origin: "http://134.122.48.238",
@@ -35,17 +30,16 @@ app.use(
 );
 
 app.use(cookieParser());
+app.use(express.json());
 
 const uploadsDir = path.join(__dirname, "/uploads");
 console.log("Serving static files from:", uploadsDir);
 app.use("/uploads", express.static(uploadsDir));
-app.use(express.json());
 
-app.get("/", (request, response) => {
-  console.log(request);
-  return response.status(234).send("Welcome");
+app.use("/api/", authRoute);
+app.use("/api/companies", companiesRoute);
+app.use("/api/image", imagesRoute);
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
-
-app.use("/", authRouth);
-app.use("/companies", companiesRoute);
-app.use("/image", imagesRoute);

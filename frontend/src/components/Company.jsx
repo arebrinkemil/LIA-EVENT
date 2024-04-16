@@ -28,7 +28,7 @@ const Company = () => {
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
-          `http://134.122.48.238:5555/companies/${id}`
+          `http://134.122.48.238:5555/api/companies/${id}`
         );
 
         setCompany(response.data);
@@ -41,11 +41,9 @@ const Company = () => {
   }, [id]);
 
   useEffect(() => {
-    console.log(owner, cookies.jwt);
     if (cookies.jwt && company) {
-      console.log("fetching profile");
       axios
-        .get(`http://134.122.48.238:5555/profile`, {
+        .get(`http://134.122.48.238:5555/api/profile`, {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,
           },
@@ -54,7 +52,6 @@ const Company = () => {
         .then((response) => {
           if (response.data._id === company.owner_id) {
             setOwner(true);
-            console.log("Owner set to true");
           }
         })
         .catch((error) => {

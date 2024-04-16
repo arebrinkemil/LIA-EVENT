@@ -22,7 +22,7 @@ const Profile = () => {
     const fetchCompanies = async () => {
       try {
         const response = await axios.get(
-          "http://134.122.48.238:5555/companies/your_companies",
+          "http://134.122.48.238:5555/api/companies/your_companies",
           {
             headers: {
               Authorization: `Bearer ${cookies.jwt}`,
@@ -44,12 +44,15 @@ const Profile = () => {
         return;
       }
       try {
-        const response = await axios.get("http://134.122.48.238:5555/profile", {
-          headers: {
-            Authorization: `Bearer ${cookies.jwt}`,
-          },
-          withCredentials: true,
-        });
+        const response = await axios.get(
+          "http://134.122.48.238:5555/api/profile",
+          {
+            headers: {
+              Authorization: `Bearer ${cookies.jwt}`,
+            },
+            withCredentials: true,
+          }
+        );
         const { data } = response;
         setUsername(data.name);
       } catch (error) {
@@ -63,7 +66,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://134.122.48.238:5555/logout",
+        "http://134.122.48.238:5555/api/logout",
         {},
         {
           withCredentials: true,
