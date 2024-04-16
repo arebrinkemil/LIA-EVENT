@@ -55,7 +55,7 @@
   .card:hover * {
     transition: all 0.1s !important;
     color: white !important;
-    border-color: white !important;
+
     fill: white !important;
   }
 
