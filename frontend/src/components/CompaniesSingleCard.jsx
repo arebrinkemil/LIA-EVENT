@@ -61,7 +61,7 @@ const CompanySingleCard = ({ company }) => {
       )}
 
       <div
-        className="p-3 border  hover:scale-105 hover:bg-opacity-50 hover:bg-white border-black rounded-3xl absolute bottom-4 right-4 cursor-pointer"
+        className="p-3 border  hover:scale-105  border-black rounded-3xl absolute bottom-4 right-4 cursor-pointer hover:bg-redHover hover:border-redHover"
         onClick={() => navigate(`/companies/${company._id}`)}
       >
         SE MER

@@ -41,7 +41,9 @@ const Company = () => {
   }, [id]);
 
   useEffect(() => {
-    if (cookies.jwt) {
+    console.log(owner, cookies.jwt);
+    if (cookies.jwt && company) {
+      console.log("fetching profile");
       axios
         .get(`http://134.122.48.238:5555/profile`, {
           headers: {
@@ -52,14 +54,16 @@ const Company = () => {
         .then((response) => {
           if (response.data._id === company.owner_id) {
             setOwner(true);
+            console.log("Owner set to true");
           }
         })
         .catch((error) => {
           if (error.response && error.response.status === 401) {
+            console.error("Unauthorized");
           }
         });
     }
-  }, []);
+  }, [cookies.jwt, company]);
 
   if (!company) {
     return <div>Loading...</div>;
