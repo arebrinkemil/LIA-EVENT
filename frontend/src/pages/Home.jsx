@@ -42,27 +42,32 @@ const Home = () => {
         <Header></Header>
         <ScrollBanner />
         <Banner />
-        <WhatIsIt />
+        <FromOffscreenSection direction={"right"}>
+          <WhatIsIt />
+        </FromOffscreenSection>
         <FromOffscreenSection direction={"left"}>
           <ForWho />
         </FromOffscreenSection>
         <FromOffscreenSection>
           <Bullets />
         </FromOffscreenSection>
-        <Student />{" "}
-        <section className="pb-10 flex justify-center align-middle">
-          <img
-            className="animate-arrowUpDown"
-            src={arrowDown}
-            alt="pixelated arrow pointing down"
-          />
-        </section>
+        <FromOffscreenSection direction={"left"}>
+          <Student />{" "}
+          <section className="pb-10 flex justify-center align-middle">
+            <img
+              className="animate-arrowUpDown"
+              src={arrowDown}
+              alt="pixelated arrow pointing down"
+            />
+          </section>
+        </FromOffscreenSection>
         <Location />
         <div className="px-4 mb-9">
           <RedButton path="/signup" width={"100%"}>
             Skapa en användare
           </RedButton>
         </div>
+
         <Footer></Footer>
       </div>
 
@@ -139,9 +144,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          {/* slut */} {/* slut */} {/* slut */} {/* slut */}
-          {/* slut */} {/* slut */} {/* slut */}
-          {/* slut */} {/* slut */} {/* slut */}
+
           <div className="flex flex-row gap-5 mb-28">
             <div className="flex flex-col justify-between basis-1/2">
               <FromOffscreenSection direction={"left"} className="basis-1/2">
@@ -187,12 +190,7 @@ const Home = () => {
               </FromOffscreenSection>
             </div>
           </div>
-          {/* slut */} {/* slut */}
-          {/* slut */} {/* slut */}
-          {/* slut */} {/* slut */}
-          {/* slut */}
-          {/* slut */} {/* slut */} {/* slut */}
-          {/* slut */}
+
           <div className="flex flex-row gap-5 mb-28 h-[80vh]">
             <div className="flex flex-col justify-between basis-1/2 h-full">
               <FromOffscreenSection direction="left" fullHeight={true}>

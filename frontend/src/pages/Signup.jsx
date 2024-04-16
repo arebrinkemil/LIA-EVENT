@@ -88,14 +88,14 @@ const Signup = () => {
 
   return (
     <>
-      <div className="overflow-x-clip relative">
+      <div className="overflow-x-clip relative min-h-[100vh]">
         <Header />
         <div className="m-4 w-full flex flex-row gap-1 items-center">
           <NavButton path={"/"}>HEM</NavButton>
           <DividerStar />
           <NavButton>SKAPA ANVÄNDARE</NavButton>
         </div>
-        <div className="form_container m-4 mt-12 mb-12 sm:mx-28 md:mx-40 lg:mx-60 xl:mx-96">
+        <div className="form_container m-4 mt-12 mb-12 sm:mx-28 md:mx-40 lg:mx-60 xl:mx-96 min-h-[60vh]">
           <h2 className="text-4xl md:mb-6 md:text-center">
             Skapa användare för ert företag
           </h2>
