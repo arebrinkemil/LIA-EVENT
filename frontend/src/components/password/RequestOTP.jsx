@@ -10,7 +10,7 @@ const RequestOTP = ({ onEmailSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5555/forgotPassword", { email });
+      await axios.post("http://134.122.48.238:5555/forgotPassword", { email });
       enqueueSnackbar("OTP has been sent to your email.", {
         variant: "success",
       });

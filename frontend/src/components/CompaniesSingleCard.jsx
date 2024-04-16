@@ -14,7 +14,7 @@ const CompanySingleCard = ({ company }) => {
   useEffect(() => {
     if (cookies.jwt) {
       axios
-        .get(`http://localhost:5555/profile`, {
+        .get(`http://134.122.48.238:5555/profile`, {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,
           },
