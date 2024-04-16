@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 import { Link, useNavigate } from "react-router-dom";
 
 const ResetPassword = ({ email }) => {
@@ -9,11 +9,12 @@ const ResetPassword = ({ email }) => {
   const [otp, setOtp] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.error("Lösenorden matchar inte.");
+      enqueueSnackbar("Lösenorden matchar inte.", { variant: "error" });
       return;
     }
 
@@ -23,12 +24,16 @@ const ResetPassword = ({ email }) => {
         otp,
         password,
       });
-      toast.success("Lösenordet har återställts.");
+      enqueueSnackbar("Lösenordet har återställts.", {
+        variant: "success",
+      });
       setTimeout(() => {
         navigate("/login");
       }, 1000);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Ett fel uppstod.");
+      enqueueSnackbar(error.response?.data?.message || "Ett fel uppstod.", {
+        variant: "error",
+      });
     }
   };
 

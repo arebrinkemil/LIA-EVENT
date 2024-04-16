@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { useSnackbar } from "notistack";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import StudentWithLaptop from "../assets/photos/student-w-laptop-square.png";
@@ -11,6 +11,7 @@ import DividerStar from "../components/NavDivider";
 import DOMPurify from "dompurify";
 
 const Login = () => {
+  const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -36,12 +37,15 @@ const Login = () => {
   };
 
   const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
+    enqueueSnackbar(err, {
+      variant: "error",
+      autoHideDuration: 1000,
     });
+
   const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-left",
+    enqueueSnackbar(msg, {
+      variant: "success",
+      autoHideDuration: 1000,
     });
 
   const handleSubmit = async (e) => {
@@ -56,14 +60,14 @@ const Login = () => {
         { withCredentials: true }
       );
       //console.log(data);
-      const { success, message } = data;
+      const { success } = data;
       if (success) {
-        handleSuccess(message);
+        handleSuccess("Successfully logged in");
         setTimeout(() => {
           navigate("/profile");
         }, 1000);
       } else {
-        handleError(message);
+        handleError("Invalid credentials");
       }
     } catch (error) {
       console.log(error);
@@ -150,7 +154,6 @@ const Login = () => {
             src={StudentWithLaptop}
             alt="student with laptop"
           />
-          <ToastContainer />
         </div>
         <Footer></Footer>
       </div>

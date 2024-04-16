@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { useSnackbar } from "notistack";
+
 import Header from "../components/Header.jsx";
 import RedButton from "../components/RedButton.jsx";
 import WhiteButton from "../components/WhiteButton.jsx";
@@ -26,6 +27,7 @@ import eyes from "../assets/photos/eyes-over-book.png";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
   const handleLIA = () => {
     navigate("/companies");
   };
@@ -235,7 +237,6 @@ const Home = () => {
 
         <Footer></Footer>
       </div>
-      <ToastContainer />
     </>
   );
 };
