@@ -14,7 +14,7 @@ const EventInfoSection = () => (
         src={studentsLaptops}
         alt="students with laptops"
       />
-      <p className="w-full text-lg text-center">17:00-19:00</p>
+      <p className="w-full text-lg text-center">17:00 &ndash; 19:00</p>
     </div>
     2024
   </section>

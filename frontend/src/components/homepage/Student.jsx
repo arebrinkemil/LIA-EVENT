@@ -2,7 +2,7 @@ import React from "react";
 import BulletPoint from "../BulletPoint";
 
 const Student = () => (
-  <section className="px-4 flex my-2 flex-col gap">
+  <section className="px-4 flex my-2 flex-col gap pt-12">
     <div className=" bg-black flex w-fit justify-start items-center text-center">
       <h1 className="responsive-heading text-white px-2">STUDENT?</h1>
     </div>

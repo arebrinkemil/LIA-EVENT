@@ -10,6 +10,7 @@ import Footer from "./Footer";
 import NavButton from "./NavButton";
 import DividerStar from "./NavDivider";
 import DOMPurify from "dompurify";
+import Arrow from "../assets/icons/dropdown_arrow.svg";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -213,7 +214,7 @@ const EditCompany = () => {
                 className="form-input"
               />
             </div>
-            <div className="my-4">
+            <div className="my-4 relative">
               <label className="text-xl mr-4 text-gray-500">
                 *Vad söker ni
               </label>
@@ -225,6 +226,7 @@ const EditCompany = () => {
                 <option value="Webbutvecklare">Webbutvecklare</option>
                 <option value="Digital Designer">Digital Designer</option>
               </select>
+              <img className="absolute right-4 top-10" src={Arrow} alt="" />
             </div>
             <div className="my-4">
               <label className="text-xl mr-4 text-gray-500">
@@ -237,7 +239,7 @@ const EditCompany = () => {
                 className="form-input"
               />
             </div>
-            <div className="my-4">
+            <div className="my-4 relative">
               <label className="text-xl mr-4 text-gray-500">Vart?</label>
               <select
                 value={location}
@@ -247,6 +249,7 @@ const EditCompany = () => {
                 <option value="Göteborg">Göteborg</option>
                 <option value="Annan Plats">Annan Plats</option>
               </select>
+              <img className="absolute right-4 top-10" src={Arrow} alt="" />
             </div>
 
             <div className="my-4">
