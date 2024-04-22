@@ -11,7 +11,7 @@ const Location = () => (
     <div className="w-2/3">
       <p className="text-3xl">NÄR & VAR?</p>
       <p className="text-lg">Datum: 24 april 2024</p>
-      <p className="text-lg">Tid: 17:00 &ndash; 19:00</p>
+      <p className="text-lg">Tid: 15:00 &ndash; 17:00</p>
       <p className="text-lg">
         Plats: Visual Arena Lindholmspiren 3 417 56 Göteborg
       </p>
