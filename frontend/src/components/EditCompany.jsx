@@ -37,7 +37,7 @@ const EditCompany = () => {
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
-          `http://134.122.48.238:5555/api/companies/${id}`
+          `https://liaevent.arebr.ink/api/companies/${id}`
         );
 
         setCompany(response.data);
@@ -71,7 +71,7 @@ const EditCompany = () => {
         );
 
         await axios.delete(
-          `http://134.122.48.238:5555/api/image/${companyId}/${oldLogotypeFilename}`,
+          `https://liaevent.arebr.ink/api/image/${companyId}/${oldLogotypeFilename}`,
           {
             withCredentials: true,
           }
@@ -116,7 +116,7 @@ const EditCompany = () => {
         );
 
         await axios.delete(
-          `http://134.122.48.238:5555/api/image/${companyId}/${oldLogotypeFilename}`,
+          `https://liaevent.arebr.ink/api/image/${companyId}/${oldLogotypeFilename}`,
           {
             withCredentials: true,
           }
@@ -124,7 +124,7 @@ const EditCompany = () => {
       }
 
       const response = await axios.post(
-        `http://134.122.48.238:5555/api/image/${companyId}`,
+        `https://liaevent.arebr.ink/api/image/${companyId}`,
         formData,
         {
           withCredentials: true,
@@ -140,7 +140,7 @@ const EditCompany = () => {
   const deleteCompany = async () => {
     try {
       await axios.delete(
-        `http://134.122.48.238:5555/api/companies/${company.companyId}`,
+        `https://liaevent.arebr.ink/api/companies/${company.companyId}`,
         {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,
@@ -160,7 +160,7 @@ const EditCompany = () => {
   const handleSaveCompany = async () => {
     try {
       await axios.put(
-        `http://134.122.48.238:5555/api/companies/${id}`,
+        `https://liaevent.arebr.ink/api/companies/${id}`,
         {
           logotype,
           name,

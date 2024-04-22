@@ -23,7 +23,7 @@ mongoose.connect(mongoDBURL, {
 
 app.use(
   cors({
-    origin: "http://134.122.48.238",
+    origin: "https://liaevent.arebr.ink",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })

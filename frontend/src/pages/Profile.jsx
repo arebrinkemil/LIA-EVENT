@@ -22,7 +22,7 @@ const Profile = () => {
     const fetchCompanies = async () => {
       try {
         const response = await axios.get(
-          "http://134.122.48.238:5555/api/companies/your_companies",
+          "https://liaevent.arebr.ink/api/companies/your_companies",
           {
             headers: {
               Authorization: `Bearer ${cookies.jwt}`,
@@ -45,7 +45,7 @@ const Profile = () => {
       }
       try {
         const response = await axios.get(
-          "http://134.122.48.238:5555/api/profile",
+          "https://liaevent.arebr.ink/api/profile",
           {
             headers: {
               Authorization: `Bearer ${cookies.jwt}`,
@@ -66,7 +66,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://134.122.48.238:5555/api/logout",
+        "https://liaevent.arebr.ink/api/logout",
         {},
         {
           withCredentials: true,

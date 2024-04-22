@@ -42,7 +42,7 @@ const CompanyList = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://134.122.48.238:5555/api/companies")
+      .get("https://liaevent.arebr.ink/api/companies")
       .then((response) => {
         setCompanies(response.data.data);
         setLoading(false);

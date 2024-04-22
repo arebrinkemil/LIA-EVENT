@@ -24,7 +24,7 @@ const LoginLogoutButton = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://134.122.48.238:5555/api/logout",
+        "https://liaevent.arebr.ink/api/logout",
         {},
         {
           withCredentials: true,

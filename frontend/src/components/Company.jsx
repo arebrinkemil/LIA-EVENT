@@ -28,7 +28,7 @@ const Company = () => {
     const fetchCompany = async () => {
       try {
         const response = await axios.get(
-          `http://134.122.48.238:5555/api/companies/${id}`
+          `https://liaevent.arebr.ink/api/companies/${id}`
         );
 
         setCompany(response.data);
@@ -43,7 +43,7 @@ const Company = () => {
   useEffect(() => {
     if (cookies.jwt && company) {
       axios
-        .get(`http://134.122.48.238:5555/api/profile`, {
+        .get(`https://liaevent.arebr.ink/api/profile`, {
           headers: {
             Authorization: `Bearer ${cookies.jwt}`,
           },

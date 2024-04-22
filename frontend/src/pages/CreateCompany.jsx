@@ -37,7 +37,7 @@ const CreateCompany = () => {
       }
       try {
         const response = await axios.get(
-          "http://134.122.48.238:5555/api/profile",
+          "https://liaevent.arebr.ink/api/profile",
           {
             headers: {
               Authorization: `Bearer ${cookies.jwt}`,
@@ -64,7 +64,7 @@ const CreateCompany = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://134.122.48.238:5555/api/logout",
+        "https://liaevent.arebr.ink/api/logout",
         {},
         {
           withCredentials: true,
@@ -98,7 +98,7 @@ const CreateCompany = () => {
       data.append("logotype", logotype);
       try {
         const response = await axios.post(
-          `http://134.122.48.238:5555/api/image/${companyId}`,
+          `https://liaevent.arebr.ink/api/image/${companyId}`,
           data,
           {
             headers: {
@@ -135,7 +135,7 @@ const CreateCompany = () => {
       task_description: taskDescription,
     };
     try {
-      await axios.post("http://134.122.48.238:5555/api/companies", data, {
+      await axios.post("https://liaevent.arebr.ink/api/companies", data, {
         headers: {
           Authorization: `Bearer ${cookies.jwt}`,
         },

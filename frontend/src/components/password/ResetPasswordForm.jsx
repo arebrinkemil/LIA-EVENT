@@ -19,7 +19,7 @@ const ResetPassword = ({ email }) => {
     }
 
     try {
-      await axios.post("http://134.122.48.238:5555/api/resetPassword", {
+      await axios.post("https://liaevent.arebr.ink/api/resetPassword", {
         email,
         otp,
         password,

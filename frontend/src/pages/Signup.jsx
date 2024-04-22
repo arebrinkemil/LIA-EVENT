@@ -53,7 +53,7 @@ const Signup = () => {
     }
     try {
       const response = await axios.post(
-        "http://134.122.48.238:5555/api/",
+        "https://liaevent.arebr.ink/api/",
         {
           email,
           password,

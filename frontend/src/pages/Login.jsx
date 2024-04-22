@@ -52,7 +52,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://134.122.48.238:5555/api/auth",
+        "https://liaevent.arebr.ink/api/auth",
         {
           email,
           password,
