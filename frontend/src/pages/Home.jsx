@@ -210,7 +210,7 @@ const Home = () => {
                         <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
                           Tid:
                         </p>
-                        <p>17:00 &ndash; 19:00</p>
+                        <p>15:00 &ndash; 17:00</p>
                       </div>
                       <div>
                         <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">

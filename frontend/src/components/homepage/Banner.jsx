@@ -55,7 +55,7 @@ const Banner = () => {
               <h1 className="bannerText pl-10 font-bold noLineBanner">YRGO</h1>
             </div>
             <div className="flex grow basis-3/12 flex-col text-end text-4xl justify-center">
-              <p>17:00 &ndash; 19:00</p>
+              <p>15:00 &ndash; 17:00</p>
               <p>24 APRIL MEETUP</p>
               <p>2024</p>
             </div>
