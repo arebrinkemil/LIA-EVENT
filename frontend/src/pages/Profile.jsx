@@ -101,9 +101,9 @@ const Profile = () => {
             <CompaniesCard companies={companies} />
           </div>
         </div>
-        <div className="w-full flex flex-col items-center md:items-end">
+        <div className="w-full flex flex-col items-center md:items-start">
           <Link to="/companies/create">
-            <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 text-xl md:mr-6 lg:mr-16">
+            <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 text-xl md:ml-6 lg:ml-16">
               Lägg till kort
               <img src={plus} alt="create company plus icon" />
             </div>

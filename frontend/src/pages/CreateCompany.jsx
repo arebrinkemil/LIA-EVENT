@@ -188,10 +188,14 @@ const CreateCompany = () => {
               <option value="Webbutvecklare">Webbutvecklare</option>
               <option value="Digital Designer">Digital Designer</option>
             </select>
-            <img className="absolute right-4 top-10" src={Arrow} alt="" />
+            <img
+              className="absolute right-4 top-10 pointer-events-none"
+              src={Arrow}
+              alt=""
+            />
           </div>
 
-          <label className="text-xl mr-4 text-gray-500">
+          <label className="text-xl mr-4 text-gray-500 my-4">
             *Hur många planerade LIA platser tar ni in?
           </label>
           <AmountInput amount={amount} setAmount={setAmount} />
@@ -206,7 +210,11 @@ const CreateCompany = () => {
               <option value="Göteborg">Göteborg</option>
               <option value="Annan Plats">Annan Plats</option>
             </select>
-            <img className="absolute right-4 top-10" src={Arrow} alt="" />
+            <img
+              className="absolute right-4 top-10 pointer-events-none"
+              src={Arrow}
+              alt=""
+            />
           </div>
 
           <div className="my-4">
