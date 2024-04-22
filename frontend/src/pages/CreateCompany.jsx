@@ -8,6 +8,7 @@ import AmountInput from "../components/AmountInput";
 import NavButton from "../components/NavButton";
 import DividerStar from "../components/NavDivider";
 import DOMpurify from "dompurify";
+import Arrow from "../assets/icons/dropdown_arrow.svg";
 
 const CreateCompany = () => {
   const [dragging, setDragging] = useState(false);
@@ -174,7 +175,7 @@ const CreateCompany = () => {
             />
           </div>
 
-          <div className="my-4">
+          <div className="my-4 relative">
             <label className="text-xl mr-4 text-gray-500">*Vad söker ni</label>
             <select
               value={role}
@@ -184,6 +185,7 @@ const CreateCompany = () => {
               <option value="Webbutvecklare">Webbutvecklare</option>
               <option value="Digital Designer">Digital Designer</option>
             </select>
+            <img className="absolute right-4 top-10" src={Arrow} alt="" />
           </div>
 
           <label className="text-xl mr-4 text-gray-500">
@@ -191,7 +193,7 @@ const CreateCompany = () => {
           </label>
           <AmountInput amount={amount} setAmount={setAmount} />
 
-          <div className="my-4">
+          <div className="my-4 relative">
             <label className="text-xl mr-4 text-gray-500">Vart?</label>
             <select
               value={location}
@@ -201,6 +203,7 @@ const CreateCompany = () => {
               <option value="Göteborg">Göteborg</option>
               <option value="Annan Plats">Annan Plats</option>
             </select>
+            <img className="absolute right-4 top-10" src={Arrow} alt="" />
           </div>
 
           <div className="my-4">

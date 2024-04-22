@@ -27,7 +27,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
         <li>
-          <p>Tid: 17:00-19:00</p>
+          <p>Tid: 17:00 &ndash; 19:00</p>
         </li>
         <li>
           <BannerStar />
@@ -53,7 +53,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
         <li>
-          <p>Tid: 17:00-19:00</p>
+          <p>Tid: 17:00 &ndash; 19:00</p>
         </li>
         <li>
           <BannerStar />
@@ -79,7 +79,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
         <li>
-          <p>Tid: 17:00-19:00</p>
+          <p>Tid: 17:00 &ndash; 19:00</p>
         </li>
         <li>
           <BannerStar />
@@ -105,7 +105,7 @@ const ScrollBanner = () => {
           <BannerStar />
         </li>
         <li>
-          <p>Tid: 17:00-19:00</p>
+          <p>Tid: 17:00 &ndash; 19:00</p>
         </li>
         <li>
           <BannerStar />
