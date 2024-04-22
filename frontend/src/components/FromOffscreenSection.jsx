@@ -28,8 +28,6 @@ const FromOffscreenSection = ({ children, direction, fullHeight }) => {
 
   const translateClass =
     direction === "left" ? "-translate-x-48" : "translate-x-48";
-
-  // Add 'h-full' to the class list if fullHeight is true
   const sectionClasses = `transition ease-in-out duration-1000 ${
     isVisible ? "" : translateClass
   } ${fullHeight ? "h-full" : ""}`;

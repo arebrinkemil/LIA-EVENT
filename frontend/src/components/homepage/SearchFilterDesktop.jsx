@@ -38,7 +38,7 @@ const SearchFilterDesktop = ({ onFilterChange, setFilters, toggleFilter }) => {
             toggleFilter={toggleFilter}
             label="ANTAL LIA-PLATSER"
             options={["Two_or_fewer", "More_than_two"]}
-            name={["1-2", "2-4"]}
+            name={["MELLAN 1 OCH 2", "2 ELLER FLER"]}
             onChange={onFilterChange}
           />
         </div>

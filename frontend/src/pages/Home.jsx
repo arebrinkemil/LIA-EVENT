@@ -57,7 +57,7 @@ const Home = () => {
             <img
               className="animate-arrowUpDown"
               src={arrowDown}
-              alt="pixelated arrow pointing down"
+              alt="arrow pointing down"
             />
           </section>
         </FromOffscreenSection>
@@ -157,13 +157,13 @@ const Home = () => {
                 </div>
               </FromOffscreenSection>
             </div>
-            <div className="flex flex-col justify-between basis-1/2">
+            <div className="flex flex-col justify-between basis-1/2 pt-28">
               <FromOffscreenSection
                 direction={"right"}
                 className="basis-1/2 h-full"
               >
-                <section className=" mt-28 flex flex-col gap">
-                  <div className=" bg-black flex justify-start items-center text-center">
+                <section className=" flex flex-col gap">
+                  <div className=" bg-black flex justify-start items-center text-center mt-12">
                     <h1 className="responsive-heading text-white px-2">
                       STUDENT?
                     </h1>
@@ -210,7 +210,7 @@ const Home = () => {
                         <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">
                           Tid:
                         </p>
-                        <p>17:00-19:00</p>
+                        <p>17:00 &ndash; 19:00</p>
                       </div>
                       <div>
                         <p className="text-2xl px-1 w-auto bg-red text-white line-clamp-1 inline-block ">

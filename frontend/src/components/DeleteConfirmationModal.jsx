@@ -19,7 +19,7 @@ const DeleteConfirmationModal = ({ onClose, onConfirm }) => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="fixed z-50 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
       <div
         className="bg-white p-5 rounded-lg flex flex-col justify-center items-center"
         ref={modalRef}

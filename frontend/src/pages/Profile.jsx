@@ -95,13 +95,13 @@ const Profile = () => {
             {" "}
             Nedan kan ni lägga till eller redigera ert företagskort. Efter att
             ni publicerar företagskortet kommer det att bli synligt för
-            studenter som besöker sidan “Hitta LIA”.
+            studenter som besöker sidan "Hitta LIA".
           </p>
           <div className="lg:mr-10">
             <CompaniesCard companies={companies} />
           </div>
         </div>
-        <div className="w-full flex flex-col items-center md:items-center">
+        <div className="w-full flex flex-col items-center md:items-end">
           <Link to="/companies/create">
             <div className="flex flex-row border border-black rounded-3xl p-3 gap-2 text-xl md:mr-6 lg:mr-16">
               Lägg till kort
