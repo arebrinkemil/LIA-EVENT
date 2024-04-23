@@ -38,28 +38,8 @@ const ScrollBanner = () => {
         <li>
           <BannerStar />
         </li>
-      </ul>
-      <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
         <li>
-          <p>När & var?</p>
-        </li>
-        <li>
-          <BannerStar />
-        </li>
-        <li>
-          <p>Datum: 24 april 2024</p>
-        </li>
-        <li>
-          <BannerStar />
-        </li>
-        <li>
-          <p>Tid: 15:00 &ndash; 17:00</p>
-        </li>
-        <li>
-          <BannerStar />
-        </li>
-        <li>
-          <p>Visual Arena</p>
+          <p>Digital Designer och Webbutvecklare</p>
         </li>
         <li>
           <BannerStar />
@@ -90,6 +70,12 @@ const ScrollBanner = () => {
         <li>
           <BannerStar />
         </li>
+        <li>
+          <p>Digital Designer och Webbutvecklare</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
       </ul>
       <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
         <li>
@@ -112,6 +98,44 @@ const ScrollBanner = () => {
         </li>
         <li>
           <p>Visual Arena</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
+        <li>
+          <p>Digital Designer och Webbutvecklare</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
+      </ul>
+      <ul className=" text-lg h-fit flex nowrap flex-nowrap items-center justify-center md:justify-start lg:[&_li]:mx-10 [&_li]:mx-3 [&_img]:max-w-none animate-infinite-scroll">
+        <li>
+          <p>När & var?</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
+        <li>
+          <p>Datum: 24 april 2024</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
+        <li>
+          <p>Tid: 15:00 &ndash; 17:00</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
+        <li>
+          <p>Visual Arena</p>
+        </li>
+        <li>
+          <BannerStar />
+        </li>
+        <li>
+          <p>Digital Designer och Webbutvecklare</p>
         </li>
         <li>
           <BannerStar />
