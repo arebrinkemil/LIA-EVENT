@@ -1,3 +1,109 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  font-family: "Inter", sans-serif;
+  color: #333;
+  scroll-behavior: smooth;
+}
+
+@layer components {
+  .responsive-heading {
+    font-size: clamp(
+      2.25rem,
+      4vw + 1rem,
+      4rem
+    ); /* Adjust the values as needed */
+  }
+
+  .inherit {
+    height: inherit;
+  }
+
+  .noLineBanner {
+    line-height: 145px !important;
+  }
+  .overlapBox {
+    font-size: clamp(12px, 34px, 48px);
+  }
+
+  .bannerText {
+    font-size: clamp(150px, 200px, 250px);
+    line-height: clamp(150px, 200px, 250px);
+    text-wrap: nowrap;
+  }
+
+  .form-input {
+    @apply appearance-none border-[1px] rounded-3xl px-4 w-full py-3 hover:cursor-pointer;
+  }
+
+  .card:hover {
+    transition: all 0.1s !important;
+    background-color: #333 !important;
+    scale: 1.05;
+  }
+
+  .snackbar.success {
+    background-color: #b2e8ba;
+  }
+
+  .snackbar.error {
+    background-color: #970c0c;
+  }
+
+  .card:hover * {
+    transition: all 0.1s !important;
+    color: white !important;
+
+    fill: white !important;
+  }
+
+  .card:hover .edit-icon #pen {
+    transition: all 0.1s !important;
+
+    display: none !important;
+  }
+
+  .card:hover .edit-icon #pen-white {
+    display: block !important;
+    transition: all 0.1s !important;
+  }
+
+  .nowrap {
+    text-wrap: nowrap;
+  }
+
+  .hinge {
+    animation: hinge 10s ease 0s infinite;
+  }
+
+  @keyframes hinge {
+    0% {
+      opacity: 0;
+      animation-timing-function: ease-in-out;
+    }
+    10%,
+    80% {
+      transform: rotate(0);
+      transform-origin: top left;
+      animation-timing-function: ease-in-out;
+      opacity: 1;
+    }
+    85%,
+    95% {
+      transform: rotate(80deg);
+      transform-origin: top left;
+      animation-timing-function: ease-in-out;
+    }
+    90% {
+      transform: rotate(60deg);
+      transform-origin: top left;
+      animation-timing-function: ease-in-out;
+    }
+    100% {
+      transform: translateY(700px);
+      opacity: 0.8;
+    }
+  }
+}
